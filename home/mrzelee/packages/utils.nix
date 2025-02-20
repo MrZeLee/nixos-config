@@ -7,6 +7,7 @@
     tor
     tor-browser
     pinentry-all
+    seahorse
 
     # System
     pciutils
