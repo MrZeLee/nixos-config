@@ -30,6 +30,7 @@
     git-lfs
     lazygit
     tig
+    opencommit
 
     # Cloud/Infrastructure
     ansible

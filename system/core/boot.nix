@@ -10,20 +10,31 @@
     initrd = {
       verbose = false;
       kernelModules = ["i915"];
-      systemd.enable = true;
-      supportedFilesystems = [
-        "ext4"
-        "ntfs"
-      ];
+      # systemd.enable = true;
+      # supportedFilesystems = [
+      #   "ext4"
+      #   "ntfs"
+      # ];
     };
     plymouth.enable = true;
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot = {
+      # systemd-boot.enable = true;
+      grub = {
         enable = true;
-        configurationLimit = 2; # Keep only the last two configurations
+        devices = ["nodev"];
+        efiSupport = true;
+        useOSProber = true;
       };
     };
+
+    # loader = {
+    #   efi.canTouchEfiVariables = true;
+    #   systemd-boot = {
+    #     enable = true;
+    #     configurationLimit = 2; # Keep only the last two configurations
+    #   };
+    # };
     kernelParams = [
       # General Performance Optimization
       "intel_pstate=active" # Ensures the Intel-specific CPU frequency scaling driver is used for better performance

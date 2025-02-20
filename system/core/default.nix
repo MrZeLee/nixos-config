@@ -3,7 +3,7 @@
     ./boot.nix
     ./users.nix
     ./security.nix
-    ./lanzaboote.nix
+    # ./lanzaboote.nix
   ];
 
   # Common system configuration
