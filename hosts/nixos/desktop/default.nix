@@ -8,7 +8,7 @@
     ../../../system
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "desktop";
   system.stateVersion = "24.11"; # Add this line
 
   # Desktop-specific configurations

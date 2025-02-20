@@ -7,7 +7,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos-laptop";
+  networking.hostName = "laptop";
 
   # Enable NVIDIA drivers
   services.xserver.videoDrivers = ["nvidia"];

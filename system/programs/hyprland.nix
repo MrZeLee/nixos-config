@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -12,6 +16,9 @@
     systemPackages = with pkgs; [
       hyprlandPlugins.hy3
       hyprlandPlugins.csgo-vulkan-fix
+
+      #dependecy for hyprland scripts
+      bc
     ];
 
     sessionVariables = {
