@@ -16,6 +16,7 @@
     systemPackages = with pkgs; [
       hyprlandPlugins.hy3
       hyprlandPlugins.csgo-vulkan-fix
+      hypridle
 
       #dependecy for hyprland scripts
       bc
