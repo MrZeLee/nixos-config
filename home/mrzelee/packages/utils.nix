@@ -1,26 +1,34 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    # Security
-    keepassxc
-    gnupg
-    pass
-    tor
-    tor-browser
-    pinentry-all
-    seahorse
+  home.packages = with pkgs;
+    [
+      # Security
+      keepassxc
+      gnupg
+      pass
+      tor
 
-    # System
-    pciutils
-    usbutils
-    lshw
+      # System
+      pciutils
 
-    # Network
-    nmap
-    netcat
-    wget
-    curl
+      # Network
+      nmap
+      netcat
+      wget
+      curl
 
-    # Misc
-    qbittorrent
-  ];
+      # Misc
+      qbittorrent
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      #Security
+      tor-browser
+      pinentry-all
+      seahorse
+
+      #System
+      usbutils
+      lshw
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ];
 }

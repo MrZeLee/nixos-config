@@ -43,13 +43,17 @@
     fd
     ## VimTex
     pstree
-    xdotool
 
     # VSCode
     pkgs.vscode
 
     # Document viewers
     zathura
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ## VimTex dependencies
+    xdotool
     typora
-  ];
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ];
 }
