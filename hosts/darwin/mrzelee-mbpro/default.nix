@@ -1,10 +1,16 @@
-{pkgs, ...}: {
+{lib, ...}: {
   imports = [
-    ./services.nix
+    ../../../system
   ];
 
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
+  system.stateVersion = 4; # Add this line
+
+  networking.hostName = "mrzelee-mbpro";
+  networking.computerName = "mrzelee-mbpro";
+
   # Darwin-specific host configurations
-  system.defaults = {
+  system = {
     defaults = {
       ".GlobalPreferences"."com.apple.mouse.scaling" = 1.5;
 
@@ -77,7 +83,7 @@
           "/Applications/KeePassXC.app"
         ];
         persistent-others = [
-          "/Users/${userSettings.username}/Downloads"
+          "/Users/mrzelee/Downloads"
         ];
         show-process-indicators = true;
         tilesize = 48;

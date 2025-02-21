@@ -1,39 +1,46 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    # Image
-    gimp
+  home.packages = with pkgs;
+    [
+      # Image
+      gimp
 
-    swayimg
-    #dependencies
-    giflib
-    libjpeg
-    libjxl
-    libpng
-    librsvg
-    libwebp
-    libheif
-    libavif
-    libtiff
-    libsixel
+      # Audio/Video
+      spotify
+      spotify-player
+      mpv
+      ffmpeg_6-full
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      #Image
+      swayimg
+      #dependencies
+      giflib
+      libjpeg
+      libjxl
+      libpng
+      librsvg
+      libwebp
+      libheif
+      libavif
+      libtiff
+      libsixel
 
-    grim
-    slurp
+      grim
+      slurp
 
-    # Audio/Video
-    spotify
-    spotify-player
-    mpv
-    ffmpeg_6-full
-    pavucontrol
+      #Audio/Video
+      pavucontrol
 
-    # File management
-    nemo-with-extensions
-    gvfs
-    udisks2
-    gphoto2
-    libmtp
-    cinnamon-desktop
-    shared-mime-info
-    xdg-utils
-  ];
+      # File management
+      nemo-with-extensions
+      gvfs
+      udisks2
+      gphoto2
+      libmtp
+      cinnamon-desktop
+      shared-mime-info
+      xdg-utils
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ];
 }

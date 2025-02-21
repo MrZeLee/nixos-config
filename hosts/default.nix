@@ -37,34 +37,47 @@
         ++ extraModules;
     };
   };
-  # mkDarwinSystem = hostname: extraModules: let
-  #   pkgs = import nixpkgs {
-  #     inherit system;
-  #     config.allowUnfree = true;
-  #     overlays = [
-  #       (final: prev: {
-  #         unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
-  #       })
-  #       (import ../pkgs {inherit nixpkgs;}) # Add your custom packages overlay
-  #     ];
-  #   };
-  # in {
-  #   ${hostname} = inputs.nix-darwin.lib.darwinSystem {
-  #     inherit system;
-  #     specialArgs = {inherit inputs pkgs;};
-  #     modules =
-  #       [
-  #         ./darwin/${hostname}
-  #         ../modules/darwin
-  #       ]
-  #       ++ extraModules;
-  #   };
-  # };
+  mkDarwinSystem = hostname: extraModules: let
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        (final: prev: {
+          unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
+        })
+        (import ../pkgs/overlay.nix {inherit nixpkgs;}) # Add your custom packages overlay
+      ];
+    };
+
+    darwinSystem = inputs.nix-darwin.lib.darwinSystem {
+      inherit system;
+      specialArgs = {inherit inputs pkgs;};
+      modules =
+        [
+          ./darwin/${hostname}
+          inputs.home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              users.mrzelee = import ../home/mrzelee;
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+              };
+            };
+          }
+          ../modules/darwin
+        ]
+        ++ extraModules;
+    };
+  in {
+    ${hostname} = darwinSystem;
+  };
 in {
   nixosConfigurations =
     mkSystem "desktop" [];
   # // (mkSystem "laptop" []);
 
-  # darwinConfigurations =
-  #   mkDarwinSystem "laptop" [];
+  darwinConfigurations =
+    mkDarwinSystem "mrzelee-mbpro" [];
 }
