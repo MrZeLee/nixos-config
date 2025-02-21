@@ -22,17 +22,17 @@
         [
           ./nixos/${hostname}
           inputs.home-manager.nixosModules.home-manager
-          ({config, ...}: {
+          {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               users.mrzelee = import ../home/mrzelee;
               extraSpecialArgs = {
                 inherit inputs;
-                osConfig = config;
+                inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
               };
             };
-          })
+          }
         ]
         ++ extraModules;
     };

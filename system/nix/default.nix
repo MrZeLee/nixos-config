@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./nixpkgs.nix
   ];
@@ -41,8 +42,15 @@
     };
 
     # Garbage collection settings
-    gc = lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.isDarwin {
+    gc =
+      if pkgs.stdenv.isLinux
+      then {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      }
+      else if pkgs.stdenv.isDarwin
+      then {
         automatic = true;
         interval = {
           Hour = 3;
@@ -50,13 +58,10 @@
           Minute = 0;
         };
         options = "--delete-older-than 7d";
-      })
-      (lib.mkIf pkgs.stdenv.isLinux {
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      })
-    ];
+      }
+      else {};
   };
-
-  services.nix-daemon.enable = lib.mkIf pkgs.stdenv.isDarwin true;
+}
+// lib.optionalAttrs pkgs.stdenv.isDarwin {
+  services.nix-daemon.enable = true;
 }
