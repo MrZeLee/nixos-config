@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }: {
@@ -7,6 +6,7 @@
     ./fonts.nix
     ./xdg.nix
     ./qt.nix
+    ./direnv.nix
     ./zsh.nix
     ./steam.nix
     ./firefox.nix

@@ -12,6 +12,13 @@
   # Darwin-specific host configurations
   system = {
     defaults = {
+      CustomSystemPreferences = {
+        "com.apple.desktopservices" = {
+          DSDontWriteNetworkStores = true;
+          DSDontWriteUSBStores = true;
+        };
+      };
+
       ".GlobalPreferences"."com.apple.mouse.scaling" = 1.5;
 
       NSGlobalDomain = {

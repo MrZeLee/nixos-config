@@ -14,6 +14,7 @@
     else if system == "aarch64-darwin"
     then [
       ./programs/fonts.nix
+      ./programs/direnv.nix
       ./nix
       ./services
       ./core/users.nix
