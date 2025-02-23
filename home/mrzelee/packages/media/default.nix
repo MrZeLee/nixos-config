@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+
+  imports = [ ./ani-cli ];
+
   home.packages = with pkgs;
     [
       # Image
