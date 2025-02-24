@@ -30,5 +30,6 @@
       lshw
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
+      pinentry_mac
     ];
 }

@@ -27,7 +27,6 @@ in
           inherit
             (pkgs)
             fleet-cli
-            wezterm
             koji
             ;
         };
