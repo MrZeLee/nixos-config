@@ -2,6 +2,7 @@
   inputs,
   nixpkgs,
   system,
+  mac-app-util,
 }: let
   mkSystem = hostname: extraModules: let
     pkgs = import nixpkgs {
@@ -54,6 +55,7 @@
       specialArgs = {inherit inputs pkgs;};
       modules =
         [
+          mac-app-util.darwinModules.default
           ./darwin/${hostname}
           inputs.home-manager.darwinModules.home-manager
           {
@@ -64,6 +66,9 @@
                 inherit inputs;
                 inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
               };
+              sharedModules = [
+                mac-app-util.homeManagerModules.default
+              ];
             };
           }
           ../modules/darwin

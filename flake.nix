@@ -26,6 +26,8 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs = inputs @ {
@@ -44,6 +46,7 @@
       (import ./hosts {
         inherit inputs nixpkgs;
         system = "aarch64-darwin";
+        mac-app-util = inputs.mac-app-util;
       })
       .darwinConfigurations;
 
