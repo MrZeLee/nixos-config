@@ -17,6 +17,7 @@
     neofetch
     rclone
     speedtest-cli
+    stow
     tldr
     tree
     vimv-rs
