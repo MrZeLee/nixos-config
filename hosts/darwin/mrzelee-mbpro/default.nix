@@ -1,4 +1,4 @@
-{lib, ...}: {
+{lib, pkgs, ...}: {
   imports = [
     ../../../system
   ];
@@ -82,12 +82,12 @@
         orientation = "bottom";
         persistent-apps = [
           "/System/Applications/Launchpad.app"
-          "/Applications/WezTerm.app"
+          "${pkgs.wezterm}/Applications/WezTerm.app"
           "/Applications/Firefox.app"
           "/Applications/Discord.app"
           "/System/Applications/Messages.app"
-          "/Applications/Spotify.app"
-          "/Applications/KeePassXC.app"
+          "${pkgs.spotify}/Applications/Spotify.app"
+          "${pkgs.keepassxc}/Applications/KeePassXC.app"
         ];
         persistent-others = [
           "/Users/mrzelee/Downloads"
