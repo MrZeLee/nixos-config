@@ -18,6 +18,7 @@
       ./wayland.nix
       ./messaging.nix
       ./development.nix
+      ./network.nix
     ]
     else if isDarwin
     then [
@@ -29,6 +30,8 @@
       ./editors.nix
       ./messaging.nix
       ./development.nix
+      ./aerospace.nix
+      ./network.nix
     ]
     else [];
 
