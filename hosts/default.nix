@@ -2,7 +2,7 @@
   inputs,
   nixpkgs,
   system,
-  mac-app-util,
+  mac-app-util ? null,
 }: let
   mkSystem = hostname: extraModules: let
     pkgs = import nixpkgs {
