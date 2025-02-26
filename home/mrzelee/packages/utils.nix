@@ -18,7 +18,7 @@
 
       # Misc
       qbittorrent
-      mmex
+      # mmex
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       #Security

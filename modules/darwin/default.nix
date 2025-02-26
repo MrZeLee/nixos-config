@@ -23,6 +23,7 @@
       "dropzone"
       "firefox"
       "github"
+      "gnucash"
       "google-chrome"
       "google-cloud-sdk"
       "google-drive"
