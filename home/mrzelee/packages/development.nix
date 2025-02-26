@@ -31,6 +31,7 @@
     lazygit
     tig
     opencommit
+    koji
 
     # Cloud/Infrastructure
     ansible

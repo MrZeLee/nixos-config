@@ -21,6 +21,7 @@ in
             fleet-cli
             wezterm
             koji
+            mmex
             ;
         }
         else {
