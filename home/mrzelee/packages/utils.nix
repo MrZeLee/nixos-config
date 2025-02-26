@@ -29,6 +29,9 @@
       #System
       usbutils
       lshw
+
+      #Misc
+      gnucash
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       pinentry_mac
