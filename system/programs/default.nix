@@ -13,6 +13,7 @@
     ./gamemode.nix
     ./hyprland.nix
     ./noisetorch.nix
+    ./pinentry.nix
   ];
 
   environment.gnome.excludePackages = with pkgs; [

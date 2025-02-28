@@ -121,4 +121,6 @@
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
+  # FOR NEXT VERSION
+  # security.pam.services.sudo_local.reattach = true;
 }

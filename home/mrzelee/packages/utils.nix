@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs;
     [
       # Security
@@ -23,7 +27,6 @@
     ++ lib.optionals pkgs.stdenv.isLinux [
       #Security
       tor-browser
-      pinentry-all
       seahorse
 
       #System
@@ -34,6 +37,5 @@
       gnucash
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
-      pinentry_mac
     ];
 }

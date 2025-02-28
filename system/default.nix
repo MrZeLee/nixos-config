@@ -15,6 +15,7 @@
     then [
       ./programs/fonts.nix
       ./programs/direnv.nix
+      ./programs/pinentry_mac.nix
       ./nix
       ./services
       ./core/users.nix

@@ -15,6 +15,7 @@
     then [
       ./jankyborders.nix
       ./tmux.nix
+      ./dbus.nix
     ]
     else [];
 }
