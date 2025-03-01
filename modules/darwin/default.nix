@@ -20,7 +20,6 @@
       "displaylink"
       "docker"
       "drawio"
-      "dropzone"
       "firefox"
       "github"
       "gnucash"
