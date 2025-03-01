@@ -6,6 +6,9 @@
   wrapGAppsHook3,
   killall,
 }:
+
+# Using this version so I can use scretch with swww
+
 python3.pkgs.buildPythonApplication rec {
   pname = "waypaper";
   version = "2.4";

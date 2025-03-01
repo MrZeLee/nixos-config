@@ -11,6 +11,8 @@
 rustPlatform.buildRustPackage rec {
   name = "swww";
 
+  # Using this version because of bug with vertical displays
+
   src = fetchFromGitHub {
     owner = "Nynxz";
     repo = "swww";
