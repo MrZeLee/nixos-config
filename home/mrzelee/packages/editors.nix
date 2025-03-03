@@ -48,6 +48,8 @@
       fd
       ## VimTex
       pstree
+      #MarkdownPreview
+      yarn
 
       # VSCode
       pkgs.vscode
