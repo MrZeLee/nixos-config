@@ -9,7 +9,7 @@
         };
       };
 
-      ".GlobalPreferences"."com.apple.mouse.scaling" = 1.5;
+      ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
 
       NSGlobalDomain = {
         AppleICUForce24HourTime = true;
@@ -39,7 +39,7 @@
         PMPrintingExpandedStateForPrint = true;
         PMPrintingExpandedStateForPrint2 = true;
         _HIHideMenuBar = true;
-        "com.apple.keyboard.fnState" = false;
+        "com.apple.keyboard.fnState" = true;
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.sound.beep.feedback" = 0;
         "com.apple.sound.beep.volume" = 0.6065307;
