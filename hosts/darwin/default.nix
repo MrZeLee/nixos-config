@@ -101,4 +101,16 @@
   security.pam.enableSudoTouchIdAuth = true;
   # FOR NEXT VERSION
   # security.pam.services.sudo_local.reattach = true;
+
+  environment.systemPackages = with pkgs; [
+    (symlinkJoin {
+      name = "xdg-open-wrapper";
+      paths = [
+        (writeShellScriptBin "xdg-open" ''
+          #!/bin/sh
+          exec open "$@"
+        '')
+      ];
+    })
+  ];
 }
