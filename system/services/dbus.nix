@@ -5,9 +5,12 @@
 }: let
   dbusSessionConf =
     builtins.replaceStrings
-    ["<auth>EXTERNAL</auth>"]
-    ["<auth>DBUS_COOKIE_SHA1</auth>"]
-    (builtins.readFile "${pkgs.dbus}/share/dbus-1/session.conf");
+    ["<include ignore_missing=\"yes\">/etc/dbus-1/session.conf</include>"]
+    ["<!-- <include ignore_missing=\"yes\">/etc/dbus-1/session.conf</include> -->"]
+    (builtins.replaceStrings
+      ["<auth>EXTERNAL</auth>"]
+      ["<auth>DBUS_COOKIE_SHA1</auth>"]
+      (builtins.readFile "${pkgs.dbus}/share/dbus-1/session.conf"));
 in {
   environment = {
     systemPackages = with pkgs; [
