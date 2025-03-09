@@ -21,6 +21,7 @@
     openssl
 
     # Build tools
+    gnumake
     cmake
     gcc
 
