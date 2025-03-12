@@ -16,6 +16,7 @@
       "bartender"
       "calibre"
       "cheatsheet"
+      "chromium"
       "discord"
       "displaylink"
       "docker"

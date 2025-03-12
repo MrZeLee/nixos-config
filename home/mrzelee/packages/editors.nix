@@ -13,6 +13,7 @@
       ## LSP
       lua-language-server
       marksman
+      isort
       ## img-clip
       # pngpaste # For MacOs
       ## Mason Core
