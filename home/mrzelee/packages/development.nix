@@ -51,5 +51,9 @@
     gnuplot
     graphviz
     texliveFull
+
+    # Automations
+    chromium
+    chromedriver
   ];
 }
