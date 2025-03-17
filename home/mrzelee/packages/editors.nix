@@ -17,6 +17,7 @@
       ## img-clip
       # pngpaste # For MacOs
       ## Mason Core
+      zip
       unzip
       wget
       curl
