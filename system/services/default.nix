@@ -10,6 +10,7 @@
       ./power.nix
       ./printing.nix
       ./gnome-keyring.nix
+      ./cloudflare-warp.nix
     ]
     else if system == "aarch64-darwin"
     then [
