@@ -17,6 +17,7 @@
       "calibre"
       "cheatsheet"
       "chromium"
+      "cloudflare-warp"
       "discord"
       "displaylink"
       "docker"
