@@ -35,6 +35,7 @@
 
       #Misc
       gnucash
+      vdhcoapp
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
     ];
