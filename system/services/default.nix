@@ -11,6 +11,7 @@
       ./printing.nix
       ./gnome-keyring.nix
       ./cloudflare-warp.nix
+      ./docker.nix
     ]
     else if system == "aarch64-darwin"
     then [

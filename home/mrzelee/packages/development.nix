@@ -42,6 +42,8 @@
       # Cloud/Infrastructure
       ansible
       cloudflared
+      docker
+      docker-compose
       fleet-cli
       k9s
       kubectl

@@ -10,6 +10,9 @@
       gnupg
       pass
       tor
+      torsocks
+      monero-gui
+      monero-cli
 
       # System
       pciutils
