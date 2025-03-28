@@ -11,8 +11,6 @@
       pass
       tor
       torsocks
-      monero-gui
-      monero-cli
 
       # System
       pciutils
@@ -31,6 +29,8 @@
       #Security
       tor-browser
       seahorse
+      monero-cli
+      monero-gui
 
       #System
       usbutils

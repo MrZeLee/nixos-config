@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   # Darwin-specific module configurations
   environment.systemPackages = with pkgs; [
-    mas # Mac App Store CLI
+    unstable.mas # Mac App Store CLI
   ];
 
   # Homebrew needs to be installed on its own!
@@ -14,7 +14,7 @@
       "alfred"
       "authy"
       "bartender"
-      "calibre"
+      # "calibre"
       "cheatsheet"
       "chromium"
       "cloudflare-warp"
