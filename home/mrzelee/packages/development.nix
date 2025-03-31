@@ -38,6 +38,7 @@
       tig
       opencommit
       koji
+      gitflow
 
       # Cloud/Infrastructure
       ansible

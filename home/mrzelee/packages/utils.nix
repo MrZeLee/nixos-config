@@ -39,6 +39,9 @@
       #Misc
       gnucash
       vdhcoapp
+
+      #Media
+      stremio
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
     ];
