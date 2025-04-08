@@ -9,7 +9,7 @@
 
       # Audio/Video
       spotify
-      spotify-player
+      unstable.spotify-player
       mpv
       ffmpeg_6-full
     ]
