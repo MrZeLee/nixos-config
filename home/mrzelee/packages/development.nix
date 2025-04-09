@@ -45,6 +45,7 @@
       cloudflared
       docker
       docker-compose
+      kind
       fleet-cli
       k9s
       kubectl
