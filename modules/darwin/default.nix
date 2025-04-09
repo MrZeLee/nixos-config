@@ -48,6 +48,7 @@
       "shottr"
       "skim"
       "steam"
+      "stremio"
       "temurin"
       "termius"
       "tor-browser"
