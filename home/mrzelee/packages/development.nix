@@ -55,6 +55,7 @@
       kubetail
       kustomize
       opentofu
+      postgresql
 
       # Documentation
       gnuplot
