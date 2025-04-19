@@ -80,8 +80,8 @@
   };
 in {
   nixosConfigurations =
-    mkSystem "desktop" [];
-  # // (mkSystem "laptop" []);
+    mkSystem "desktop" []
+  // (mkSystem "laptop" []);
 
   darwinConfigurations =
     mkDarwinSystem "mrzelee-mbpro" [];
