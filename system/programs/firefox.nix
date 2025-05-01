@@ -18,6 +18,12 @@
       "browser.crashReports.unsubmittedCheck.autoSubmit2" = false;
       "network.trr.mode" = 3;
       "browser.sessionstore.restore_on_demand" = false;
+
+      # this settings enable keeping the login of pages
+      "privacy.sanitize.sanitizeOnShutdown" = false;
+      "privacy.sanitize.pending" = "[]";
+      "privacy.clearOnShutdown_v2.cache" = false;
+      "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
     };
     policies = {
       ExtensionSettings = {
