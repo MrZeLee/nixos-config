@@ -32,6 +32,7 @@
       ./development.nix
       ./aerospace.nix
       ./network.nix
+      ./librewolf.nix
     ]
     else [];
 

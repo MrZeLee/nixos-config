@@ -17,6 +17,7 @@
         persistent-apps = [
           "/System/Applications/Launchpad.app"
           "${pkgs.wezterm}/Applications/WezTerm.app"
+          "${pkgs.unstable.librewolf}/Applications/Librewolf.app"
           "/Applications/Firefox.app"
           "/Applications/Discord.app"
           "/System/Applications/Messages.app"

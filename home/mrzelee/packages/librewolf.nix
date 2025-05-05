@@ -1,0 +1,58 @@
+{ pkgs, inputs, lib, ... }:
+
+{
+  programs.firefox = {
+    enable  = true;
+    package = pkgs.unstable.librewolf;
+    configPath =
+      if pkgs.stdenv.isDarwin then "Library/Application Support/librewolf"
+      else if pkgs.stdenv.isLinux then ".mozilla/librewolf"
+      else ".mozilla/librewolf";
+    # configPath = "Library/Application Support/librewolf";
+
+    # -------- PERFIL --------
+    profiles.default = {
+      id        = 0;
+      isDefault = true;
+      name      = "nixos";
+
+      settings = {
+        # ─── Aceleração por VA-API ──────────────────────────────────────────────
+        "media.ffmpeg.vaapi.enabled"   = true;
+        "media.rdd-ffmpeg.enabled"     = true;   # (notar o hífen correcto)
+        "media.av1.enabled"            = false;
+        "widget.dmabuf.force-enabled"  = true;
+
+        # ─── Performance & UX ──────────────────────────────────────────────────
+        "browser.preferences.defaultPerformanceSettings.enabled" = false;
+        "browser.translations.automaticallyPopup"               = false;
+        "browser.sessionstore.restore_on_demand"                = false;
+
+        # ─── Privacidade ───────────────────────────────────────────────────────
+        "signon.rememberSignons"                = false;
+        "privacy.globalprivacycontrol.enabled"  = true;
+        "privacy.donottrackheader.enabled"      = true;
+        "datareporting.healthreport.uploadEnabled"            = false;
+        "browser.crashReports.unsubmittedCheck.autoSubmit2"   = false;
+        "network.trr.mode"                      = 3;   # DNS-over-HTTPS apenas
+
+        # ─── Manter logins entre sessões ──────────────────────────────────────
+        "privacy.sanitize.sanitizeOnShutdown"          = false;
+        "privacy.sanitize.pending"                     = "[]";
+        "privacy.clearOnShutdown_v2.cache"             = false;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+
+        # Desactivar desactivação automática de extensões instaladas por HM
+        "extensions.autoDisableScopes" = 0;
+        "browser.profiles.enabled" = true;
+      };
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        ublock-origin
+        darkreader
+        keepassxc-browser
+        vimium-c
+        newtab-adapter
+      ];
+    };
+  };
+}

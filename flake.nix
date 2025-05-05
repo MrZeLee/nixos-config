@@ -28,6 +28,11 @@
     };
 
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {

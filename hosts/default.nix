@@ -28,6 +28,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users.mrzelee = import ../home/mrzelee;
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs;
                 inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
@@ -62,6 +63,7 @@
             home-manager = {
               useGlobalPkgs = true;
               users.mrzelee = import ../home/mrzelee;
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs;
                 inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
