@@ -55,4 +55,15 @@
       ];
     };
   };
+
+  home = let
+    system = pkgs.stdenv.hostPlatform.system;
+    in
+    lib.mkIf (system == "aarch64-darwin") {
+    activation = {
+      librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        ln -s ~/Library/Application\ Support/Mozilla/NativeMessagingHosts ~/Library/Application\ Support/librewolf/NativeMessagingHosts
+      '';
+    };
+  };
 }
