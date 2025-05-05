@@ -32,6 +32,12 @@
       "karabiner-elements"
       "keyboardcleantool"
       "kobo"
+      {
+        name = "librewolf";
+        args = {
+          no_quarantine = true;
+        };
+      }
       "mactex-no-gui"
       "mendeley"
       "messenger"

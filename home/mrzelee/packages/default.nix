@@ -19,6 +19,7 @@
       ./messaging.nix
       ./development.nix
       ./network.nix
+      ./librewolf.nix
     ]
     else if isDarwin
     then [

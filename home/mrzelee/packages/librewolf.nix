@@ -3,12 +3,13 @@
 {
   programs.firefox = {
     enable  = true;
-    package = pkgs.unstable.librewolf;
+    package = if pkgs.stdenv.isDarwin then null
+      else if pkgs.stdenv.isLinux then pkgs.librewolf
+      else null;
     configPath =
       if pkgs.stdenv.isDarwin then "Library/Application Support/librewolf"
-      else if pkgs.stdenv.isLinux then ".mozilla/librewolf"
-      else ".mozilla/librewolf";
-    # configPath = "Library/Application Support/librewolf";
+      else if pkgs.stdenv.isLinux then ".librewolf"
+      else ".librewolf";
 
     # -------- PERFIL --------
     profiles.default = {
@@ -19,7 +20,7 @@
       settings = {
         # ─── Aceleração por VA-API ──────────────────────────────────────────────
         "media.ffmpeg.vaapi.enabled"   = true;
-        "media.rdd-ffmpeg.enabled"     = true;   # (notar o hífen correcto)
+        "media.rdd-ffmpeg.enabled"     = true;
         "media.av1.enabled"            = false;
         "widget.dmabuf.force-enabled"  = true;
 
@@ -34,7 +35,7 @@
         "privacy.donottrackheader.enabled"      = true;
         "datareporting.healthreport.uploadEnabled"            = false;
         "browser.crashReports.unsubmittedCheck.autoSubmit2"   = false;
-        "network.trr.mode"                      = 3;   # DNS-over-HTTPS apenas
+        "network.trr.mode"                      = 3;
 
         # ─── Manter logins entre sessões ──────────────────────────────────────
         "privacy.sanitize.sanitizeOnShutdown"          = false;
@@ -52,6 +53,8 @@
         keepassxc-browser
         vimium-c
         newtab-adapter
+        video-downloadhelper
+        brotab
       ];
     };
   };

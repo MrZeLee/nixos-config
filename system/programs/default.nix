@@ -9,7 +9,7 @@
     ./direnv.nix
     ./zsh.nix
     ./steam.nix
-    ./firefox.nix
+    # ./firefox.nix
     ./gamemode.nix
     ./hyprland.nix
     ./noisetorch.nix
