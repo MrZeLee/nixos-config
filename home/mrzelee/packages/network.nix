@@ -1,7 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs;
     [
-      zerotierone
+      # TODO: set this up to work
+      # zerotierone
       wireshark
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
