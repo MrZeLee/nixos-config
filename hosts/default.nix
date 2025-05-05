@@ -9,6 +9,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
+        inputs.nur.overlay
         (final: prev: {
           unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
         })
@@ -44,6 +45,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
+        inputs.nur.overlay
         (final: prev: {
           unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
         })
@@ -51,7 +53,8 @@
       ];
     };
 
-    darwinSystem = inputs.nix-darwin.lib.darwinSystem {
+  in {
+    ${hostname} = inputs.nix-darwin.lib.darwinSystem {
       inherit system;
       specialArgs = {inherit inputs pkgs;};
       modules =
@@ -77,8 +80,6 @@
         ]
         ++ extraModules;
     };
-  in {
-    ${hostname} = darwinSystem;
   };
 in {
   nixosConfigurations =

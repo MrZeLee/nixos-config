@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.firefox = {
@@ -47,7 +47,7 @@
         "extensions.autoDisableScopes" = 0;
         "browser.profiles.enabled" = true;
       };
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         darkreader
         keepassxc-browser
