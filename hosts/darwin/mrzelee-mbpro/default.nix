@@ -18,7 +18,6 @@
           "/System/Applications/Launchpad.app"
           "${pkgs.wezterm}/Applications/WezTerm.app"
           "/Applications/Librewolf.app"
-          "/Applications/Firefox.app"
           "/Applications/Discord.app"
           "/System/Applications/Messages.app"
           "${pkgs.spotify}/Applications/Spotify.app"
