@@ -59,14 +59,21 @@
     };
   };
 
-  home = let
-    system = pkgs.stdenv.hostPlatform.system;
-    in
-    lib.mkIf (system == "aarch64-darwin") {
-    activation = {
-      librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        ln -s ~/Library/Application\ Support/Mozilla/NativeMessagingHosts ~/Library/Application\ Support/librewolf/NativeMessagingHosts || true
-      '';
-    };
-  };
+  home = lib.mkMerge [
+    (lib.mkIf pkgs.stdenv.isLinux {
+      activation = {
+        librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts || true
+        '';
+      };
+    })
+
+    (lib.mkIf pkgs.stdenv.isDarwin {
+      activation = {
+        librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          ln -s ~/Library/Application\ Support/Mozilla/NativeMessagingHosts ~/Library/Application\ Support/librewolf/NativeMessagingHosts || true
+        '';
+      };
+    })
+  ];
 }
