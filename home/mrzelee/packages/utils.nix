@@ -39,6 +39,7 @@
       #Misc
       gnucash
       vdhcoapp
+      libreoffice
 
       #Media
       stremio

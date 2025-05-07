@@ -32,6 +32,7 @@
       "karabiner-elements"
       "keyboardcleantool"
       "kobo"
+      "libreoffice"
       {
         name = "librewolf";
         args = {
