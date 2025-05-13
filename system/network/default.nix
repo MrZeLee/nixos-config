@@ -20,4 +20,9 @@
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
   ];
+
+  imports = [
+    ./iperf3.nix
+    ./spotify.nix
+  ];
 }
