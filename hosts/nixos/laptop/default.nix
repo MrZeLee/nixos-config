@@ -25,7 +25,7 @@
   boot.loader = {
     grub.enable = lib.mkForce false;
     systemd-boot = {
-      enable = true;
+      enable = lib.mkForce true;
       configurationLimit = 2; # Keep only the last two configurations
     };
   };
