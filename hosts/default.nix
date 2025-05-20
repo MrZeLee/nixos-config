@@ -9,7 +9,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        inputs.nur.overlay
+        inputs.nur.overlays.default
         (final: prev: {
           unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
         })
@@ -45,7 +45,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        inputs.nur.overlay
+        inputs.nur.overlays.default
         (final: prev: {
           unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
         })
