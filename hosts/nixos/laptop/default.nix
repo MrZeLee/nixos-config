@@ -4,6 +4,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./boot.nix
     ../../../system
   ];
 
@@ -19,14 +20,6 @@
 
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-  boot.loader = {
-    grub.enable = lib.mkForce false;
-    systemd-boot = {
-      enable = lib.mkForce true;
-      configurationLimit = 2; # Keep only the last two configurations
     };
   };
 

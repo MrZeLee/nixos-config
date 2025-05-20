@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./boot.nix
     ./users.nix
     ./security.nix
     # ./lanzaboote.nix
