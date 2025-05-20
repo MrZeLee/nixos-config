@@ -8,6 +8,8 @@
     enable = true;
     dns = "systemd-resolved";
   };
+  # Note: to connect to wifi use command nmcli device wifi connect <SSID> password
+  # <password>
 
   services = {
     # DNS resolver
