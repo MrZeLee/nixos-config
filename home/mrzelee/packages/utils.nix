@@ -44,6 +44,9 @@
 
       #Media
       stremio
+
+      #Network
+      sshfs
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
     ];

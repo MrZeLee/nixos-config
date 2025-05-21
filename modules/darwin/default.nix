@@ -70,6 +70,7 @@
       "monero"
       "tor"
       "wireguard-tools"
+      "sshfs"
     ];
     taps = [
       "nikitabobko/tap"
