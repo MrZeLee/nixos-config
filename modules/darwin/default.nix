@@ -39,6 +39,7 @@
           no_quarantine = true;
         };
       }
+      "macfuse"
       "mactex-no-gui"
       "mendeley"
       "messenger"
@@ -70,7 +71,6 @@
       "monero"
       "tor"
       "wireguard-tools"
-      "sshfs"
     ];
     taps = [
       "nikitabobko/tap"
