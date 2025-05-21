@@ -20,6 +20,7 @@
       netcat
       wget
       curl
+      teleport_17
 
       # Misc
       qbittorrent
