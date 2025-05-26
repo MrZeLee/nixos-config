@@ -24,7 +24,7 @@ in
             wezterm
             # koji
             mmex
-            gnucash
+            # gnucash
             ;
         }
         else {
