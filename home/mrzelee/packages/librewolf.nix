@@ -17,6 +17,15 @@
       isDefault = true;
       name      = "nixos";
 
+      bookmarks = [
+        {
+          name = "WhatsApp";
+          tags = "whatsapp";
+          keyword = "whatsapp";
+          url = "https://web.whatsapp.com";
+        }
+      ];
+
       settings = {
         # ─── Aceleração por VA-API ──────────────────────────────────────────────
         "media.ffmpeg.vaapi.enabled"   = true;

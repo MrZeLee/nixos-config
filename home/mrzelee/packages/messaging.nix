@@ -7,7 +7,7 @@
     ]
     ++ lib.optionals isLinux [
       caprine # Facebook Messenger
-      whatsapp-for-linux
+      # wasistlos # WhatsApp in browser
       vesktop # Discord
     ]
     ++ lib.optionals isDarwin [
