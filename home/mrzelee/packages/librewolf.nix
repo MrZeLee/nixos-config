@@ -20,7 +20,7 @@
       bookmarks = [
         {
           name = "WhatsApp";
-          tags = "whatsapp";
+          tags = ["whatsapp"];
           keyword = "whatsapp";
           url = "https://web.whatsapp.com";
         }
