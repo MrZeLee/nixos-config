@@ -1,15 +1,16 @@
 {
   pkgs,
   lib,
+  isLinux,
   ...
 }: {
   environment = {
     systemPackages = with pkgs;
       []
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ++ lib.optionals isLinux [
         pinentry-all
       ];
-    sessionVariables = lib.mkIf pkgs.stdenv.isLinux {
+    sessionVariables = lib.mkIf isLinux {
         PINENTRY_PROGRAM = "${pkgs.pinentry-all}/bin/pinentry";
       };
   };

@@ -1,6 +1,8 @@
 {
   pkgs,
   osConfig,
+  isLinux,
+  isDarwin,
   ...
 }: {
   imports = [
@@ -14,7 +16,7 @@
       tmux
       zsh
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       # Terminal utilities
       (
         if osConfig.hardware.nvidia.modesetting.enable
@@ -22,7 +24,7 @@
         else btop
       )
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals isDarwin [
       btop
     ];
 }

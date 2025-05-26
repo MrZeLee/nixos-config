@@ -1,10 +1,12 @@
 {
   pkgs,
   lib,
+  isLinux,
+  isDarwin,
   ...
 }: {
   users.users.mrzelee = lib.mkMerge [
-    (lib.mkIf pkgs.stdenv.isLinux {
+    (lib.mkIf isLinux {
       isNormalUser = true;
       description = "MrZeLee";
       extraGroups = ["networkmanager" "wheel" "video" "render" "input" "uinput" "gamemode"];
@@ -17,7 +19,7 @@
       ];
     })
 
-    (lib.mkIf pkgs.stdenv.isDarwin {
+    (lib.mkIf isDarwin {
       home = "/Users/mrzelee";
       shell = pkgs.zsh;
     })

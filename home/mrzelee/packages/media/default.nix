@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, isLinux, isDarwin, ...}: {
 
   imports = [ ./ani-cli ];
 
@@ -13,7 +13,7 @@
       mpv
       ffmpeg_6-full
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       #Image
       swayimg
       #dependencies
@@ -44,6 +44,6 @@
       shared-mime-info
       xdg-utils
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals isDarwin [
     ];
 }

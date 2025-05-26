@@ -1,8 +1,6 @@
-{pkgs, ...}: {
-  imports = let
-    system = pkgs.stdenv.hostPlatform.system;
-  in
-    if system == "x86_64-linux"
+{isDarwin, isLinux, ...}: {
+  imports =
+    if isLinux
     then [
       ./core
       ./network
@@ -11,7 +9,7 @@
       ./nix
       ./services
     ]
-    else if system == "aarch64-darwin"
+    else if isDarwin
     then [
       ./programs/fonts.nix
       ./programs/direnv.nix

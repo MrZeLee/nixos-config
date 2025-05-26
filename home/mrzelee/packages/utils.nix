@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  isLinux,
+  isDarwin,
   ...
 }: {
   home.packages = with pkgs;
@@ -26,7 +28,7 @@
       qbittorrent
       # mmex
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       #Security
       tor-browser
       seahorse
@@ -48,6 +50,6 @@
       #Network
       sshfs
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals isDarwin [
     ];
 }

@@ -1,9 +1,10 @@
 {
   lib,
   pkgs,
+  isDarwin,
   ...
 }:
-lib.mkIf pkgs.stdenv.isDarwin {
+lib.mkIf isDarwin {
   launchd = {
     user = {
       agents = {

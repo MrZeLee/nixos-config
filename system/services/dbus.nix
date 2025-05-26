@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  isDarwin,
   ...
 }: let
   dbusSessionConf =
@@ -17,7 +18,7 @@ in {
       dbus
       glib
     ];
-    etc = lib.optionalAttrs pkgs.stdenv.isDarwin {
+    etc = lib.optionalAttrs isDarwin {
       "dbus-1/session.conf".text = dbusSessionConf;
     };
   };

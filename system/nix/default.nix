@@ -3,6 +3,8 @@
   pkgs,
   inputs,
   lib,
+  isLinux,
+  isDarwin,
   ...
 }:
 {
@@ -31,25 +33,25 @@
       # Disable auto-optimise-store because of this issue:
       #   https://github.com/NixOS/nix/issues/7273
       # "error: cannot link '/nix/store/.tmp-link-xxxxx-xxxxx' to '/nix/store/.links/xxxx': File exists"
-      auto-optimise-store = !(pkgs.stdenv.isDarwin);
+      auto-optimise-store = !(isDarwin);
       flake-registry = "/etc/nix/registry.json";
 
       # for direnv GC roots
       keep-derivations = true;
       keep-outputs = true;
 
-      trusted-users = ["root" "@wheel"] ++ lib.optionals pkgs.stdenv.isDarwin ["@admin"];
+      trusted-users = ["root" "@wheel"] ++ lib.optionals isDarwin ["@admin"];
     };
 
     # Garbage collection settings
     gc =
-      if pkgs.stdenv.isLinux
+      if isLinux
       then {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
       }
-      else if pkgs.stdenv.isDarwin
+      else if isDarwin
       then {
         automatic = true;
         interval = {
@@ -62,6 +64,6 @@
       else {};
   };
 }
-// lib.optionalAttrs pkgs.stdenv.isDarwin {
+// lib.optionalAttrs isDarwin {
   services.nix-daemon.enable = true;
 }

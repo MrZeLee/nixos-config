@@ -1,8 +1,6 @@
-{pkgs, ...}: {
-  imports = let
-    system = pkgs.stdenv.hostPlatform.system;
-  in
-    if system == "x86_64-linux"
+{isDarwin, isLinux, ...}: {
+  imports =
+    if isLinux
     then [
       ./noisetorch.nix
       ./ssh.nix
@@ -13,7 +11,7 @@
       ./cloudflare-warp.nix
       ./docker.nix
     ]
-    else if system == "aarch64-darwin"
+    else if isDarwin
     then [
       ./jankyborders.nix
       ./tmux.nix

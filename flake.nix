@@ -52,6 +52,6 @@
       })
       .darwinConfigurations;
 
-    packages = import ./pkgs {inherit nixpkgs;};
+    packages = import ./pkgs {inherit inputs;};
   };
 }

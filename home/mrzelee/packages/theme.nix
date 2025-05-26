@@ -1,11 +1,11 @@
-{pkgs, ...}: {
+{pkgs, isLinux, isDarwin, ...}: {
   home.packages = with pkgs;
     [
       nerd-fonts.hack
       adwaita-icon-theme
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       catppuccin-sddm
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [];
+    ++ lib.optionals isDarwin [];
 }

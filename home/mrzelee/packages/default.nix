@@ -37,10 +37,7 @@
     ]
     else [];
 
-  home = let
-    system = pkgs.stdenv.hostPlatform.system;
-    in
-    lib.mkIf (system == "aarch64-darwin") {
+  home = lib.mkIf isDarwin {
     activation = {
       prepareStow = lib.hm.dag.entryAfter ["writeBoundary"] ''
         mkdir -p /Users/mrzelee/.config

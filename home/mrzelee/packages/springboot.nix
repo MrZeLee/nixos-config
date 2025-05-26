@@ -1,13 +1,15 @@
 {
   pkgs,
   lib,
+  isLinux,
+  isDarwin,
   ...
 }: {
   home.packages = with pkgs;
     [
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals isDarwin [
     ];
 }

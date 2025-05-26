@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  isLinux,
   ...
 }: {
   home.packages = with pkgs;
@@ -65,7 +66,7 @@
       # Automations
       chromedriver
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       #Automations
       chromium
     ];

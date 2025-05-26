@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  isLinux,
+  isDarwin,
   ...
 }: {
   home.packages = with pkgs;
@@ -59,11 +61,11 @@
       # Document viewers
       zathura
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       ## VimTex dependencies
       xdotool
       typora
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals isDarwin [
     ];
 }

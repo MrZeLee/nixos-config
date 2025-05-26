@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  isDarwin,
   ...
 }: let
   myPinentryMac = pkgs.pinentry_mac.overrideAttrs (old: {
@@ -15,10 +16,10 @@ in {
   environment = {
     systemPackages =
       []
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals isDarwin [
         myPinentryMac
       ];
-    variables = lib.mkIf pkgs.stdenv.isDarwin {
+    variables = lib.mkIf isDarwin {
       PINENTRY_PROGRAM = "${pkgs.pinentry_mac}/bin/pinentry-mac";
     };
   };

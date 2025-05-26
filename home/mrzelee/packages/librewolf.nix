@@ -1,14 +1,14 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, isLinux, isDarwin, ... }:
 
 {
   programs.firefox = {
     enable  = true;
-    package = if pkgs.stdenv.isDarwin then null
-      else if pkgs.stdenv.isLinux then pkgs.librewolf
+    package = if isDarwin then null
+      else if isLinux then pkgs.librewolf
       else null;
     configPath =
-      if pkgs.stdenv.isDarwin then "Library/Application Support/librewolf"
-      else if pkgs.stdenv.isLinux then ".librewolf"
+      if isDarwin then "Library/Application Support/librewolf"
+      else if isLinux then ".librewolf"
       else ".librewolf";
 
     # -------- PERFIL --------
@@ -60,7 +60,7 @@
   };
 
   home = lib.mkMerge [
-    (lib.mkIf pkgs.stdenv.isLinux {
+    (lib.mkIf isLinux {
       activation = {
         librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
           ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts || true
@@ -68,7 +68,7 @@
       };
     })
 
-    (lib.mkIf pkgs.stdenv.isDarwin {
+    (lib.mkIf isDarwin {
       activation = {
         librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
           ln -s ~/Library/Application\ Support/Mozilla/NativeMessagingHosts ~/Library/Application\ Support/librewolf/NativeMessagingHosts || true

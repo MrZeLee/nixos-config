@@ -1,11 +1,11 @@
-{pkgs, ...}: {
+{pkgs, isLinux, ...}: {
   home.packages = with pkgs;
     [
       # TODO: set this up to work
       # zerotierone
       wireshark
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
+    ++ lib.optionals isLinux [
       onionshare-gui
     ];
 }

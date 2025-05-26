@@ -1,11 +1,13 @@
-{nixpkgs}: let
+{ inputs }:
+let
   systems = ["x86_64-linux" "aarch64-darwin"];
-  forAllSystems = nixpkgs.lib.genAttrs systems;
-  overlay = import ./overlay.nix {inherit nixpkgs;};
+  forAllSystems = inputs.nixpkgs.lib.genAttrs systems;
+
+  overlay = import ./overlay.nix {};
 in
-  forAllSystems (
-    system: let
-      pkgs = import nixpkgs {
+  forAllSystems (system:
+    let
+      pkgs = import inputs.nixpkgs {
         inherit system;
         overlays = [overlay];
       };
@@ -20,7 +22,7 @@ in
             swww
             fleet-cli
             wezterm
-            koji
+            # koji
             mmex
             gnucash
             ;
@@ -29,7 +31,7 @@ in
           inherit
             (pkgs)
             fleet-cli
-            koji
+            # koji
             ;
         };
     in
