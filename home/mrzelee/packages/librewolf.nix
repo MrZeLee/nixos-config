@@ -17,14 +17,17 @@
       isDefault = true;
       name      = "nixos";
 
-      bookmarks = [
-        {
-          name = "WhatsApp";
-          tags = ["whatsapp"];
-          keyword = "whatsapp";
-          url = "https://web.whatsapp.com";
-        }
-      ];
+      bookmarks = {
+        force = true;
+        settings = [
+          {
+            name = "WhatsApp";
+            tags = ["whatsapp"];
+            keyword = "whatsapp";
+            url = "https://web.whatsapp.com";
+          }
+        ];
+      };
 
       settings = {
         # ─── Aceleração por VA-API ──────────────────────────────────────────────
