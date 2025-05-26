@@ -12,6 +12,7 @@
 
   # Darwin-specific host configurations
   system = {
+    primaryUser = "mrzelee";
     defaults = {
       dock = {
         persistent-apps = [

@@ -1,7 +1,7 @@
 {pkgs, isDarwin, isLinux, ...}: {
   home.packages = with pkgs;
     [
-      signal-desktop
+      signal-desktop-bin
       telegram-desktop
       zoom-us
     ]

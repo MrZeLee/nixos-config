@@ -65,5 +65,5 @@
   };
 }
 // lib.optionalAttrs isDarwin {
-  services.nix-daemon.enable = true;
+  nix.enable = true;
 }
