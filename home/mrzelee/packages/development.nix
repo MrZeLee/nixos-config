@@ -16,7 +16,7 @@
       python312Packages.pip
       pipx
       rustc
-      nodejs_23
+      nodejs_24
       zulu23
 
       cargo

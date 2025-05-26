@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs;
     [
-      (pkgs.nerdfonts.override {fonts = ["Hack"];})
+      nerd-fonts.hack
       adwaita-icon-theme
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [

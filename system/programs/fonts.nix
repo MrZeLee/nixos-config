@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   fonts = {
     packages = [
-      (pkgs.nerdfonts.override {fonts = ["Hack"];}) # Only install Hack Nerd Font
+      pkgs.nerd-fonts.hack # Only install Hack Nerd Font
     ];
   };
 }

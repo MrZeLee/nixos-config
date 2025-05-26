@@ -39,7 +39,7 @@
       pipx
       rustc
       cargo
-      nodejs_23
+      nodejs_24
       zulu23
       texliveFull
       ## Treesitter

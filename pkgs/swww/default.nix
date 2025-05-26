@@ -26,7 +26,7 @@ rustPlatform.buildRustPackage rec {
   #     "bitcode-0.6.0" = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   #   };
   # };
-  cargoHash = "sha256-qV+N7FteBCxmOkMZjW13jOqy4ZDLLqeZY+Ng9lM8J0I=";
+  cargoHash = "sha256-bt8E5Nxf/2HlpAemUuhAL/fdaoz/168H9YReanWhc2I=";
 
   buildInputs = [
     lz4
