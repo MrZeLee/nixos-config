@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+
+  nixpkgs.config.allowBroken = true;
+
   # Darwin-specific host configurations
   system = {
     defaults = {

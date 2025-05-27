@@ -21,7 +21,7 @@ in
             waypaper
             swww
             fleet-cli
-            wezterm
+            # wezterm
             # koji
             mmex
             # gnucash
