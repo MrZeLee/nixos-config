@@ -10,6 +10,7 @@
       "pt_PT.UTF-8/UTF-8"
     ];
     extraLocaleSettings = {
+      LANG = "en_US.UTF-8";
       LC_MESSAGES = "en_US.UTF-8";
       LC_IDENTIFICATION = "pt_PT.UTF-8";
       LC_CTYPE = "pt_PT.UTF-8";
