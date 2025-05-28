@@ -64,6 +64,3 @@
       else {};
   };
 }
-// lib.optionalAttrs isDarwin {
-  nix.enable = true;
-}

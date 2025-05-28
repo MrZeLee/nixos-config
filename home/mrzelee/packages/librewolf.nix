@@ -75,6 +75,7 @@
     (lib.mkIf isLinux {
       activation = {
         librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          rm -rf ~/.librewolf/native-messaging-hosts && \
           ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts || true
         '';
       };
@@ -83,6 +84,7 @@
     (lib.mkIf isDarwin {
       activation = {
         librewolf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          rm -rf ~/Library/Application\ Support/librewolf/NativeMessagingHosts && \
           ln -s ~/Library/Application\ Support/Mozilla/NativeMessagingHosts ~/Library/Application\ Support/librewolf/NativeMessagingHosts || true
         '';
       };
