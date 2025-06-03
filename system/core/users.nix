@@ -9,7 +9,8 @@
     (lib.mkIf isLinux {
       isNormalUser = true;
       description = "MrZeLee";
-      extraGroups = ["networkmanager" "wheel" "video" "render" "input" "uinput" "gamemode"];
+      extraGroups = ["networkmanager" "wheel" "video" "render" "input" "uinput"
+        "gamemode" "lpadmin"];
       home = "/home/mrzelee";
       createHome = true;
       shell = pkgs.zsh;
