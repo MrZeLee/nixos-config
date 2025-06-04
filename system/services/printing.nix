@@ -4,5 +4,9 @@
     enable = true;
   };
 
+  # Enables ipp
   services.avahi.enable = true;
+
+  # For scanning
+  services.scanservjs.enable = true;
 }
