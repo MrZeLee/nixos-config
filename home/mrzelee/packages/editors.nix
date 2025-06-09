@@ -29,6 +29,8 @@
       ###Formatters
       stylua
       prettierd
+      #### xmllint
+      libxml2
 
       go
       php83
