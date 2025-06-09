@@ -8,5 +8,10 @@
   services.avahi.enable = true;
 
   # For scanning
-  services.scanservjs.enable = true;
+  services.scanservjs = {
+    enable = true;
+    settings = {
+      port = 8081;
+    };
+  };
 }
