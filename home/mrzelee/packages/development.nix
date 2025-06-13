@@ -6,6 +6,9 @@
 }: {
   home.packages = with pkgs;
     [
+      # AI
+      codex
+
       # Languages
       go
       php83
@@ -65,6 +68,9 @@
 
       # Automations
       chromedriver
+
+      #Databases
+      pgadmin4-desktopmode
     ]
     ++ lib.optionals isLinux [
       #Automations
