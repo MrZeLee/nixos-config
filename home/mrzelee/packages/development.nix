@@ -71,6 +71,9 @@
 
       #Databases
       pgadmin4-desktopmode
+
+      #Testing
+      postman
     ]
     ++ lib.optionals isLinux [
       #Automations

@@ -29,6 +29,7 @@
       "google-cloud-sdk"
       "google-drive"
       "iina"
+      "intellij-idea-ce"
       "karabiner-elements"
       "keyboardcleantool"
       "kobo"
