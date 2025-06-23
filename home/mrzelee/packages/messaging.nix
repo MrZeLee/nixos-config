@@ -9,7 +9,9 @@
       caprine # Facebook Messenger
       # wasistlos # WhatsApp in browser
       vesktop # Discord
+      teams-for-linux
     ]
     ++ lib.optionals isDarwin [
+      teams
     ];
 }
