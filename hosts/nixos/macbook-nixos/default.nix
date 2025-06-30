@@ -38,7 +38,7 @@
 
   # configuration.nix:
   boot.kernelParams = [ "button.lid_init_state=open" ];
-  powerManagement.enable = true;
+  powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 
   services.logind.extraConfig = ''
@@ -79,7 +79,35 @@
      };
    };
 
-  # environment.systemPackages = with pkgs; [
-  #   displaylink
-  # ];
+  services.power-profiles-daemon = {
+    enable     = true;
+  };
+
+  # install the default config with our on-ac / on-battery settings
+  environment.etc."power-profiles-daemon/config.toml".text = lib.trim ''
+    [general]
+    # which profile to pick at boot if none is active
+    default-profile = "balanced"
+
+    # switch profiles on AC / battery insert/remove
+    on-ac      = "performance"
+    on-battery = "powersave"
+
+    # how long to wait after an AC/BAT event before switching
+    timeout = 10
+
+    # If you want to tweak the individual profiles, you can do so here:
+    #
+    #[profile.powersave]
+    #  # example: turn on schedutil governor
+    #  governor = "schedutil"
+    #
+    #[profile.performance]
+    #  governor = "performance"
+  '';
+
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+    # displaylink
+  ];
 }
