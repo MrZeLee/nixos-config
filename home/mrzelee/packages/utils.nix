@@ -3,6 +3,7 @@
   lib,
   isLinux,
   isDarwin,
+  isX86_64,
   ...
 }: {
   home.packages = with pkgs;
@@ -30,7 +31,6 @@
     ]
     ++ lib.optionals isLinux [
       #Security
-      tor-browser
       seahorse
       monero-cli
       monero-gui
@@ -49,6 +49,9 @@
 
       #Network
       sshfs
+    ]
+    ++ lib.optionals (isLinux && isX86_64) [
+      tor-browser
     ]
     ++ lib.optionals isDarwin [
     ];

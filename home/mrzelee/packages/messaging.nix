@@ -1,9 +1,8 @@
-{pkgs, isDarwin, isLinux, ...}: {
+{pkgs, isDarwin, isLinux, isX86_64, ...}: {
   home.packages = with pkgs;
     [
       signal-desktop-bin
       telegram-desktop
-      zoom-us
     ]
     ++ lib.optionals isLinux [
       caprine # Facebook Messenger
@@ -11,7 +10,11 @@
       vesktop # Discord
       teams-for-linux
     ]
+    ++ lib.optionals (isLinux && isX86_64) [
+      zoom-us
+    ]
     ++ lib.optionals isDarwin [
       teams
+      zoom-us
     ];
 }

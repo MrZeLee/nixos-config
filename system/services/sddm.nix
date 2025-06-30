@@ -3,7 +3,7 @@
     xserver = {
       enable = true;
       # Load nvidia driver for Xorg and Wayland
-      videoDrivers = ["nvidia"];
+      videoDrivers = ["modesetting"];
       xkb = {
         layout = "us";
         variant = "intl";

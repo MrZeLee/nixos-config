@@ -30,6 +30,11 @@
     mac-app-util.url = "github:hraban/mac-app-util";
 
     nur.url = "github:nix-community/nur";
+
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -41,8 +46,11 @@
       (import ./hosts {
         inherit inputs nixpkgs;
         system = "x86_64-linux";
-      })
-      .nixosConfigurations;
+      }).nixosConfigurations
+      // (import ./hosts {
+        inherit inputs nixpkgs;
+        system = "aarch64-linux";
+      }).nixosConfigurations;
 
     darwinConfigurations =
       (import ./hosts {

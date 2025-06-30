@@ -1,5 +1,7 @@
 {
   pkgs,
+  lib,
+  isX86_64,
   ...
 }: {
   imports = [
@@ -8,13 +10,12 @@
     ./qt.nix
     ./direnv.nix
     ./zsh.nix
-    ./steam.nix
     # ./firefox.nix
     ./gamemode.nix
     ./hyprland.nix
     ./noisetorch.nix
     ./pinentry.nix
-  ];
+  ] ++ lib.optionals isX86_64 [ ./steam.nix ];
 
   environment.gnome.excludePackages = with pkgs; [
     gnome-calendar #calendar

@@ -11,6 +11,9 @@
         inherit inputs;
         isLinux = builtins.match ".*-linux" system != null;
         isDarwin = builtins.match ".*-darwin" system != null;
+	# Architecture
+	isAarch64 = builtins.match "^aarch64-.*" system != null;
+	isX86_64 = builtins.match "^x86_64-.*" system != null;
       };
       modules =
         [
@@ -27,6 +30,9 @@
                 inherit inputs;
                 isLinux = builtins.match ".*-linux" system != null;
                 isDarwin = builtins.match ".*-darwin" system != null;
+		# Architecture
+		isAarch64 = builtins.match "^aarch64-.*" system != null;
+		isX86_64 = builtins.match "^x86_64-.*" system != null;
               };
             };
           }
@@ -41,6 +47,9 @@
         inherit inputs;
         isLinux = builtins.match ".*-linux" system != null;
         isDarwin = builtins.match ".*-darwin" system != null;
+	# Architecture
+	isAarch64 = builtins.match "^aarch64-.*" system != null;
+	isX86_64 = builtins.match "^x86_64-.*" system != null;
       };
       modules =
         [
@@ -57,6 +66,9 @@
                 inherit inputs;
                 isLinux = builtins.match ".*-linux" system != null;
                 isDarwin = builtins.match ".*-darwin" system != null;
+		# Architecture
+		isAarch64 = builtins.match "^aarch64-.*" system != null;
+		isX86_64 = builtins.match "^x86_64-.*" system != null;
               };
               sharedModules = [
                 mac-app-util.homeManagerModules.default
@@ -71,7 +83,8 @@
 in {
   nixosConfigurations =
     mkSystem "desktop" []
-  // (mkSystem "laptop" []);
+  // (mkSystem "laptop" [])
+  // (mkSystem "macbook-nixos" []);
 
   darwinConfigurations =
     mkDarwinSystem "mrzelee-mbpro" [];

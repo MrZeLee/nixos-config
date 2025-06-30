@@ -1,4 +1,4 @@
-{pkgs, isLinux, isDarwin, ...}: {
+{pkgs, isLinux, isDarwin, isX86_64, ...}: {
 
   imports = [ ./ani-cli ];
 
@@ -8,7 +8,6 @@
       gimp
 
       # Audio/Video
-      spotify
       unstable.spotify-player
       mpv
       ffmpeg_6-full
@@ -44,6 +43,10 @@
       shared-mime-info
       xdg-utils
     ]
+    ++ lib.optionals (isLinux && isX86_64) [
+      spotify
+    ]
     ++ lib.optionals isDarwin [
+      spotify
     ];
 }

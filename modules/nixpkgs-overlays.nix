@@ -15,6 +15,7 @@
       #   unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
       # })
       (import ../pkgs/overlay.nix { inherit nixpkgs; })
+      inputs.nixos-apple-silicon.overlays.apple-silicon-overlay
     ];
   };
 }

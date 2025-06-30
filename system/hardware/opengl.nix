@@ -1,3 +1,4 @@
+{ config, lib, isAarch64, ...}:
 {
   # Enable OpenGL
   hardware.graphics = {

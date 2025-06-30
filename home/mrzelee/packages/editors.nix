@@ -3,6 +3,7 @@
   lib,
   isLinux,
   isDarwin,
+  isX86_64,
   ...
 }: {
   home.packages = with pkgs;
@@ -66,6 +67,8 @@
     ++ lib.optionals isLinux [
       ## VimTex dependencies
       xdotool
+    ]
+    ++ lib.optionals (isLinux && isX86_64) [
       typora
     ]
     ++ lib.optionals isDarwin [

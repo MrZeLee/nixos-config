@@ -1,9 +1,9 @@
 { inputs }:
 let
-  systems = ["x86_64-linux" "aarch64-darwin"];
+  systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
   forAllSystems = inputs.nixpkgs.lib.genAttrs systems;
 
-  overlay = import ./overlay.nix {};
+  overlay = import ./overlay.nix { nixpkgs = inputs.nixpkgs; };
 in
   forAllSystems (system:
     let
@@ -27,12 +27,25 @@ in
             # gnucash
             ;
         }
-        else {
-          inherit
-            (pkgs)
-            fleet-cli
-            # koji
-            ;
+        else if system == "aarch64-linux"
+	then {
+	  inherit
+	    (pkgs)
+	    waypaper
+	    swww
+	    fleet-cli
+	    # wezterm
+	    # koji
+	    mmex
+	    # gnucash
+	    ;
+	}
+	else {
+	  inherit
+	    (pkgs)
+	    fleet-cli
+	    # koji
+	    ;
         };
     in
       systemPackages
