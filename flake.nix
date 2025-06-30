@@ -42,15 +42,13 @@
     nixpkgs,
     ...
   }: {
-    nixosConfigurations =
-      (import ./hosts {
-        inherit inputs nixpkgs;
-        system = "x86_64-linux";
-      }).nixosConfigurations
-      // (import ./hosts {
-        inherit inputs nixpkgs;
-        system = "aarch64-linux";
-      }).nixosConfigurations;
+    nixosConfigurations = {
+      # x86_64 hosts
+      desktop       = (import ./hosts { inherit inputs nixpkgs; system = "x86_64-linux"; }).nixosConfigurations.desktop;
+      laptop        = (import ./hosts { inherit inputs nixpkgs; system = "x86_64-linux"; }).nixosConfigurations.laptop;
+      # aarch64 host
+      macbook-nixos = (import ./hosts { inherit inputs nixpkgs; system = "aarch64-linux"; }).nixosConfigurations.macbook-nixos;
+    };
 
     darwinConfigurations =
       (import ./hosts {

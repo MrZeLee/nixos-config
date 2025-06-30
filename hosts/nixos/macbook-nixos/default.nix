@@ -31,6 +31,6 @@
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = lib.mkDefault [ "modesetting" ];
 
 }
