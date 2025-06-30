@@ -25,16 +25,19 @@
     };
 
   swapDevices = [
-    { device = "/swapfile"; }
+    {
+      device = "/swapfile";
+      size = 16384;
+    }
   ];
 
-  # boot.resumeDevice = "/dev/disk/by-uuid/{UUID for swap}";
+  boot.resumeDevice = "/swapfile";
 
-  # boot.kernelParams = [ 
-  #  "resume_offset=SWAP_OFFSET" 
-  #  "acpi_osi=Linux"
-  #  "acpi_backlight=video"
-  #  ];
+  boot.kernelParams = [
+   "resume_offset=SWAP_OFFSET"
+   "acpi_osi=Linux"
+   "acpi_backlight=video"
+   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
