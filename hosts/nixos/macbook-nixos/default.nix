@@ -34,7 +34,7 @@
 
   services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
 
-  environment.systemPackages = with pkgs; [
-    displaylink
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   displaylink
+  # ];
 }
