@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -33,4 +34,7 @@
 
   services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
 
+  environment.systemPackages = with pkgs; [
+    displaylink
+  ];
 }
