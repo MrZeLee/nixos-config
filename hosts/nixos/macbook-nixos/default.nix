@@ -108,6 +108,7 @@
 
   environment.systemPackages = with pkgs; [
     brightnessctl
+    playerctl
     # displaylink
   ];
 }
