@@ -43,6 +43,7 @@
       opencommit
       koji
       gitflow
+      pre-commit
 
       # Cloud/Infrastructure
       ansible
