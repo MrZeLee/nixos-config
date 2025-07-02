@@ -49,6 +49,9 @@
 
       #Network
       sshfs
+
+      #Lightweight terminal
+      enlightenment.terminology
     ]
     ++ lib.optionals (isLinux && isX86_64) [
       tor-browser
