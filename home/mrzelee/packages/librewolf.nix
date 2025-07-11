@@ -1,5 +1,8 @@
-{ pkgs, lib, isLinux, isDarwin, ... }:
+{ pkgs, lib, config, isLinux, isDarwin, ... }:
 
+let
+  bookmarkFile = config.programs.firefox.profiles.default.bookmarks.configFile;
+in
 {
   programs.firefox = {
     enable  = true;
@@ -18,13 +21,32 @@
       name      = "nixos";
 
       bookmarks = {
+        enable = true;
         force = true;
         settings = [
           {
-            name = "WhatsApp";
-            tags = ["whatsapp"];
-            keyword = "whatsapp";
-            url = "https://web.whatsapp.com";
+            name = "Bookmarks Toolbar";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "WhatsApp";
+                tags = ["messages"];
+                keyword = "whatsapp";
+                url = "https://web.whatsapp.com";
+              }
+              {
+                name = "Messenger";
+                tags = ["messages"];
+                keyword = "messenger";
+                url = "https://www.messenger.com";
+              }
+              {
+                name = "NixOS Search Packages";
+                tags = ["nixos" "search"];
+                keyword = "nixpkgs";
+                url = "https://search.nixos.org/packages";
+              }
+            ];
           }
         ];
       };
@@ -35,6 +57,8 @@
         "media.rdd-ffmpeg.enabled"     = true;
         "media.av1.enabled"            = false;
         "widget.dmabuf.force-enabled"  = true;
+
+        "browser.eme.ui.enabled"       = true;
 
         # ─── Performance & UX ──────────────────────────────────────────────────
         "browser.preferences.defaultPerformanceSettings.enabled" = false;
@@ -58,6 +82,15 @@
         # Desactivar desactivação automática de extensões instaladas por HM
         "extensions.autoDisableScopes" = 0;
         "browser.profiles.enabled" = true;
+
+        "browser.places.importBookmarksHTML" = true;
+        "browser.bookmarks.file"             = bookmarkFile;
+
+        # optional quality-of-life tweaks
+        "browser.toolbars.bookmarks.visibility" = "always";  # show toolbar
+
+        #UI
+        "browser.uiCustomization.state" = "{\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[\"vimium-c_gdh1995_cn-browser-action\",\"_b9db16a4-6edc-47ec-a1f4-b86292ed211d_-browser-action\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"bookmarks-menu-button\",\"screenshot-button\",\"vertical-spacer\",\"urlbar-container\",\"customizableui-special-spring2\",\"save-to-pocket-button\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"ublock0_raymondhill_net-browser-action\",\"unified-extensions-button\",\"keepassxc-browser_keepassxc_org-browser-action\",\"addon_darkreader_org-browser-action\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"vertical-tabs\":[],\"PersonalToolbar\":[\"personal-bookmarks\"]},\"seen\":[\"addon_darkreader_org-browser-action\",\"keepassxc-browser_keepassxc_org-browser-action\",\"ublock0_raymondhill_net-browser-action\",\"vimium-c_gdh1995_cn-browser-action\",\"_b9db16a4-6edc-47ec-a1f4-b86292ed211d_-browser-action\",\"developer-button\",\"screenshot-button\"],\"dirtyAreaCache\":[\"unified-extensions-area\",\"nav-bar\",\"vertical-tabs\"],\"currentVersion\":22,\"newElementCount\":3}";
       };
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin

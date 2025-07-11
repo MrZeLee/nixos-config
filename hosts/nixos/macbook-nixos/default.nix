@@ -68,16 +68,16 @@
      lidSwitch = "suspend";
    };
 
-   # Macbook pro fan controlls is an option too.
-   services.mbpfan = {
-     enable = true;
-     aggressive = false;
-     settings.general = { # even more agressive settings for the fan
-         low_temp = 50;
-         high_temp = 55;
-         max_temp = 65;
-     };
-   };
+   # # Macbook pro fan controlls is an option too.
+   # services.mbpfan = {
+   #   enable = true;
+   #   aggressive = false;
+   #   settings.general = { # even more agressive settings for the fan
+   #       low_temp = 50;
+   #       high_temp = 55;
+   #       max_temp = 65;
+   #   };
+   # };
 
   services.power-profiles-daemon = {
     enable     = true;
