@@ -9,6 +9,7 @@
     # ./apple-silicon-support
     inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     ../../../system
+    ./boot.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
