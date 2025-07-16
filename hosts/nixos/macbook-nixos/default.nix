@@ -25,6 +25,10 @@
   boot.extraModprobeConfig = ''
     options hid_apple iso_layout=0
   '';
+  
+  # Hibernation support: suspend-to-disk via initrd resume hook
+  swapDevices = lib.mkForce [ { device = "/swapfile"; size = 16384; } ];
+  boot.resumeDevice = lib.mkForce "/swapfile";
 
   networking.wireless.iwd = {
     enable = true;
@@ -37,8 +41,16 @@
 
   services.xserver.videoDrivers = lib.mkForce [];
 
-  # configuration.nix:
-  boot.kernelParams = [ "button.lid_init_state=open" ];
+  # Kernel parameters: resume support, ACPI tweaks, lid init state,
+  # and force Apple-specific cpuidle driver (WFI/WFE hack) over PSCI
+  boot.kernelParams = lib.mkForce [
+    "resume=/swapfile"
+    "acpi_osi=Linux"
+    "acpi_backlight=video"
+    "button.lid_init_state=open"
+    # Use the Apple cpuidle driver for proper WFI/WFE idle on Apple Silicon
+    "cpuidle.driver=apple"
+  ];
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 
@@ -51,6 +63,7 @@
      HoldoffTimeoutSec=5s
      IdleAction=suspend
      IdleActionSec=300s
+     HibernateDelaySec=10min
    '';
 
    systemd.services.disable-nvme-d3cold = {
@@ -65,9 +78,6 @@
      };
    };
 
-   services.logind = {
-     lidSwitch = "suspend";
-   };
 
    # # Macbook pro fan controlls is an option too.
    # services.mbpfan = {
@@ -83,6 +93,7 @@
   services.power-profiles-daemon = {
     enable     = true;
   };
+
 
   # install the default config with our on-ac / on-battery settings
   environment.etc."power-profiles-daemon/config.toml".text = lib.trim ''
