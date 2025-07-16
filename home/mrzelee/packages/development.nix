@@ -44,6 +44,7 @@
       koji
       gitflow
       pre-commit
+      act
 
       # Cloud/Infrastructure
       ansible
