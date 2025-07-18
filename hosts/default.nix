@@ -14,6 +14,7 @@
         # Architecture
         isAarch64 = builtins.match "^aarch64-.*" system != null;
         isX86_64 = builtins.match "^x86_64-.*" system != null;
+        hostname = hostname;
       };
       modules =
         [
@@ -33,6 +34,7 @@
                 # Architecture
                 isAarch64 = builtins.match "^aarch64-.*" system != null;
                 isX86_64 = builtins.match "^x86_64-.*" system != null;
+                hostname = hostname;
               };
             };
           }
@@ -50,6 +52,7 @@
         # Architecture
         isAarch64 = builtins.match "^aarch64-.*" system != null;
         isX86_64 = builtins.match "^x86_64-.*" system != null;
+        hostname = hostname;
       };
       modules =
         [
@@ -69,6 +72,7 @@
                 # Architecture
                 isAarch64 = builtins.match "^aarch64-.*" system != null;
                 isX86_64 = builtins.match "^x86_64-.*" system != null;
+                hostname = hostname;
               };
               sharedModules = [
                 mac-app-util.homeManagerModules.default

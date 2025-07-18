@@ -1,4 +1,4 @@
-{pkgs, isLinux, isDarwin, isX86_64, ...}: {
+{pkgs, lib, hostname, isLinux, isDarwin, isX86_64, ...}: {
 
   imports = [ ./ani-cli ];
 
@@ -49,4 +49,12 @@
     ++ lib.optionals isDarwin [
       spotify
     ];
+
+  home.file = lib.mkIf (hostname == "macbook-nixos") {
+    ".config/mpv/mpv.conf".text = ''
+      vo=gpu
+      gpu-api=opengl
+      gpu-context=wayland
+    '';
+  };
 }
