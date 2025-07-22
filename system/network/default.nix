@@ -8,6 +8,7 @@
     enable = true;
     dns = "systemd-resolved";
   };
+  networking.extraHosts = "127.0.0.1 azurite";
   # Note: to connect to wifi use command nmcli device wifi connect <SSID> password
   # <password>
 

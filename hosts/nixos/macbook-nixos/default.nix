@@ -30,9 +30,21 @@
   swapDevices = lib.mkForce [ { device = "/swapfile"; size = 16384; } ];
   boot.resumeDevice = lib.mkForce "/swapfile";
 
+  # Use iwd as NetworkManager's wifi backend (more stable on M1)
   networking.wireless.iwd = {
     enable = true;
-    settings.General.EnableNetworkConfiguration = true;
+    settings = {
+      General = {
+        EnableNetworkConfiguration = true;
+        # allow a longer assoc timeout for flaky links
+        AssociateTimeout = 30;
+      };
+    };
+  };
+
+  networking.networkmanager.wifi = {
+    # delegate all wifi to iwd
+    backend = "iwd";
   };
 
   networking.hostName = "macbook-nixos"; # Define your hostname.
@@ -50,6 +62,8 @@
     "button.lid_init_state=open"
     # Use the Apple cpuidle driver for proper WFI/WFE idle on Apple Silicon
     "cpuidle.driver=apple"
+    # set your regional domain for wifi
+    "cfg80211.ieee80211_regdom=PT"
   ];
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
