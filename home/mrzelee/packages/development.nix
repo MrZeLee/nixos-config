@@ -62,6 +62,7 @@
       kustomize
       opentofu
       postgresql
+      terraform
 
       # Documentation
       gnuplot
