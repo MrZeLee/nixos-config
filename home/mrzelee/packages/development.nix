@@ -8,6 +8,7 @@
     [
       # AI
       codex
+      unstable.opencode
 
       # Languages
       go
