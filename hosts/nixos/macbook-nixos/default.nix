@@ -18,7 +18,6 @@
 
   #Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
-  hardware.asahi.withRust = true;
   hardware.asahi.useExperimentalGPUDriver = true;
 
   # For ` to < and ~ to > (for those with US keyboards)
