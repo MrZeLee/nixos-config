@@ -64,6 +64,7 @@
       opentofu
       postgresql
       terraform
+      azure-cli
 
       # Documentation
       gnuplot
