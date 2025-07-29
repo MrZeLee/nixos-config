@@ -24,6 +24,7 @@ in
             # koji
             mmex
             codex
+            mkchromecast
             # gnucash
             ;
         }
@@ -38,6 +39,7 @@ in
             # koji
             mmex
             codex
+            mkchromecast
             # gnucash
             ;
         }

@@ -27,6 +27,7 @@
 
       # Misc
       qbittorrent
+      mkchromecast
       # mmex
       ghostscript
     ]
