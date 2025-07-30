@@ -10,6 +10,7 @@
       ./gnome-keyring.nix
       ./cloudflare-warp.nix
       ./docker.nix
+      ./flatpak.nix
     ]
     else if isDarwin
     then [
