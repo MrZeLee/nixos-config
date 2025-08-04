@@ -5,6 +5,6 @@
   # wezterm = prev.callPackage ./wezterm {};
   # koji = prev.callPackage ./koji {};
   mmex = prev.callPackage ./mmex {};
-  codex = prev.callPackage ./codex {};
+  # codex = prev.callPackage ./codex {};
   # gnucash = prev.callPackage ./gnucash {};
 }

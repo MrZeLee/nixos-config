@@ -7,7 +7,7 @@
   home.packages = with pkgs;
     [
       # AI
-      codex
+      unstable.codex
       unstable.opencode
 
       # Languages

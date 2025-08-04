@@ -23,7 +23,7 @@ in
             # wezterm
             # koji
             mmex
-            codex
+            # codex
             # gnucash
             ;
         }
@@ -37,7 +37,7 @@ in
             # wezterm
             # koji
             mmex
-            codex
+            # codex
             # gnucash
             ;
         }
@@ -45,7 +45,7 @@ in
           inherit
             (pkgs)
             fleet-cli
-            codex
+            # codex
             # koji
             ;
         };
