@@ -27,5 +27,6 @@
   imports = [
     ./iperf3.nix
     ./spotify.nix
+    ./openvpn3.nix
   ];
 }
