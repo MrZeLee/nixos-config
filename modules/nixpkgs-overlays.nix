@@ -10,6 +10,10 @@
           inherit (prev.stdenv.hostPlatform) system;
           config.allowUnfree = true;
         };
+        master = import inputs.nixpkgs-master {
+          inherit (prev.stdenv.hostPlatform) system;
+          config.allowUnfree = true;
+        };
       })
       # (final: prev: {
       #   unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};

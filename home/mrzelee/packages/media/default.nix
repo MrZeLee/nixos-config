@@ -8,7 +8,8 @@
       gimp
 
       # Audio/Video
-      unstable.spotify-player
+      # unstable.spotify-player
+      master.spotify-player
       mpv
       ffmpeg_6-full
     ]
