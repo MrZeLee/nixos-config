@@ -9,6 +9,7 @@
       # AI
       unstable.codex
       unstable.opencode
+      unstable.claude-code
 
       # Languages
       go
