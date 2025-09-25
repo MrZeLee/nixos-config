@@ -60,6 +60,8 @@
 
       # VSCode
       pkgs.vscode
+      glibc
+      postgresql
 
       # Document viewers
       zathura

@@ -65,6 +65,7 @@
       opentofu
       postgresql
       terraform
+      terragrunt
       azure-cli
 
       # Documentation
@@ -80,9 +81,11 @@
 
       #Testing
       postman
+      age
     ]
     ++ lib.optionals isLinux [
       #Automations
       chromium
+      parted
     ];
 }

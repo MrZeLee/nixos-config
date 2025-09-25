@@ -36,19 +36,22 @@
       url = "github:nix-community/nixos-apple-silicon/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    agenix,
     ...
   }: {
     nixosConfigurations = {
       # x86_64 hosts
-      desktop       = (import ./hosts { inherit inputs nixpkgs; system = "x86_64-linux"; }).nixosConfigurations.desktop;
-      laptop        = (import ./hosts { inherit inputs nixpkgs; system = "x86_64-linux"; }).nixosConfigurations.laptop;
+      desktop       = (import ./hosts { inherit inputs nixpkgs agenix; system = "x86_64-linux"; }).nixosConfigurations.desktop;
+      laptop        = (import ./hosts { inherit inputs nixpkgs agenix; system = "x86_64-linux"; }).nixosConfigurations.laptop;
       # aarch64 host
-      macbook-nixos = (import ./hosts { inherit inputs nixpkgs; system = "aarch64-linux"; }).nixosConfigurations.macbook-nixos;
+      macbook-nixos = (import ./hosts { inherit inputs nixpkgs agenix; system = "aarch64-linux"; }).nixosConfigurations.macbook-nixos;
     };
 
     darwinConfigurations =

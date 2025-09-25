@@ -1,6 +1,7 @@
 {
   inputs,
   nixpkgs,
+  agenix,
   system,
   mac-app-util ? null,
 }: let
@@ -8,7 +9,7 @@
     ${hostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit inputs;
+        inherit inputs system;
         isLinux = builtins.match ".*-linux" system != null;
         isDarwin = builtins.match ".*-darwin" system != null;
         # Architecture
@@ -19,6 +20,7 @@
       modules =
         [
           ../modules/nixpkgs-overlays.nix
+          ./nixos/default.nix
           ./nixos/${hostname}
           inputs.home-manager.nixosModules.home-manager
           {
@@ -28,7 +30,7 @@
               users.mrzelee = import ../home/mrzelee;
               backupFileExtension = "backup";
               extraSpecialArgs = {
-                inherit inputs;
+                inherit inputs system;
                 isLinux = builtins.match ".*-linux" system != null;
                 isDarwin = builtins.match ".*-darwin" system != null;
                 # Architecture
@@ -38,6 +40,7 @@
               };
             };
           }
+          agenix.nixosModules.default
         ]
         ++ extraModules;
     };
@@ -46,7 +49,7 @@
     ${hostname} = inputs.nix-darwin.lib.darwinSystem {
       inherit system;
       specialArgs = {
-        inherit inputs;
+        inherit inputs system;
         isLinux = builtins.match ".*-linux" system != null;
         isDarwin = builtins.match ".*-darwin" system != null;
         # Architecture
@@ -66,7 +69,7 @@
               users.mrzelee = import ../home/mrzelee;
               backupFileExtension = "backup";
               extraSpecialArgs = {
-                inherit inputs;
+                inherit inputs system;
                 isLinux = builtins.match ".*-linux" system != null;
                 isDarwin = builtins.match ".*-darwin" system != null;
                 # Architecture
