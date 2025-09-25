@@ -29,7 +29,6 @@
       qbittorrent
       # mmex
       ghostscript
-      localsend
     ]
     ++ lib.optionals isLinux [
       #Security
