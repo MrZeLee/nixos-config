@@ -15,6 +15,7 @@
     ./hyprland.nix
     ./noisetorch.nix
     ./pinentry.nix
+    ./localsend.nix
   ] ++ lib.optionals isX86_64 [ ./steam.nix ];
 
   environment.gnome.excludePackages = with pkgs; [
