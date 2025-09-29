@@ -44,6 +44,7 @@
       gnucash
       vdhcoapp
       libreoffice
+      kdePackages.okular
 
       #Media
       stremio
