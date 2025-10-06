@@ -11,6 +11,8 @@
     "net.ipv4.icmp_ignore_bogus_error_responses" = 1;
     # Reverse path filtering causes the kernel to do source validation of
     # packets received from all interfaces. This can mitigate IP spoofing.
+    # to use vpns use the command:
+    # sudo sysctl -w net.ipv4.conf.<vpn_interface>.rp_filter=2
     "net.ipv4.conf.default.rp_filter" = 1;
     "net.ipv4.conf.all.rp_filter" = 1;
     # Do not accept IP source route packets (we're not a router)
