@@ -41,6 +41,7 @@
       julia_19-bin
       python312
       python312Packages.pip
+      uv
       pipx
       rustc
       cargo
