@@ -29,6 +29,7 @@
       qbittorrent
       # mmex
       ghostscript
+      pdfpc
     ]
     ++ lib.optionals isLinux [
       #Security
