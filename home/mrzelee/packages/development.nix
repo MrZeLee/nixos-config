@@ -78,6 +78,16 @@
 
       #Databases
       pgadmin4-desktopmode
+      (writeShellScriptBin "harlequin" ''
+        # Ensure harlequin is installed with all dependencies
+        if ! ${uv}/bin/uv tool list 2>/dev/null | grep -q "harlequin"; then
+          echo "Installing harlequin with uv..." >&2
+          ${uv}/bin/uv tool install 'harlequin[postgres]'
+        fi
+        # Run harlequin via uv
+        exec ${uv}/bin/uv tool run harlequin "$@"
+      '')
+      # harlequin
 
       #Testing
       postman
