@@ -8,4 +8,5 @@
     protontricks.enable = true;
     package = pkgs.steam.override {extraLibraries = pkgs: [pkgs.gperftools];};
   };
+  hardware.xone.enable = true;
 }
