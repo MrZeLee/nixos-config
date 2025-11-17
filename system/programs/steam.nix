@@ -9,4 +9,5 @@
     package = pkgs.steam.override {extraLibraries = pkgs: [pkgs.gperftools];};
   };
   hardware.xone.enable = true;
+  hardware.steam-hardware.enable = true;
 }
