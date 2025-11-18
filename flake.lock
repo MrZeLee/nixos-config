@@ -390,7 +390,7 @@
       },
       "original": {
         "owner": "nix-community",
-        "ref": "main",
+        "ref": "release-25.05",
         "repo": "nixos-apple-silicon",
         "type": "github"
       }
