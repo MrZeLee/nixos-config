@@ -49,6 +49,7 @@
 
       #Media
       stremio
+      bluetui
 
       #Network
       sshfs
