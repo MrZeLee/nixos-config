@@ -20,6 +20,8 @@
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
   hardware.asahi.useExperimentalGPUDriver = true;
 
+  services.pipewire.lowLatency.enable = lib.mkForce false;
+
   # For ` to < and ~ to > (for those with US keyboards)
   boot.extraModprobeConfig = ''
     options hid_apple iso_layout=0

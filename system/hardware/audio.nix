@@ -17,6 +17,7 @@
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
 
+    # changed in macos to false, bluetooth was failing with cracks
     lowLatency.enable = true;
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
