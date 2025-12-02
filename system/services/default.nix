@@ -11,6 +11,7 @@
       ./cloudflare-warp.nix
       ./docker.nix
       ./flatpak.nix
+      ./tailscale.nix
     ]
     else if isDarwin
     then [
