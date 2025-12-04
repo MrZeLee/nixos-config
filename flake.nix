@@ -38,6 +38,11 @@
     };
 
     agenix.url = "github:ryantm/agenix";
+
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -61,6 +66,15 @@
         mac-app-util = inputs.mac-app-util;
       })
       .darwinConfigurations;
+
+    # Standalone home-manager configurations (for non-NixOS Linux like Debian/Pop!_OS)
+    homeConfigurations =
+      (import ./hosts {
+        inherit inputs nixpkgs;
+        agenix = null;
+        system = "x86_64-linux";
+      })
+      .homeConfigurations;
 
     packages = import ./pkgs {inherit inputs;};
   };

@@ -87,6 +87,26 @@
         ++ extraModules;
     };
   };
+  mkHomeConfiguration = hostname: extraModules: {
+    ${hostname} = inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {inherit system;};
+      extraSpecialArgs = {
+        inherit inputs system;
+        isLinux = builtins.match ".*-linux" system != null;
+        isDarwin = builtins.match ".*-darwin" system != null;
+        isAarch64 = builtins.match "^aarch64-.*" system != null;
+        isX86_64 = builtins.match "^x86_64-.*" system != null;
+        isStandalone = true;
+        hostname = hostname;
+      };
+      modules =
+        [
+          ../modules/nixpkgs-overlays.nix
+          ./home-manager/${hostname}
+        ]
+        ++ extraModules;
+    };
+  };
 in {
   nixosConfigurations =
     mkSystem "desktop" []
@@ -95,4 +115,7 @@ in {
 
   darwinConfigurations =
     mkDarwinSystem "mrzelee-mbpro" [];
+
+  homeConfigurations =
+    mkHomeConfiguration "jmoura" [];
 }
