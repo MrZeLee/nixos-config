@@ -27,6 +27,7 @@
 
       # Misc
       qbittorrent
+      obsidian
       # mmex
       ghostscript
       pdfpc

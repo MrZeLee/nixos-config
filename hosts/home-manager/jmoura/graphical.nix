@@ -39,6 +39,7 @@ in {
     (wrapGL vscode)
     (wrapGL zathura)
     (wrapGL typora)
+    (wrapGL obsidian)
 
     # Development
     (wrapGL pgadmin4-desktopmode)
