@@ -12,24 +12,11 @@
     ./boot.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
-
   #Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
   hardware.asahi.useExperimentalGPUDriver = true;
 
   services.pipewire.lowLatency.enable = lib.mkForce false;
-
-  # For ` to < and ~ to > (for those with US keyboards)
-  boot.extraModprobeConfig = ''
-    options hid_apple iso_layout=0
-  '';
-  
-  # Hibernation support: suspend-to-disk via initrd resume hook
-  swapDevices = lib.mkForce [ { device = "/swapfile"; size = 16384; } ];
-  boot.resumeDevice = lib.mkForce "/swapfile";
 
   # Use iwd as NetworkManager's wifi backend (more stable on M1)
   networking.wireless.iwd = {
@@ -54,18 +41,6 @@
 
   services.xserver.videoDrivers = lib.mkForce [];
 
-  # Kernel parameters: resume support, ACPI tweaks, lid init state,
-  # and force Apple-specific cpuidle driver (WFI/WFE hack) over PSCI
-  boot.kernelParams = lib.mkForce [
-    "resume=/swapfile"
-    "acpi_osi=Linux"
-    "acpi_backlight=video"
-    "button.lid_init_state=open"
-    # Use the Apple cpuidle driver for proper WFI/WFE idle on Apple Silicon
-    "cpuidle.driver=apple"
-    # set your regional domain for wifi
-    "cfg80211.ieee80211_regdom=PT"
-  ];
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 

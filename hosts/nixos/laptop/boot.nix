@@ -28,6 +28,7 @@
       # General Performance Optimization
       "intel_pstate=active" # Ensures the Intel-specific CPU frequency scaling driver is used for better performance
       "iommu=pt" # Enables IOMMU in pass-through mode, reducing virtualization overhead and ensuring optimal PCIe device performance.
+      "usbcore.autosuspend=-1" # Disable USB autosuspend globally (fixes mouse disconnects and speeds up device recognition)
 
       # disable the boot lines
       "quiet"
