@@ -9,8 +9,9 @@ in {
   home.packages = with pkgs; [
     # Hyprland compositor and core tools
     (wrapGL hyprland)
+    # NOTE:using dotfiles installtion so it can use pam
+    # hyprlock
     hypridle
-    hyprlock
     hyprpaper
 
     # Hyprland plugins (note: may need version matching with hyprland)
@@ -29,9 +30,6 @@ in {
     # Wallpaper
     swww
     (wrapGL waypaper)
-
-    # Screen locking (swaylock-effects is a superset of swaylock with blur/effects)
-    swaylock-effects
 
     # Screenshot & screen recording
     grim
@@ -64,15 +62,21 @@ in {
   # Set Hyprland-related environment variables
   home.sessionVariables = {
     HYPRLAND_HY3 = "${pkgs.hyprlandPlugins.hy3}";
+    # LD_LIBRARY_PATH = "$HOME/.nix-profile/lib:/usr/local/lib\${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}";
   };
 
-  # Enable XDG portal
+  # Enable XDG portal for screen sharing
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
-    config.common.default = "*";
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+    };
   };
+
 }
