@@ -95,7 +95,7 @@
     python312Packages.pip
     uv
     pipx
-    rustc
+    unstable.rustc
     cargo
     nodejs_24
     zulu23
@@ -141,7 +141,9 @@
     azure-cli
 
     # Databases
-    postgresql
+    (postgresql.withPackages (pp: [
+      pp.pgvector
+    ]))
     unstable.lazysql
 
     # Documentation
@@ -152,7 +154,9 @@
 
     # Media CLI tools
     ffmpeg_6-full
-    master.spotify-player
+    (master.spotify-player.override {
+      withAudioBackend = "pulseaudio";
+    })
 
     # Image libraries (dependencies)
     giflib
