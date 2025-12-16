@@ -12,12 +12,18 @@
     };
   };
 
+  programs.hyprlock = {
+    enable = true;
+  };
+
   environment = {
     systemPackages = with pkgs; [
       hyprland
       hyprlandPlugins.hy3
       hyprlandPlugins.csgo-vulkan-fix
       hypridle
+      hyprpaper
+      hyprlock
 
       #dependecy for hyprland scripts
       bc

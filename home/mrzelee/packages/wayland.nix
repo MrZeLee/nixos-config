@@ -4,7 +4,6 @@
     fuzzel
     mako
     libnotify
-    swaylock
     swaybg
     waypaper
     swww
