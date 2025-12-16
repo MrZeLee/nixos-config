@@ -75,7 +75,54 @@ in {
     ];
     config = {
       common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
+      hyprland.default = ["hyprland" "gtk"];
+    };
+  };
+
+  # Systemd user services for XDG portals (needed on non-NixOS)
+  # Use nix-installed xdg-desktop-portal with correct XDG_DATA_DIRS
+  #
+  # After home-manager switch, run these commands to enable the services:
+  #   systemctl --user daemon-reload
+  #   systemctl --user enable xdg-desktop-portal.service xdg-desktop-portal-hyprland.service
+  #   systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal
+  #
+  # The user-level services override the system ones in /usr/lib/systemd/user/
+  systemd.user.services.xdg-desktop-portal = {
+    Unit = {
+      Description = "Portal service (Nix)";
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target" "xdg-desktop-portal-hyprland.service"];
+    };
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.portal.Desktop";
+      ExecStart = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
+      Environment = [
+        "XDG_DATA_DIRS=${config.home.profileDirectory}/share:/usr/local/share:/usr/share"
+      ];
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
+
+  systemd.user.services.xdg-desktop-portal-hyprland = {
+    Unit = {
+      Description = "Portal service (Hyprland implementation)";
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+      ConditionEnvironment = "WAYLAND_DISPLAY";
+    };
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.impl.portal.desktop.hyprland";
+      ExecStart = "${pkgs.xdg-desktop-portal-hyprland}/libexec/xdg-desktop-portal-hyprland";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
     };
   };
 
