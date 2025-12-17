@@ -6,6 +6,15 @@
   # Wrap packages with nixGL for OpenGL support on non-NixOS systems
   wrapGL = pkg: config.lib.nixGL.wrap pkg;
 in {
+  # Cursor theme configuration
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   home.packages = with pkgs; [
     # Hyprland compositor and core tools
     (wrapGL hyprland)
