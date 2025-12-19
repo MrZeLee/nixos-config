@@ -59,6 +59,8 @@ in {
     brightnessctl
     playerctl
     pamixer
+    #used in the hyprland+hyprpaper, to see added monitors
+    socat
 
     # XDG portal for screen sharing
     xdg-desktop-portal-hyprland
