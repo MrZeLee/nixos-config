@@ -67,6 +67,12 @@
      };
    };
 
+   # Fix DRM/GPU race condition on Apple Silicon - ensure display-manager
+   # waits for GPU and DRM devices to be fully initialized before starting
+   systemd.services.display-manager = {
+     after = [ "systemd-udev-settle.service" "plymouth-quit.service" ];
+     wants = [ "systemd-udev-settle.service" ];
+   };
 
    # # Macbook pro fan controlls is an option too.
    # services.mbpfan = {

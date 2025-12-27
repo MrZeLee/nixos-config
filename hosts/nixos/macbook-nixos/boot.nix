@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   ...
 }: {
  boot = {
@@ -26,7 +27,17 @@
       "cpuidle.driver=apple"
       # set your regional domain for wifi
       "cfg80211.ieee80211_regdom=PT"
+      # Hide boot messages
+      "quiet"
+      "splash"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_level=3"
     ];
+
+    # Reduce console log level to hide kernel messages
+    consoleLogLevel = 0;
   };
 
   # Hibernation support: suspend-to-disk via initrd resume hook
