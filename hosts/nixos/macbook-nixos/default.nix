@@ -14,7 +14,6 @@
 
   #Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
-  hardware.asahi.useExperimentalGPUDriver = true;
 
   services.pipewire.lowLatency.enable = lib.mkForce false;
 
@@ -44,17 +43,17 @@
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 
-  services.logind.extraConfig = ''
-     HandlePowerKey=suspend-then-hibernate
-     HandlePowerKeyLongPress=poweroff
-     HandleLidSwitch=suspend-then-hibernate
-     HandleLidSwitchExternalPower=suspend-then-hibernate
-     HandleLidSwitchDocked=suspend-then-hibernate
-     HoldoffTimeoutSec=5s
-     IdleAction=suspend
-     IdleActionSec=300s
-     HibernateDelaySec=10min
-   '';
+  services.logind.settings.Login = {
+    HandlePowerKey="suspend-then-hibernate";
+    HandlePowerKeyLongPress="poweroff";
+    HandleLidSwitch="suspend-then-hibernate";
+    HandleLidSwitchExternalPower="suspend-then-hibernate";
+    HandleLidSwitchDocked="suspend-then-hibernate";
+    HoldoffTimeoutSec="5s";
+    IdleAction="suspend";
+    IdleActionSec="300s";
+    HibernateDelaySec="10min";
+  };
 
    systemd.services.disable-nvme-d3cold = {
      enable = true;

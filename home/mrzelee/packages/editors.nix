@@ -38,7 +38,7 @@
       php83Packages.composer
       lua51Packages.lua
       lua51Packages.luarocks
-      julia_19-bin
+      julia-bin
       python312
       python312Packages.pip
       uv
@@ -46,7 +46,7 @@
       rustc
       cargo
       nodejs_24
-      zulu23
+      zulu
       texliveFull
       ## Treesitter
       tree-sitter

@@ -2,17 +2,17 @@
   description = "MrZeLee's NixOS Config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,7 +33,7 @@
     nur.url = "github:nix-community/nur";
 
     nixos-apple-silicon = {
-      url = "github:nix-community/nixos-apple-silicon/release-25.05";
+      url = "github:nix-community/nixos-apple-silicon/release-2025-11-18";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -18,7 +18,7 @@
     # Kernel parameters: resume support, ACPI tweaks, lid init state,
     # and force Apple-specific cpuidle driver (WFI/WFE hack) over PSCI
     kernelParams = lib.mkForce [
-      "resume=/swapfile"
+      "resume=/dev/disk/by-label/swap"
       "acpi_osi=Linux"
       "acpi_backlight=video"
       "button.lid_init_state=open"
@@ -30,7 +30,7 @@
   };
 
   # Hibernation support: suspend-to-disk via initrd resume hook
-  swapDevices = lib.mkForce [ { device = "/swapfile"; size = 16384; } ];
-  boot.resumeDevice = lib.mkForce "/swapfile";
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+  boot.resumeDevice = "/dev/disk/by-label/swap";
 
 }

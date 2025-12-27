@@ -49,7 +49,7 @@
       kdePackages.okular
 
       #Media
-      stremio
+      #stremio
       bluetui
 
       #Network
