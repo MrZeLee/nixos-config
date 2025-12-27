@@ -21,7 +21,7 @@
         enable = true;
         wayland.enable = true;
         package = pkgs.kdePackages.sddm;
-        theme = "catppuccin-mocha";
+        theme = "catppuccin-mocha-mauve";
       };
       defaultSession = "hyprland";
     };
@@ -30,6 +30,7 @@
   environment.systemPackages = with pkgs; [
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
+      accent = "mauve";
     })
   ];
 }
