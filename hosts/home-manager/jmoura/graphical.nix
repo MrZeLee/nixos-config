@@ -49,5 +49,8 @@ in {
     # Network
     (wrapGL wireshark)
 
+    # Temp
+    (wrapGL neo4j-desktop)
+
   ];
 }

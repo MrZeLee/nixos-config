@@ -20,7 +20,7 @@ in {
   home.stateVersion = "24.11";
 
   # Enable nixGL for OpenGL support on non-NixOS systems
-  nixGL = {
+  targets.genericLinux.nixGL = {
     packages = inputs.nixgl.packages;
     defaultWrapper = "mesa"; # Intel Arc uses Mesa
     installScripts = ["mesa"];
