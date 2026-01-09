@@ -139,6 +139,7 @@
     terraform
     terragrunt
     azure-cli
+    unstable.awscli2
 
     # Databases
     (postgresql.withPackages (pp: [
