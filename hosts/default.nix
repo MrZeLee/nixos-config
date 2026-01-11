@@ -102,7 +102,7 @@
       modules =
         [
           ../modules/nixpkgs-overlays.nix
-          ./home-manager/${hostname}
+          ../home/${hostname}
         ]
         ++ extraModules;
     };
