@@ -196,4 +196,6 @@
     # Custom packages
     (pkgs.callPackage (inputs.mvd + "/default.nix") {})
   ];
+
+  fonts.fontconfig.enable = true;
 }
