@@ -155,7 +155,7 @@
 
     # Media CLI tools
     ffmpeg_6-full
-    (master.spotify-player.override {
+    (unstable.spotify-player.override {
       withAudioBackend = "pulseaudio";
     })
 
