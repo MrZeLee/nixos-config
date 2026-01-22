@@ -172,6 +172,7 @@
     libsixel
 
     # Fonts & Themes
+    nerd-fonts.jetbrains-mono
     nerd-fonts.hack
 
     # Misc CLI
@@ -187,6 +188,9 @@
 
     # AI tools
     unstable.claude-code
+
+    dos2unix
+    qmk
   ]
   ++ [
     # Custom packages

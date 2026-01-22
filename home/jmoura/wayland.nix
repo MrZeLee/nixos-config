@@ -124,7 +124,7 @@ in {
       Description = "Portal service (Hyprland implementation)";
       PartOf = ["graphical-session.target"];
       After = ["graphical-session.target"];
-      ConditionEnvironment = "WAYLAND_DISPLAY";
+      # ConditionEnvironment = "WAYLAND_DISPLAY";
     };
     Service = {
       Type = "dbus";
