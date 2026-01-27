@@ -77,6 +77,7 @@
     fd
     pstree
     yarn
+    mermaid-cli
 
     # Archive tools
     zip
