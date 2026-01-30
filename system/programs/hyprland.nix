@@ -24,6 +24,8 @@
       hypridle
       hyprpaper
       hyprlock
+      wl-kbptr
+      wlrctl
 
       #dependecy for hyprland scripts
       bc
