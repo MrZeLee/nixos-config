@@ -28,6 +28,8 @@
       vimv-rs
       watch
       zoxide
+
+      qmk
     ]
     ++ [
       (pkgs.callPackage
