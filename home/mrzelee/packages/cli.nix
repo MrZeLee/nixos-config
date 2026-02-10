@@ -30,6 +30,7 @@
       zoxide
 
       qmk
+      nvd
     ]
     ++ [
       (pkgs.callPackage

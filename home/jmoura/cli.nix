@@ -192,6 +192,7 @@
 
     dos2unix
     qmk
+    nvd
   ]
   ++ [
     # Custom packages
