@@ -19,6 +19,7 @@
     fzf
     jq
     direnv
+    wiremix
 
     # File utilities
     stow

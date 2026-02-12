@@ -28,6 +28,7 @@
       vimv-rs
       watch
       zoxide
+      wiremix
 
       qmk
       nvd
