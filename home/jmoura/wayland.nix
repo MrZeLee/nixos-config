@@ -52,6 +52,10 @@ in {
     cliphist
     wl-clipboard
 
+    # Vim anywhere (Wayland)
+    wofi
+    wtype
+
     # File manager (used in your config)
     nautilus
 

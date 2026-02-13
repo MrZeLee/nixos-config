@@ -20,6 +20,10 @@
     jq
     direnv
     wiremix
+    (ledger.override {
+      gpgmeSupport = true;
+      usePython = true;
+    })
 
     # File utilities
     stow

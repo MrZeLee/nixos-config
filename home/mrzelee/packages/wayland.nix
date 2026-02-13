@@ -7,5 +7,9 @@
     swaybg
     waypaper
     swww
+
+    # Vim anywhere (Wayland)
+    wofi
+    wtype
   ];
 }
