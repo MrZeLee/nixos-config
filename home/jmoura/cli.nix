@@ -126,6 +126,7 @@
     gitflow
     pre-commit
     act
+    meld
 
     # Cloud/Infrastructure
     ansible
