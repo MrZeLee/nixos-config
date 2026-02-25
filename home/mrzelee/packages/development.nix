@@ -42,11 +42,16 @@
       git-lfs
       lazygit
       tig
-      opencommit
+      (opencommit.overrideAttrs {
+        makeWrapperArgs = [
+          "--prefix" "NODE_PATH" ":" "${commitlint}/lib/node_modules/@commitlint/root/node_modules"
+        ];
+      })
       koji
       gitflow
       pre-commit
       act
+      commitlint
 
       # Cloud/Infrastructure
       ansible
