@@ -41,6 +41,8 @@
       gh-dash
       git-lfs
       lazygit
+      lazydocker
+      lazyjournal
       tig
       (opencommit.overrideAttrs {
         makeWrapperArgs = [

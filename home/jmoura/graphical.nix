@@ -26,6 +26,7 @@ in {
     (wrapGL spotify)
     (wrapGL gimp)
     (wrapGL swayimg)
+    (wrapGL moonlight-qt)
 
     # Security
     (wrapGL keepassxc)
@@ -51,6 +52,7 @@ in {
 
     # Temp
     (wrapGL neo4j-desktop)
+    (wrapGL drawio)
 
   ];
 }

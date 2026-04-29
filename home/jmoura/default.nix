@@ -31,9 +31,31 @@ in {
   home.sessionVariables = {
     DOCKER_HOST = "unix:///run/user/1000/docker.sock";
   };
+
   systemd.user.services.docker = {
     Unit.Description = "Docker (Rootless)";
     Service.ExecStart = "${pkgs.docker}/bin/dockerd-rootless";
+    Install.WantedBy = [ "default.target" ];
+  };
+
+
+  systemd.user.services.ollama = {
+    Unit.Description = "Ollama LLM Server (Vulkan)";
+    Service.ExecStart = "${pkgs.ollama-vulkan}/bin/ollama serve";
+    Install.WantedBy = [ "default.target" ];
+  };
+
+  systemd.user.services.ollama-pull = {
+    Unit = {
+      Description = "Pull Ollama models";
+      After = [ "ollama.service" ];
+      Requires = [ "ollama.service" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.ollama-vulkan}/bin/ollama pull qwen3:4b'";
+      RemainAfterExit = true;
+    };
     Install.WantedBy = [ "default.target" ];
   };
 

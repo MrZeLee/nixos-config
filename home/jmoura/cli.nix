@@ -120,6 +120,8 @@
     gh-dash
     git-lfs
     lazygit
+    lazydocker
+    lazyjournal
     tig
     (opencommit.overrideAttrs {
       makeWrapperArgs = [
@@ -132,6 +134,7 @@
     act
     meld
     commitlint
+    ollama-vulkan
 
     # Cloud/Infrastructure
     ansible
