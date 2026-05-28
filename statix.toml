@@ -1,0 +1,5 @@
+disabled = [
+  "repeated_keys",
+  "manual_inherit_from",
+]
+ignore = [".direnv", "result"]

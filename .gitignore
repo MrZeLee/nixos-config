@@ -1,3 +1,5 @@
 codecompanion-workspace.json
 result
 .opencommit-commitlint
+.direnv/
+.pre-commit-config.yaml

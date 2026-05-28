@@ -43,6 +43,11 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -50,9 +55,54 @@
       self,
       nixpkgs,
       agenix,
+      git-hooks,
       ...
     }:
+    let
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems f;
+      preCommitFor =
+        system:
+        git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+            statix = {
+              enable = true;
+              settings.ignore = [ "**/hardware-configuration.nix" ];
+            };
+            deadnix = {
+              enable = true;
+              excludes = [ "hardware-configuration\\.nix$" ];
+              settings.noLambdaPatternNames = true;
+              settings.noLambdaArg = true;
+            };
+          };
+        };
+    in
     {
+      checks = forAllSystems (system: {
+        pre-commit-check = preCommitFor system;
+      });
+
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          check = preCommitFor system;
+        in
+        {
+          default = pkgs.mkShell {
+            inherit (check) shellHook;
+            buildInputs = check.enabledPackages;
+          };
+        }
+      );
+
       nixosConfigurations = {
         # x86_64 hosts
         desktop =
@@ -73,20 +123,28 @@
           }).nixosConfigurations.macbook-nixos;
       };
 
-      darwinConfigurations =
-        (import ./hosts {
-          inherit inputs nixpkgs;
-          system = "aarch64-darwin";
-          mac-app-util = inputs.mac-app-util;
-        }).darwinConfigurations;
+      inherit
+        (
+          (import ./hosts {
+            inherit inputs nixpkgs;
+            system = "aarch64-darwin";
+            inherit (inputs) mac-app-util;
+          })
+        )
+        darwinConfigurations
+        ;
 
       # Standalone home-manager configurations (for non-NixOS Linux like Debian/Pop!_OS)
-      homeConfigurations =
-        (import ./hosts {
-          inherit inputs nixpkgs;
-          agenix = null;
-          system = "x86_64-linux";
-        }).homeConfigurations;
+      inherit
+        (
+          (import ./hosts {
+            inherit inputs nixpkgs;
+            agenix = null;
+            system = "x86_64-linux";
+          })
+        )
+        homeConfigurations
+        ;
 
       packages = import ./pkgs { inherit inputs; };
     };
