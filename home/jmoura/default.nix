@@ -31,6 +31,7 @@ in
   # set the user uid and install uidmap in root
   home.sessionVariables = {
     DOCKER_HOST = "unix:///run/user/1000/docker.sock";
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
   };
 
   systemd.user.services.docker = {

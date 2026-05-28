@@ -78,7 +78,11 @@
       marksman
       ruff
       stylua
+      prettier
       prettierd
+      markdown-toc
+      markdownlint-cli2
+      sqlite
       libxml2
       nil
       nixfmt-rfc-style
@@ -91,6 +95,7 @@
       mermaid-cli
       mercurial
       ast-grep
+      python3Packages.pylatexenc
 
       # Archive tools
       zip

@@ -7,6 +7,10 @@
   ...
 }:
 {
+  home.sessionVariables = {
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+  };
+
   home.packages =
     with pkgs;
     [
@@ -31,7 +35,12 @@
       ## Mason Languages
       ###Formatters
       stylua
+      prettier
       prettierd
+      markdown-toc
+      markdownlint-cli2
+      python3Packages.pylatexenc
+      sqlite
       #### xmllint
       libxml2
       #### nix
