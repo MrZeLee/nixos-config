@@ -77,12 +77,14 @@
     stylua
     prettierd
     libxml2
-    tree-sitter
+    unstable.tree-sitter
     ripgrep
     fd
     pstree
     yarn
     mermaid-cli
+    mercurial
+    ast-grep
 
     # Archive tools
     zip

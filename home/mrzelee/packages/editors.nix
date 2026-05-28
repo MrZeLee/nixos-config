@@ -33,6 +33,12 @@
       #### xmllint
       libxml2
 
+      ## diffview
+      mercurial
+
+      ## grup-far
+      ast-grep
+
       go
       php83
       php83Packages.composer
@@ -49,7 +55,7 @@
       zulu
       texliveFull
       ## Treesitter
-      tree-sitter
+      unstable.tree-sitter
       gcc # nodejs_22 git
       ## Telescope
       ripgrep
