@@ -1,5 +1,7 @@
-{pkgs, isLinux, ...}: {
-  home.packages = with pkgs;
+{ pkgs, isLinux, ... }:
+{
+  home.packages =
+    with pkgs;
     [
       # TODO: set this up to work
       # zerotierone

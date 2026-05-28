@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services = {
     xserver = {
       enable = true;
       # Load nvidia driver for Xorg and Wayland
-      videoDrivers = ["nvidia"];
+      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";
         variant = "intl";

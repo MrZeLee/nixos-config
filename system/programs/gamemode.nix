@@ -4,8 +4,9 @@
   lib,
   inputs,
   ...
-}: let
-  nix-gaming = inputs.nix-gaming;
+}:
+let
+  inherit (inputs) nix-gaming;
 
   inherit (pkgs.writers) writeDash;
 
@@ -13,7 +14,6 @@
   # powerprofilesctl = lib.getExe pkgs.power-profiles-daemon;
   notify-send = lib.getExe pkgs.libnotify;
   makoctl = lib.getExe' pkgs.mako "makoctl";
-  swww = lib.getExe' swww "swww";
   jq_command = lib.getExe pkgs.jq;
   xargs = lib.getExe' pkgs.findutils "xargs";
   pgrep = lib.getExe' pkgs.procps "pgrep";
@@ -46,7 +46,8 @@
     ${makoctl} mode -r 'do-not-disturb'
     ${notify-send} -u low -a 'Gamemode' 'Optimizations deactivated'
   '';
-in {
+in
+{
   imports = [
     nix-gaming.nixosModules.platformOptimizations
   ];

@@ -1,5 +1,13 @@
-{pkgs, isDarwin, isLinux, isX86_64, ...}: {
-  home.packages = with pkgs;
+{
+  pkgs,
+  isDarwin,
+  isLinux,
+  isX86_64,
+  ...
+}:
+{
+  home.packages =
+    with pkgs;
     [
       signal-desktop-bin
       telegram-desktop

@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -40,6 +41,6 @@
 
   hardware.graphics = {
     # Still don't know if it is doing anything
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
 }

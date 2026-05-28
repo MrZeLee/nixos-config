@@ -1,13 +1,11 @@
-{
-  ...
-}: {
+_: {
   boot = {
     bootspec.enableValidation = true;
 
     consoleLogLevel = 0;
     initrd = {
       verbose = false;
-      kernelModules = ["i915"];
+      kernelModules = [ "i915" ];
       # systemd.enable = true;
       # supportedFilesystems = [
       #   "ext4"
@@ -20,7 +18,7 @@
       # systemd-boot.enable = true;
       grub = {
         enable = true;
-        devices = ["nodev"];
+        devices = [ "nodev" ];
         efiSupport = true;
         useOSProber = true;
       };
@@ -53,4 +51,3 @@
     tmp.cleanOnBoot = true;
   };
 }
-

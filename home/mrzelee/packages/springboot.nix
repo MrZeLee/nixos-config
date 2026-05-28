@@ -4,11 +4,11 @@
   isLinux,
   isDarwin,
   ...
-}: {
-  home.packages = with pkgs;
-    [
-    ]
-    ++ lib.optionals isLinux [
+}:
+{
+  home.packages =
+    with pkgs;
+    lib.optionals isLinux [
     ]
     ++ lib.optionals isDarwin [
     ];

@@ -5,8 +5,10 @@
   isDarwin,
   isX86_64,
   ...
-}: {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
       # Security
       keepassxc

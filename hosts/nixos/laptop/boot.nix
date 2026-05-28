@@ -1,13 +1,11 @@
-{
-  ...
-}: {
- boot = {
+_: {
+  boot = {
     bootspec.enableValidation = true;
 
     consoleLogLevel = 0;
     initrd = {
       verbose = false;
-      kernelModules = ["i915"];
+      kernelModules = [ "i915" ];
       systemd.enable = true;
     };
     plymouth.enable = true;
@@ -22,7 +20,8 @@
     # To add the keys to the TPM2 use command: sudo systemd-cryptenroll
     # --tpm2-device=auto /dev/...
 
-    initrd.luks.devices."luks-c8e08ff0-43a6-451c-a9f8-c21bc82d14f3".device = "/dev/disk/by-uuid/c8e08ff0-43a6-451c-a9f8-c21bc82d14f3";
+    initrd.luks.devices."luks-c8e08ff0-43a6-451c-a9f8-c21bc82d14f3".device =
+      "/dev/disk/by-uuid/c8e08ff0-43a6-451c-a9f8-c21bc82d14f3";
 
     kernelParams = [
       # General Performance Optimization

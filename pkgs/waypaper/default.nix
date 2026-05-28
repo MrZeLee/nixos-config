@@ -26,7 +26,7 @@ python3.pkgs.buildPythonApplication rec {
     wrapGAppsHook3
   ];
 
-  build-system = [python3.pkgs.setuptools];
+  build-system = [ python3.pkgs.setuptools ];
 
   dependencies = [
     python3.pkgs.imageio
@@ -38,7 +38,7 @@ python3.pkgs.buildPythonApplication rec {
     python3.pkgs.pillow
   ];
 
-  propagatedBuildInputs = [killall];
+  propagatedBuildInputs = [ killall ];
 
   # has no tests
   doCheck = false;
@@ -60,7 +60,7 @@ python3.pkgs.buildPythonApplication rec {
     '';
     homepage = "https://github.com/anufrievroman/waypaper";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [totalchaos];
+    maintainers = with maintainers; [ totalchaos ];
     platforms = platforms.linux;
   };
 }

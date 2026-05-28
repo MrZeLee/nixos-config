@@ -1,7 +1,8 @@
 {
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
@@ -12,7 +13,7 @@
   system.stateVersion = "24.11";
 
   # Enable NVIDIA drivers
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     prime = {

@@ -2,10 +2,12 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   # Wrap packages with nixGL for OpenGL support
   wrapGL = pkg: config.lib.nixGL.wrap pkg;
-in {
+in
+{
   home.packages = with pkgs; [
     # Terminal emulators
     (wrapGL wezterm)

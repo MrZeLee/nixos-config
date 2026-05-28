@@ -3,8 +3,10 @@
   lib,
   isLinux,
   ...
-}: {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
       # AI
       unstable.codex
@@ -18,8 +20,7 @@
       lua51Packages.lua
       lua51Packages.luarocks
       julia-bin
-      python312
-      python312Packages.pip
+      (python312.withPackages (ps: with ps; [ pip ]))
       pipx
       rustc
       nodejs_24
@@ -46,7 +47,10 @@
       tig
       (opencommit.overrideAttrs {
         makeWrapperArgs = [
-          "--prefix" "NODE_PATH" ":" "${commitlint}/lib/node_modules/@commitlint/root/node_modules"
+          "--prefix"
+          "NODE_PATH"
+          ":"
+          "${commitlint}/lib/node_modules/@commitlint/root/node_modules"
         ];
       })
       koji

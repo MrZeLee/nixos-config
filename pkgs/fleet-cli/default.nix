@@ -25,7 +25,7 @@ pkgs.buildGoModule rec {
     sha256 = "sha256-le0+a0uHXn4PnZ2avFXb2lcshjNL6YN4Cm6ReLUSlHs=";
   };
 
-  nativeBuildInputs = [pkgs.git];
+  nativeBuildInputs = [ pkgs.git ];
   # buildInputs = [ pkgs.git ];
 
   buildPhase = ''

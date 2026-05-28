@@ -4,9 +4,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   homeDir = config.home.homeDirectory;
-in {
+in
+{
   imports = [
     ./cli.nix
     ./graphical.nix
@@ -21,11 +23,10 @@ in {
 
   # Enable nixGL for OpenGL support on non-NixOS systems
   targets.genericLinux.nixGL = {
-    packages = inputs.nixgl.packages;
+    inherit (inputs.nixgl) packages;
     defaultWrapper = "mesa"; # Intel Arc uses Mesa
-    installScripts = ["mesa"];
+    installScripts = [ "mesa" ];
   };
-
 
   # set the user uid and install uidmap in root
   home.sessionVariables = {
@@ -37,7 +38,6 @@ in {
     Service.ExecStart = "${pkgs.docker}/bin/dockerd-rootless";
     Install.WantedBy = [ "default.target" ];
   };
-
 
   systemd.user.services.ollama = {
     Unit.Description = "Ollama LLM Server (Vulkan)";
@@ -60,12 +60,12 @@ in {
   };
 
   home.activation = {
-    prepareStow = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    prepareStow = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p ${homeDir}/.config
       cd ${homeDir}/.dotfiles
       run ${pkgs.stow}/bin/stow -d ${homeDir}/.dotfiles -t ${homeDir} --restow .
     '';
-    npmInstall = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    npmInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p ${homeDir}/.npm-global
     '';
   };

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -6,7 +7,7 @@
     gamescopeSession.enable = false;
     extest.enable = false;
     protontricks.enable = true;
-    package = pkgs.steam.override {extraLibraries = pkgs: [pkgs.gperftools];};
+    package = pkgs.steam.override { extraLibraries = pkgs: [ pkgs.gperftools ]; };
   };
   hardware.xone.enable = true;
   hardware.steam-hardware.enable = true;

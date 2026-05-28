@@ -1,4 +1,11 @@
-{pkgs, config, isLinux, isDarwin, ...}: {
+{
+  pkgs,
+  config,
+  isLinux,
+  isDarwin,
+  ...
+}:
+{
   gtk = {
     enable = true;
 
@@ -55,7 +62,8 @@
     GTK_THEME = "Adwaita-dark";
   };
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       nerd-fonts.hack
       adwaita-icon-theme
@@ -66,5 +74,5 @@
       adwaita-icon-theme
       dejavu_fonts
     ]
-    ++ lib.optionals isDarwin [];
+    ++ lib.optionals isDarwin [ ];
 }

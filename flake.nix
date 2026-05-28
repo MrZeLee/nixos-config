@@ -45,37 +45,49 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    agenix,
-    ...
-  }: {
-    nixosConfigurations = {
-      # x86_64 hosts
-      desktop       = (import ./hosts { inherit inputs nixpkgs agenix; system = "x86_64-linux"; }).nixosConfigurations.desktop;
-      laptop        = (import ./hosts { inherit inputs nixpkgs agenix; system = "x86_64-linux"; }).nixosConfigurations.laptop;
-      # aarch64 host
-      macbook-nixos = (import ./hosts { inherit inputs nixpkgs agenix; system = "aarch64-linux"; }).nixosConfigurations.macbook-nixos;
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      agenix,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        # x86_64 hosts
+        desktop =
+          (import ./hosts {
+            inherit inputs nixpkgs agenix;
+            system = "x86_64-linux";
+          }).nixosConfigurations.desktop;
+        laptop =
+          (import ./hosts {
+            inherit inputs nixpkgs agenix;
+            system = "x86_64-linux";
+          }).nixosConfigurations.laptop;
+        # aarch64 host
+        macbook-nixos =
+          (import ./hosts {
+            inherit inputs nixpkgs agenix;
+            system = "aarch64-linux";
+          }).nixosConfigurations.macbook-nixos;
+      };
+
+      darwinConfigurations =
+        (import ./hosts {
+          inherit inputs nixpkgs;
+          system = "aarch64-darwin";
+          mac-app-util = inputs.mac-app-util;
+        }).darwinConfigurations;
+
+      # Standalone home-manager configurations (for non-NixOS Linux like Debian/Pop!_OS)
+      homeConfigurations =
+        (import ./hosts {
+          inherit inputs nixpkgs;
+          agenix = null;
+          system = "x86_64-linux";
+        }).homeConfigurations;
+
+      packages = import ./pkgs { inherit inputs; };
     };
-
-    darwinConfigurations =
-      (import ./hosts {
-        inherit inputs nixpkgs;
-        system = "aarch64-darwin";
-        mac-app-util = inputs.mac-app-util;
-      })
-      .darwinConfigurations;
-
-    # Standalone home-manager configurations (for non-NixOS Linux like Debian/Pop!_OS)
-    homeConfigurations =
-      (import ./hosts {
-        inherit inputs nixpkgs;
-        agenix = null;
-        system = "x86_64-linux";
-      })
-      .homeConfigurations;
-
-    packages = import ./pkgs {inherit inputs;};
-  };
 }

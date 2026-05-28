@@ -2,8 +2,10 @@
   pkgs,
   inputs,
   ...
-}: {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
       abook
       bat
@@ -34,8 +36,6 @@
       nvd
     ]
     ++ [
-      (pkgs.callPackage
-      (inputs.mvd + "/default.nix")
-      {})
+      (pkgs.callPackage (inputs.mvd + "/default.nix") { })
     ];
 }

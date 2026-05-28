@@ -55,43 +55,44 @@ rustPlatform.buildRustPackage rec {
     };
   };
 
-  nativeBuildInputs =
-    [
-      installShellFiles
-      ncurses
-      pkg-config
-      python3
-    ]
-    ++ lib.optional stdenv.isDarwin perl;
+  nativeBuildInputs = [
+    installShellFiles
+    ncurses
+    pkg-config
+    python3
+  ]
+  ++ lib.optional stdenv.isDarwin perl;
 
-  buildInputs =
+  buildInputs = [
+    fontconfig
+    zlib
+    openssl
+  ]
+  ++ lib.optionals stdenv.isLinux [
+    libX11
+    libxcb
+    libxkbcommon
+    wayland
+    xcbutil
+    xcbutilimage
+    xcbutilkeysyms
+    xcbutilwm
+    vulkan-loader
+    libGL
+  ]
+  ++ lib.optionals stdenv.isDarwin (
+    with darwin.apple_sdk.frameworks;
     [
-      fontconfig
-      zlib
-      openssl
-    ]
-    ++ lib.optionals stdenv.isLinux [
-      libX11
-      libxcb
-      libxkbcommon
-      wayland
-      xcbutil
-      xcbutilimage
-      xcbutilkeysyms
-      xcbutilwm
-      vulkan-loader
-      libGL
-    ]
-    ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
       Cocoa
       CoreGraphics
       Foundation
       darwin.libiconv
       System
       UserNotifications
-    ]);
+    ]
+  );
 
-  buildFeatures = ["distro-defaults"];
+  buildFeatures = [ "distro-defaults" ];
 
   env.NIX_LDFLAGS = lib.optionalString stdenv.isDarwin "-framework System";
 
@@ -131,12 +132,13 @@ rustPlatform.buildRustPackage rec {
   passthru = {
     terminfo =
       pkgs.runCommand "wezterm-terminfo"
-      {
-        nativeBuildInputs = [ncurses];
-      } ''
-        mkdir -p $out/share/terminfo $out/nix-support
-        tic -x -o $out/share/terminfo ${src}/termwiz/data/wezterm.terminfo
-      '';
+        {
+          nativeBuildInputs = [ ncurses ];
+        }
+        ''
+          mkdir -p $out/share/terminfo $out/nix-support
+          tic -x -o $out/share/terminfo ${src}/termwiz/data/wezterm.terminfo
+        '';
   };
 
   meta = with lib; {
@@ -144,7 +146,10 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://wezfurlong.org/wezterm";
     license = licenses.mit;
     mainProgram = "wezterm";
-    maintainers = with maintainers; [SuperSandro2000 mimame];
+    maintainers = with maintainers; [
+      SuperSandro2000
+      mimame
+    ];
     platforms = platforms.unix;
   };
 }

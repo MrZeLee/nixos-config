@@ -15,8 +15,14 @@ pkgs.rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-posT6wp33Tj2bisuYsoh/CK9swS+OVju5vgpj4bTrYs=";
 
-  nativeBuildInputs = with pkgs; [pkg-config cmake];
-  buildInputs = with pkgs; [libgit2 openssl];
+  nativeBuildInputs = with pkgs; [
+    pkg-config
+    cmake
+  ];
+  buildInputs = with pkgs; [
+    libgit2
+    openssl
+  ];
 
   meta = with lib; {
     description = "A tool to help create conventional git commits";

@@ -2,8 +2,9 @@
   lib,
   pkgs,
   ...
-}: {
- boot = {
+}:
+{
+  boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
@@ -12,7 +13,7 @@
     extraModprobeConfig = ''
       options hid_apple iso_layout=0
     '';
-  
+
     # clear tmp on boot
     tmp.cleanOnBoot = true;
 

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     ani-cli
     ani-skip
@@ -14,6 +15,6 @@
     ffmpeg_6-full
     fzf
     ani-skip
-    gnupatch #iina - installed with homebrew
+    gnupatch # iina - installed with homebrew
   ];
 }

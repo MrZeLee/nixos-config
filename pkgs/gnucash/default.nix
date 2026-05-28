@@ -46,30 +46,29 @@ stdenv.mkDerivation rec {
     pkg-config
   ];
 
-  buildInputs =
-    [
-      aqbanking
-      boost
-      glib
-      glibcLocales
-      gtest
-      guile
-      gwenhywfar
-      icu
-      libdbi
-      libdbiDrivers
-      libofx
-      libsecret
-      libxml2
-      libxslt
-      swig
-      webkitgtk_4_0
-    ]
-    ++ (with perlPackages; [
-      JSONParse
-      FinanceQuote
-      perl
-    ]);
+  buildInputs = [
+    aqbanking
+    boost
+    glib
+    glibcLocales
+    gtest
+    guile
+    gwenhywfar
+    icu
+    libdbi
+    libdbiDrivers
+    libofx
+    libsecret
+    libxml2
+    libxslt
+    swig
+    webkitgtk_4_0
+  ]
+  ++ (with perlPackages; [
+    JSONParse
+    FinanceQuote
+    perl
+  ]);
 
   patches = [
     # this patch disables test-gnc-timezone and test-gnc-datetime which fail due to nix datetime challenges

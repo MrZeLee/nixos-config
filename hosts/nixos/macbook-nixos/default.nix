@@ -3,7 +3,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     # ./apple-silicon-support
@@ -38,57 +39,59 @@
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  services.xserver.videoDrivers = lib.mkForce [];
+  services.xserver.videoDrivers = lib.mkForce [ ];
 
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 
   services.logind.settings.Login = {
-    HandlePowerKey="suspend-then-hibernate";
-    HandlePowerKeyLongPress="poweroff";
-    HandleLidSwitch="suspend-then-hibernate";
-    HandleLidSwitchExternalPower="suspend-then-hibernate";
-    HandleLidSwitchDocked="suspend-then-hibernate";
-    HoldoffTimeoutSec="5s";
-    IdleAction="suspend";
-    IdleActionSec="300s";
-    HibernateDelaySec="10min";
+    HandlePowerKey = "suspend-then-hibernate";
+    HandlePowerKeyLongPress = "poweroff";
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "suspend-then-hibernate";
+    HoldoffTimeoutSec = "5s";
+    IdleAction = "suspend";
+    IdleActionSec = "300s";
+    HibernateDelaySec = "10min";
   };
 
-   systemd.services.disable-nvme-d3cold = {
-     enable = true;
-     description = "Disable d3cold for NVMe to fix suspend issues";
-     wantedBy = [ "multi-user.target" ];
-     after = [ "network.target" ];
-     serviceConfig = {
-       Type = "oneshot";
-       ExecStart = "${pkgs.coreutils}/bin/echo 0 > /sys/bus/pci/devices/0000:01:00.0/d3cold_allowed";
-       RemainAfterExit = true;
-     };
-   };
+  systemd.services.disable-nvme-d3cold = {
+    enable = true;
+    description = "Disable d3cold for NVMe to fix suspend issues";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.coreutils}/bin/echo 0 > /sys/bus/pci/devices/0000:01:00.0/d3cold_allowed";
+      RemainAfterExit = true;
+    };
+  };
 
-   # Fix DRM/GPU race condition on Apple Silicon - ensure display-manager
-   # waits for GPU and DRM devices to be fully initialized before starting
-   systemd.services.display-manager = {
-     after = [ "systemd-udev-settle.service" "plymouth-quit.service" ];
-     wants = [ "systemd-udev-settle.service" ];
-   };
+  # Fix DRM/GPU race condition on Apple Silicon - ensure display-manager
+  # waits for GPU and DRM devices to be fully initialized before starting
+  systemd.services.display-manager = {
+    after = [
+      "systemd-udev-settle.service"
+      "plymouth-quit.service"
+    ];
+    wants = [ "systemd-udev-settle.service" ];
+  };
 
-   # # Macbook pro fan controlls is an option too.
-   # services.mbpfan = {
-   #   enable = true;
-   #   aggressive = false;
-   #   settings.general = { # even more agressive settings for the fan
-   #       low_temp = 50;
-   #       high_temp = 55;
-   #       max_temp = 65;
-   #   };
-   # };
+  # # Macbook pro fan controlls is an option too.
+  # services.mbpfan = {
+  #   enable = true;
+  #   aggressive = false;
+  #   settings.general = { # even more agressive settings for the fan
+  #       low_temp = 50;
+  #       high_temp = 55;
+  #       max_temp = 65;
+  #   };
+  # };
 
   services.power-profiles-daemon = {
-    enable     = true;
+    enable = true;
   };
-
 
   # install the default config with our on-ac / on-battery settings
   environment.etc."power-profiles-daemon/config.toml".text = lib.trim ''

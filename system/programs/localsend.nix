@@ -1,4 +1,3 @@
-{...}:
-{
-  programs.localsend.enable=true;
+_: {
+  programs.localsend.enable = true;
 }

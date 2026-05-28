@@ -1,8 +1,18 @@
-{pkgs, lib, hostname, isLinux, isDarwin, isX86_64, ...}: {
+{
+  pkgs,
+  lib,
+  hostname,
+  isLinux,
+  isDarwin,
+  isX86_64,
+  ...
+}:
+{
 
   imports = [ ./ani-cli ];
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       # Image
       gimp

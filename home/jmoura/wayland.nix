@@ -2,10 +2,12 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   # Wrap packages with nixGL for OpenGL support on non-NixOS systems
   wrapGL = pkg: config.lib.nixGL.wrap pkg;
-in {
+in
+{
   # Cursor theme configuration
   home.pointerCursor = {
     name = "Adwaita";
@@ -26,7 +28,7 @@ in {
     wlrctl
 
     # Hyprland plugins (note: may need version matching with hyprland)
-    hyprlandPlugins.hy3  # Uncomment if you need hy3 plugin
+    hyprlandPlugins.hy3 # Uncomment if you need hy3 plugin
 
     # Status bar
     (wrapGL waybar)
@@ -91,8 +93,11 @@ in {
       xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = ["gtk"];
-      hyprland.default = ["hyprland" "gtk"];
+      common.default = [ "gtk" ];
+      hyprland.default = [
+        "hyprland"
+        "gtk"
+      ];
     };
   };
 
@@ -108,8 +113,11 @@ in {
   systemd.user.services.xdg-desktop-portal = {
     Unit = {
       Description = "Portal service (Nix)";
-      PartOf = ["graphical-session.target"];
-      After = ["graphical-session.target" "xdg-desktop-portal-hyprland.service"];
+      PartOf = [ "graphical-session.target" ];
+      After = [
+        "graphical-session.target"
+        "xdg-desktop-portal-hyprland.service"
+      ];
     };
     Service = {
       Type = "dbus";
@@ -121,15 +129,15 @@ in {
       Restart = "on-failure";
     };
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 
   systemd.user.services.xdg-desktop-portal-hyprland = {
     Unit = {
       Description = "Portal service (Hyprland implementation)";
-      PartOf = ["graphical-session.target"];
-      After = ["graphical-session.target"];
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
       # ConditionEnvironment = "WAYLAND_DISPLAY";
     };
     Service = {
@@ -139,7 +147,7 @@ in {
       Restart = "on-failure";
     };
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 

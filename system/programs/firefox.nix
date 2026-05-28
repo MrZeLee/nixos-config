@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.firefox = {
     enable = true;
     package = pkgs.librewolf;
@@ -53,8 +54,7 @@
           private_browsing = true;
         };
         "addon@darkreader.org" = {
-          install_url =
-            "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
           installation_mode = "normal_installed";
           private_browsing = true;
         };

@@ -8,8 +8,7 @@
   };
   environment = {
     systemPackages = with pkgs; [
-    desktop-file-utils
-  ];
+      desktop-file-utils
+    ];
   };
 }
-

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Common system configuration
   time.timeZone = "Europe/Lisbon";
 

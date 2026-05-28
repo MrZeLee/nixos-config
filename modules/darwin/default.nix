@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Darwin-specific module configurations
   environment.systemPackages = with pkgs; [
     unstable.mas # Mac App Store CLI

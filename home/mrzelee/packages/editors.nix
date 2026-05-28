@@ -5,8 +5,10 @@
   isDarwin,
   isX86_64,
   ...
-}: {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
       # Neovim and dependencies
 
@@ -32,6 +34,10 @@
       prettierd
       #### xmllint
       libxml2
+      #### nix
+      nil
+      nixfmt-rfc-style
+      statix
 
       ## diffview
       mercurial
@@ -45,8 +51,12 @@
       lua51Packages.lua
       lua51Packages.luarocks
       julia-bin
-      python312
-      python312Packages.pip
+      (python312.withPackages (
+        ps: with ps; [
+          pip
+          flatlatex
+        ]
+      ))
       uv
       pipx
       rustc

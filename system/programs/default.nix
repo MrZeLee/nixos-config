@@ -3,7 +3,8 @@
   lib,
   isX86_64,
   ...
-}: {
+}:
+{
   imports = [
     ./fonts.nix
     ./xdg.nix
@@ -16,10 +17,11 @@
     ./noisetorch.nix
     ./pinentry.nix
     ./localsend.nix
-  ] ++ lib.optionals isX86_64 [ ./steam.nix ];
+  ]
+  ++ lib.optionals isX86_64 [ ./steam.nix ];
 
   environment.gnome.excludePackages = with pkgs; [
-    gnome-calendar #calendar
+    gnome-calendar # calendar
     gnome-calculator
     gnome-clocks
     gnome-maps

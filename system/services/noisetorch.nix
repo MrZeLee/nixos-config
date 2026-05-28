@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   systemd.user.services.noisetorch = {
     description = "Noisetorch Noise Cancelling";
-    after = ["wireplumber.service"];
+    after = [ "wireplumber.service" ];
 
     serviceConfig = {
       Type = "simple";

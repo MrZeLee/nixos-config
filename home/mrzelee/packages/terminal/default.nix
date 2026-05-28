@@ -4,12 +4,14 @@
   isLinux,
   isDarwin,
   ...
-}: {
+}:
+{
   imports = [
     ./yazi
   ];
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       wezterm
       ghostty
@@ -20,9 +22,7 @@
     ++ lib.optionals isLinux [
       # Terminal utilities
       (
-        if osConfig.hardware.nvidia.modesetting.enable
-        then btop.override {cudaSupport = true;}
-        else btop
+        if osConfig.hardware.nvidia.modesetting.enable then btop.override { cudaSupport = true; } else btop
       )
     ]
     ++ lib.optionals isDarwin [
