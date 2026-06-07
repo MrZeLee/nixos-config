@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  inputs,
+  system,
   isLinux,
   ...
 }:
@@ -20,7 +22,6 @@
       lua51Packages.lua
       lua51Packages.luarocks
       julia-bin
-      (python312.withPackages (ps: with ps; [ pip ]))
       pipx
       rustc
       nodejs_24
@@ -103,6 +104,10 @@
       #Testing
       postman
       age
+
+      #ios
+      usbmuxd
+      inputs.iloader.packages.${system}.default
     ]
     ++ lib.optionals isLinux [
       #Automations
