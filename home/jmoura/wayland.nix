@@ -49,6 +49,7 @@ in
     slurp
     swappy
     wf-recorder
+    gifski # mp4 -> high-quality gif (used by record-toggle.sh)
 
     # Clipboard
     cliphist
