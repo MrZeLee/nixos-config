@@ -187,6 +187,7 @@
       graphviz
       texliveFull
       ghostscript
+      unstable.tuxedo
 
       # Media CLI tools
       ffmpeg_6-full

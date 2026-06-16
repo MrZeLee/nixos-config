@@ -84,6 +84,7 @@
       gnuplot
       graphviz
       texliveFull
+      unstable.tuxedo
 
       # Automations
       chromedriver
