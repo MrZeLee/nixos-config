@@ -9,6 +9,15 @@
         unstable = import inputs.nixpkgs-unstable {
           inherit (prev.stdenv.hostPlatform) system;
           config.allowUnfree = true;
+          overlays = [
+            (ufinal: uprev: {
+              tuxedo =
+                (import inputs.nixpkgs-tuxedo-pr {
+                  inherit (prev.stdenv.hostPlatform) system;
+                  config.allowUnfree = true;
+                }).tuxedo;
+            })
+          ];
         };
         master = import inputs.nixpkgs-master {
           inherit (prev.stdenv.hostPlatform) system;
