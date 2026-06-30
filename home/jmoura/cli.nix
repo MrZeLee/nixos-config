@@ -48,6 +48,7 @@
       curl
       nmap
       netcat
+      dnsutils
       speedtest-cli
       ddgr
       lynx

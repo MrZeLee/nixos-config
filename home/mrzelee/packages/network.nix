@@ -6,6 +6,7 @@
       # TODO: set this up to work
       # zerotierone
       wireshark
+      dnsutils
       openvpn
       wireguard-tools
     ]
