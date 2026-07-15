@@ -46,6 +46,7 @@
       lazydocker
       lazyjournal
       tig
+      unstable.hunk
       (opencommit.overrideAttrs {
         makeWrapperArgs = [
           "--prefix"

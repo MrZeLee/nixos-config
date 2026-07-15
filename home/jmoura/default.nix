@@ -36,6 +36,8 @@ in
 
   systemd.user.services.docker = {
     Unit.Description = "Docker (Rootless)";
+    # Allow containers to reach the host via 10.0.2.2 (e.g. pgadmin -> local postgres)
+    Service.Environment = [ "DOCKERD_ROOTLESS_ROOTLESSKIT_DISABLE_HOST_LOOPBACK=false" ];
     Service.ExecStart = "${pkgs.docker}/bin/dockerd-rootless";
     Install.WantedBy = [ "default.target" ];
   };
