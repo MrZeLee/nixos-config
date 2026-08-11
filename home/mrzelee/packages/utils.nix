@@ -53,6 +53,7 @@
       vdhcoapp
       libreoffice
       kdePackages.okular
+      unstable.anydesk
 
       #Media
       #stremio

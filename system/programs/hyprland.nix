@@ -17,6 +17,8 @@
     enable = true;
   };
 
+  programs.ydotool.enable = true;
+
   environment = {
     systemPackages = with pkgs; [
       hyprland
@@ -27,6 +29,7 @@
       hyprlock
       wl-kbptr
       wlrctl
+      ydotool
 
       #dependecy for hyprland scripts
       bc
