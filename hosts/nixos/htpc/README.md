@@ -26,15 +26,13 @@ com `nixos-generate-config` e substitui o deste repo.
 
 ## Passos manuais únicos (inevitáveis)
 
-1. **Password de admin** — primeiro login (consola ou SSH: `ssh admin@htpc`,
-   password inicial `changeme`): correr `passwd`.
-2. **Ativar addons no Kodi** — na primeira execução: Add-ons → Os meus
+1. **Ativar addons no Kodi** — na primeira execução: Add-ons → Os meus
    add-ons → ativar *Jellyfin* e *Moonlight* (addons geridos pelo Nix
    aparecem instalados mas desativados na primeira vez).
-3. **Jellyfin** — ao ativar, indicar o endereço do servidor e fazer login.
-4. **Moonlight** — lançar (Add-ons → Programas → Moonlight), adicionar o
+2. **Jellyfin** — ao ativar, indicar o endereço do servidor e fazer login.
+3. **Moonlight** — lançar (Add-ons → Programas → Moonlight), adicionar o
    PC de jogos e introduzir o PIN mostrado no host.
-5. **Gamepads Bluetooth** — uma vez, via SSH:
+4. **Gamepads Bluetooth** — uma vez, via SSH:
 
    ```sh
    bluetoothctl

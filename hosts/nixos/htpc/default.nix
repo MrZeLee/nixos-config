@@ -1,12 +1,20 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   kodi = pkgs.kodi-gbm.withPackages (kp: [
     kp.jellyfin
+    kp.joystick # peripheral.joystick — required for gamepad input
+    kp.pvr-iptvsimple # live TV from an M3U playlist (EPG via XMLTV)
     (kp.buildKodiAddon {
       pname = "moonlight-launcher";
       namespace = "script.moonlight-launcher";
       version = "1.0.0";
       src = ./kodi-moonlight-addon;
+    })
+    (kp.buildKodiAddon {
+      pname = "tailscale-toggle";
+      namespace = "script.tailscale-toggle";
+      version = "1.0.0";
+      src = ./kodi-tailscale-addon;
     })
   ]);
 
@@ -18,13 +26,38 @@ let
       rm -f "$flag"
       ${kodi}/bin/kodi
       if [ -e "$flag" ]; then
-        QT_QPA_PLATFORM=eglfs ${pkgs.moonlight-qt}/bin/moonlight-qt
+        QT_QPA_PLATFORM=eglfs ${lib.getExe pkgs.moonlight-qt}
       fi
     done
   '';
 in
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../../system/services/tailscale.nix
+  ];
+
+  # The Kodi addon drives the tailscale CLI. Operator mode can't cover
+  # login: logout wipes OperatorUser from the profile, and getting it
+  # back needs root. So: sudo for exactly this one binary.
+  security.sudo.extraRules = [
+    {
+      users = [ "htpc" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/tailscale";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  # QR rendering for the tailscale addon's login flow.
+  environment.systemPackages = [ pkgs.qrencode ];
+
+  # Kodi remote control (Kore app / web UI) + EventServer.
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedUDPPorts = [ 9777 ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,6 +81,8 @@ in
     pulse.enable = true;
   };
 
+  users.mutableUsers = false;
+
   users.users.htpc = {
     isNormalUser = true;
     extraGroups = [
@@ -58,11 +93,17 @@ in
     ];
   };
 
-  users.users.admin = {
+  users.users.mrzelee = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "changeme"; # run `passwd` on first login
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDxGPJr0yZ9d+SOYqmEBP2GPejrfbAc45Ijsvk3PWYEP mrzelee404@gmail.com"
+    ];
   };
+
+  # No passwords exist (mutableUsers = false, key-only SSH), so wheel
+  # must sudo without one — also what remote nixos-rebuild --sudo needs.
+  security.sudo.wheelNeedsPassword = false;
 
   # Autologin straight into the Kodi/Moonlight session loop on tty1.
   services.greetd = {
@@ -75,7 +116,11 @@ in
 
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
   };
 
   nix.settings.experimental-features = [
