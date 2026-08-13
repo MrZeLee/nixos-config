@@ -125,6 +125,11 @@
             inherit inputs nixpkgs agenix;
             system = "aarch64-linux";
           }).nixosConfigurations.macbook-nixos;
+        # appliance host: self-contained, no home-manager/agenix
+        htpc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/nixos/htpc ];
+        };
       };
 
       inherit
