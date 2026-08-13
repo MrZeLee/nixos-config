@@ -21,7 +21,7 @@
       gettext
       lynx
       moreutils
-      neofetch
+      fastfetch
       rclone
       speedtest-cli
       stow

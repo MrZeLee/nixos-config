@@ -50,7 +50,6 @@
         gpgmeSupport = true;
         usePython = true;
       })
-      vdhcoapp
       libreoffice
       kdePackages.okular
 

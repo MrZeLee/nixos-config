@@ -16,7 +16,7 @@ in
     (wrapGL enlightenment.terminology)
 
     # Messaging
-    (wrapGL signal-desktop-bin)
+    (wrapGL signal-desktop)
     (wrapGL telegram-desktop)
     (wrapGL vesktop)
     (wrapGL caprine)

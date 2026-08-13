@@ -15,7 +15,7 @@
       eza
       tree
       zoxide
-      neofetch
+      fastfetch
       watch
       glow
       tldr

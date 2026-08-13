@@ -9,7 +9,7 @@
   home.packages =
     with pkgs;
     [
-      signal-desktop-bin
+      signal-desktop
       telegram-desktop
     ]
     ++ lib.optionals isLinux [

@@ -2,13 +2,17 @@
   self,
   inputs,
   pkgs,
+  lib,
+  isLinux,
   ...
 }:
 {
   nixpkgs = {
     config.allowUnfree = true;
   };
-
+}
+// lib.optionalAttrs isLinux {
+  # nix-ld is NixOS-only; the option doesn't exist on nix-darwin
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [

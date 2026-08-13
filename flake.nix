@@ -2,18 +2,18 @@
   description = "MrZeLee's NixOS Config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-tuxedo-pr.url = "github:IogaMaster/nixpkgs/update/tuxedo";
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,7 +34,7 @@
     nur.url = "github:nix-community/nur";
 
     nixos-apple-silicon = {
-      url = "github:nix-community/nixos-apple-silicon/release-2025-11-18";
+      url = "github:nix-community/nixos-apple-silicon/release-2026-07-30";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -45,7 +45,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    iloader.url = "github:nab138/iloader";
+    # pinned: newer revs fail to eval (missing apple-codesign cargoLock hash)
+    iloader.url = "github:nab138/iloader/f93df876226071dd27d9fa7aea20c3a6a0f566a8";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -129,7 +130,7 @@
       inherit
         (
           (import ./hosts {
-            inherit inputs nixpkgs;
+            inherit inputs nixpkgs agenix;
             system = "aarch64-darwin";
             inherit (inputs) mac-app-util;
           })

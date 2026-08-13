@@ -55,7 +55,6 @@
 
       SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
       WindowManager.StandardHideDesktopIcons = false;
-      alf.stealthenabled = 1;
 
       dock = {
         autohide = true;
@@ -102,6 +101,8 @@
   };
 
   # Add ability to used TouchID for sudo authentication
+  networking.applicationFirewall.enableStealthMode = true;
+
   security.pam.services.sudo_local.touchIdAuth = true;
   # FOR NEXT VERSION
   # security.pam.services.sudo_local.reattach = true;
