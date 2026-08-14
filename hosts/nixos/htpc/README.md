@@ -32,7 +32,10 @@ com `nixos-generate-config` e substitui o deste repo.
 2. **Jellyfin** — ao ativar, indicar o endereço do servidor e fazer login.
 3. **Moonlight** — lançar (Add-ons → Programas → Moonlight), adicionar o
    PC de jogos e introduzir o PIN mostrado no host.
-4. **Gamepads Bluetooth** — uma vez, via SSH:
+4. **PIA VPN** — Add-ons → Programas → PIA VPN → *Login...* para
+   introduzir o username/password da PIA (ficam em `/etc/pia/auth.txt`,
+   só root). Ligar/desligar, região e kill switch no mesmo menu.
+5. **Gamepads Bluetooth** — uma vez, via SSH:
 
    ```sh
    bluetoothctl

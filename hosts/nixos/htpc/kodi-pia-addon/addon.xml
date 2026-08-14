@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.pia-vpn" name="PIA VPN" version="1.0.0" provider-name="htpc">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Toggle the PIA VPN on/off</summary>
+    <description lang="en_GB">Starts or stops the openvpn-pia system service.</description>
+    <platform>all</platform>
+  </extension>
+</addon>
