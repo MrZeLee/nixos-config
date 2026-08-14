@@ -4,6 +4,7 @@ let
     kp.jellyfin
     kp.joystick # peripheral.joystick — required for gamepad input
     kp.pvr-iptvsimple # live TV from an M3U playlist (EPG via XMLTV)
+    kp.youtube
     (kp.buildKodiAddon {
       pname = "moonlight-launcher";
       namespace = "script.moonlight-launcher";
@@ -21,6 +22,7 @@ let
   # Session loop: Kodi owns the screen; the Moonlight addon drops a flag
   # file and quits Kodi, we run moonlight-qt on KMS, then Kodi comes back.
   htpc-session = pkgs.writeShellScriptBin "htpc-session" ''
+    exec > "$XDG_RUNTIME_DIR/htpc-session.log" 2>&1
     flag="$XDG_RUNTIME_DIR/launch-moonlight"
     while true; do
       rm -f "$flag"
@@ -59,8 +61,28 @@ in
   networking.firewall.allowedTCPPorts = [ 8080 ];
   networking.firewall.allowedUDPPorts = [ 9777 ];
 
+  # Answer for htpc.local on the LAN (mDNS).
+  services.avahi = {
+    enable = true;
+    publish = {
+      enable = true;
+      addresses = true;
+    };
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 1; # show the generation menu for just a second
+
+  # Quiet boot: no kernel/systemd text on the TV, and no blinking cursor
+  # on the console that flashes between Kodi and Moonlight.
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.kernelParams = [
+    "quiet"
+    "udev.log_level=3"
+    "vt.global_cursor_default=0"
+  ];
 
   networking.hostName = "htpc";
 
