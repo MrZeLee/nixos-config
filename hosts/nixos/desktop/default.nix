@@ -28,4 +28,5 @@
   };
 
   hardware.cpu.intel.sgx.provision.enable = true;
+  environment.systemPackages = [ pkgs.grub2 ];
 }
