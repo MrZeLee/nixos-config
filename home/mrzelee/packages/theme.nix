@@ -50,10 +50,13 @@
       ];
     };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-      gtk-cursor-blink = false;
-      gtk-recent-files-limit = 20;
+    gtk4 = {
+      theme = config.gtk.theme;
+      extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+        gtk-cursor-blink = false;
+        gtk-recent-files-limit = 20;
+      };
     };
   };
 
