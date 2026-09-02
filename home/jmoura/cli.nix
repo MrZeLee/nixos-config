@@ -43,6 +43,9 @@
       # Yazi file manager
       yazi
       ffmpegthumbnailer
+      chafa
+      viu
+      ueberzugpp
 
       # Network utilities
       wget

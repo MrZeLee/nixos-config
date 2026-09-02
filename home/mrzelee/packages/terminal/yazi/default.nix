@@ -13,5 +13,8 @@
     fzf
     zoxide
     imagemagick
+    chafa
+    viu
+    ueberzugpp
   ];
 }
