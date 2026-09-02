@@ -45,7 +45,7 @@
       libxml2
       #### nix
       nil
-      nixfmt-rfc-style
+      nixfmt
       statix
 
       ## diffview

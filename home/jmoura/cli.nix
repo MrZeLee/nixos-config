@@ -90,7 +90,7 @@
       sqlite
       libxml2
       nil
-      nixfmt-rfc-style
+      nixfmt
       statix
       tree-sitter
       ripgrep

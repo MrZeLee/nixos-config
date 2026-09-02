@@ -20,6 +20,8 @@ in
   home.packages = with pkgs; [
     # Hyprland compositor and core tools
     (wrapGL hyprland)
+    # nix-built Xwayland: system /usr/bin/Xwayland breaks under nixGL's LD_LIBRARY_PATH
+    xwayland
     # NOTE:using dotfiles installtion so it can use pam
     # hyprlock
     hypridle
