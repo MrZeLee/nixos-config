@@ -1,0 +1,40 @@
+--- a/src/mode_split.c	2026-09-02 16:55:01.689920354 +0100
++++ b/src/mode_split.c	2026-09-02 16:58:59.941803969 +0100
+@@ -278,11 +278,17 @@
+         state->running = false;
+         break;
+ 
++    case XKB_KEY_a:
+     case XKB_KEY_Return:
+     case XKB_KEY_space:
+         enter_next_mode(state, ms->areas[ms->current]);
+         return true;
+ 
++    case XKB_KEY_semicolon:
++        ms->current = 0;
++        split_mode_move_pointer(state, ms);
++        return true;
++
+     case XKB_KEY_BackSpace:
+         if (ms->current > 0) {
+             ms->current--;
+@@ -328,19 +334,15 @@
+ 
+     // Handle `wasd` and `hjkl` but only after home_row_keys
+     switch (text[0]) {
+-    case 'a':
+     case 'h':
+         return split_mode_split(state, mode_state, SPLIT_DIR_LEFT);
+ 
+-    case 'd':
+     case 'l':
+         return split_mode_split(state, mode_state, SPLIT_DIR_RIGHT);
+ 
+-    case 'w':
+     case 'k':
+         return split_mode_split(state, mode_state, SPLIT_DIR_UP);
+ 
+-    case 's':
+     case 'j':
+         return split_mode_split(state, mode_state, SPLIT_DIR_DOWN);
+     }
