@@ -42,6 +42,9 @@ in
     mako
     libnotify
 
+    # Audio
+    (wrapGL pavucontrol)
+
     # Wallpaper
     swww
     (wrapGL waypaper)
