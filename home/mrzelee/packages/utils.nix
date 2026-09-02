@@ -47,7 +47,8 @@
       #Misc
       gnucash
       (ledger.override {
-        gpgmeSupport = true;
+        # gpgmeSupport dropped in 26.05: gpgme 2.0 split out gpgmepp, and
+        # ledger's find_package(Gpgmepp 1.13.1) no longer resolves.
         usePython = true;
       })
       libreoffice

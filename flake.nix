@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-tuxedo-pr.url = "github:IogaMaster/nixpkgs/update/tuxedo";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-26.05";
@@ -74,7 +73,7 @@
         git-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
             statix = {
               enable = true;
               settings.ignore = [ "**/hardware-configuration.nix" ];

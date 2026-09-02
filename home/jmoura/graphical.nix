@@ -53,7 +53,7 @@ in
     (wrapGL wireshark)
 
     # Temp
-    (wrapGL neo4j-desktop)
+    (wrapGL neo4j)
     (wrapGL drawio)
 
   ];

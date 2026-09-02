@@ -24,7 +24,8 @@
       direnv
       wiremix
       (ledger.override {
-        gpgmeSupport = true;
+        # gpgmeSupport dropped in 26.05: gpgme 2.0 split out gpgmepp, and
+        # ledger's find_package(Gpgmepp 1.13.1) no longer resolves.
         usePython = true;
       })
 
@@ -88,7 +89,7 @@
       nil
       nixfmt-rfc-style
       statix
-      unstable.tree-sitter
+      tree-sitter
       ripgrep
       fd
       pstree
@@ -118,8 +119,8 @@
         ]
       ))
       uv
-      pipx
-      unstable.rustc
+      unstable.pipx # 26.05 pipx 1.8.0 fails its test suite
+      rustc
       cargo
       nodejs_24
       zulu
@@ -176,7 +177,7 @@
       terraform
       terragrunt
       azure-cli
-      unstable.awscli2
+      awscli2
 
       # Databases
       (postgresql.withPackages (pp: [
@@ -193,7 +194,7 @@
 
       # Media CLI tools
       ffmpeg_6-full
-      (unstable.spotify-player.override {
+      (spotify-player.override {
         withAudioBackend = "pulseaudio";
       })
 
