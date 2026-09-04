@@ -67,7 +67,7 @@
         ]
       ))
       uv
-      pipx
+      unstable.pipx # 26.05 pipx 1.8.0 fails its test suite
       rustc
       cargo
       nodejs_24

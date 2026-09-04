@@ -22,7 +22,7 @@
       lua51Packages.lua
       lua51Packages.luarocks
       julia-bin
-      pipx
+      unstable.pipx # 26.05 pipx 1.8.0 fails its test suite
       rustc
       nodejs_24
       zulu
