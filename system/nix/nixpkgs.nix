@@ -21,14 +21,14 @@
       libxcrypt-legacy
 
       # Graphics libraries (for Unity games)
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXi
-      xorg.libXinerama
-      xorg.libXext
-      xorg.libXrender
-      xorg.libXfixes
+      libx11
+      libxcursor
+      libxrandr
+      libxi
+      libxinerama
+      libxext
+      libxrender
+      libxfixes
 
       # OpenGL/Vulkan
       libGL
