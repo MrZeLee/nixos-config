@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -58,6 +59,23 @@ in
   services.sunshine = {
     enable = true;
     openFirewall = true;
+
+    # Without CUDA, Sunshine builds with SUNSHINE_ENABLE_CUDA=FALSE and NVENC
+    # dies at the colour-conversion step ("Couldn't scale frame"), leaving only
+    # software x264. The stock cudaSupport postFixup --set LD_LIBRARY_PATH to
+    # just vulkan-loader, which hides the driver's libcuda.so.1; --prefix with
+    # the driver path added keeps both reachable.
+    package =
+      (pkgs.sunshine.override {
+        cudaSupport = true;
+        inherit (pkgs) cudaPackages;
+      }).overrideAttrs
+        (_: {
+          postFixup = ''
+            wrapProgram $out/bin/sunshine \
+              --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ pkgs.vulkan-loader ]}:/run/opengl-driver/lib"
+          '';
+        });
 
     settings = {
       # wlr screencopy rather than kmsgrab: only it can see a virtual output.
