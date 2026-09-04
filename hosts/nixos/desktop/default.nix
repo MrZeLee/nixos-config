@@ -7,24 +7,25 @@ let
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   jq = "${pkgs.jq}/bin/jq";
 
-  # ponytail: acts on the focused monitor -- correct while Sunshine captures the
-  # only/primary output. Pin a name here if you ever stream one monitor while
-  # working on another.
-  sunshineMode = pkgs.writeShellScript "sunshine-mode" ''
-    set -eu
-    mon=$(${hyprctl} monitors -j | ${jq} -r 'first(.[] | select(.focused))
-          | "\(.name),\(.x)x\(.y)"')
-    name=''${mon%%,*}
-    pos=''${mon#*,}
-
+  # Virtual output streamed to Moonlight, so the physical monitors are left
+  # alone. Named explicitly: a bare `output create headless` yields HEADLESS-2,
+  # -3, -4... on each call, which a static output_name in sunshine.conf cannot
+  # follow.
+  sunshineDisplay = pkgs.writeShellScript "sunshine-display" ''
+    set -u
     case "$1" in
       do)
+        # a crashed stream can leave the output behind -- reuse it
+        ${hyprctl} output create headless stream || true
         ${hyprctl} keyword monitor \
-          "$name,''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS},$pos,1"
+          "stream,''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS},auto,1"
+        # so apps launched during the stream open on it
+        ${hyprctl} dispatch focusmonitor stream
         ;;
       undo)
-        # re-reading hyprland.conf restores the modes declared there
-        ${hyprctl} reload
+        real=$(${hyprctl} monitors -j | ${jq} -r 'first(.[] | select(.name != "stream")).name')
+        ${hyprctl} dispatch focusmonitor "$real"
+        ${hyprctl} output remove stream
         ;;
     esac
   '';
@@ -57,17 +58,22 @@ in
   services.sunshine = {
     enable = true;
     openFirewall = true;
-    capSysAdmin = true; # DRM/KMS capture under Wayland
 
-    # Match the mode Moonlight asks for on connect, restore it on disconnect.
-    # global_prep_cmd applies to every app, including Sunshine's built-in Desktop.
-    settings.global_prep_cmd = builtins.toJSON [
-      {
-        do = "${sunshineMode} do";
-        undo = "${sunshineMode} undo";
-        elevated = "false";
-      }
-    ];
+    settings = {
+      # wlr screencopy rather than kmsgrab: only it can see a virtual output.
+      # It also needs no CAP_SYS_ADMIN, so capSysAdmin stays off.
+      capture = "wlr";
+      output_name = "stream";
+
+      # Size the virtual output to what the client asks for, tear it down after.
+      global_prep_cmd = builtins.toJSON [
+        {
+          do = "${sunshineDisplay} do";
+          undo = "${sunshineDisplay} undo";
+          elevated = "false";
+        }
+      ];
+    };
   };
 
   hardware.cpu.intel.sgx.provision.enable = true;
