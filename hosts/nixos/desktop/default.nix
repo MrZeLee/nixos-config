@@ -94,6 +94,22 @@ in
     };
   };
 
+  # Wake-on-LAN from S5: a cold boot has to reach a running Hyprland session
+  # for Sunshine to have anything to capture, so SDDM logs in automatically.
+  networking.interfaces.enp2s0.wakeOnLan.enable = true;
+
+  # Host-only, deliberately: system/services/sddm.nix is shared by every NixOS
+  # host and none of the others should autologin.
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "mrzelee";
+  };
+
+  # sddm-autologin's PAM stack is nologin + succeed_if + permit, so no password
+  # ever reaches pam_gnome_keyring and the login keyring would stay locked.
+  # Unlocking hyprlock supplies it instead.
+  security.pam.services.hyprlock.enableGnomeKeyring = true;
+
   hardware.cpu.intel.sgx.provision.enable = true;
   environment.systemPackages = [ pkgs.grub2 ];
 }
