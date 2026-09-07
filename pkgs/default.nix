@@ -15,6 +15,7 @@ forAllSystems (
     pkgs = import inputs.nixpkgs {
       inherit system;
       overlays = [ overlay ];
+      config.allowUnfree = true;
     };
 
     # Define packages based on system
@@ -28,6 +29,7 @@ forAllSystems (
             # wezterm
             # koji
             mmex
+            optcg-sim
             # codex
             # gnucash
             ;

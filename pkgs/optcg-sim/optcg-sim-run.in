@@ -1,0 +1,24 @@
+#!@bash@/bin/bash
+set -euo pipefail
+
+# Unity writes decks and downloaded card art next to the binary, so the
+# read-only store copy is mirrored into a writable per-version user dir.
+# Decks live outside it so they survive an upgrade.
+ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/optcg-sim"
+GAME="$ROOT/@version@"
+
+if [ ! -d "$GAME" ]; then
+  mkdir -p "$ROOT/Decks"
+  rm -rf "$GAME.tmp"
+  cp -a @out@/opt/OPTCGSim "$GAME.tmp"
+  chmod -R u+w "$GAME.tmp"
+  cp -an "$GAME.tmp/Decks/." "$ROOT/Decks/"
+  rm -rf "$GAME.tmp/Decks"
+  ln -s "$ROOT/Decks" "$GAME.tmp/Decks"
+  mv "$GAME.tmp" "$GAME"
+  # Drop older versions; a NixOS rollback just re-copies them.
+  find "$ROOT" -mindepth 1 -maxdepth 1 -type d ! -name Decks ! -name "@version@" -exec rm -rf {} +
+fi
+
+cd "$GAME"
+exec @steamrun@ ./OPTCGSim.x86_64 "$@"
