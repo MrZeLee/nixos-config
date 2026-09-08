@@ -35,26 +35,31 @@ def creds_valid(user, pw):
         return False
     except OSError:
         return None
-REGIONS_CACHE = "/home/htpc/.kodi/userdata/addon_data/script.pia-vpn/regions.json"
+SERVERLIST_CACHE = "/home/htpc/.kodi/userdata/addon_data/script.pia-vpn/serverlist.json"
 
 
-def fetch_regions():
+def fetch_serverlist():
     # The kill switch blocks this while the VPN is down — fall back to
-    # the list cached from the last successful fetch.
+    # the list cached from the last successful fetch. Ports come from the
+    # serverlist too: PIA rotates them (1197 died in 2026).
     try:
         with urllib.request.urlopen(SERVERLIST, timeout=15) as resp:
             # First line of the body is JSON, the rest a signature.
-            regions = json.loads(resp.read().decode().split("\n")[0])["regions"]
-        os.makedirs(os.path.dirname(REGIONS_CACHE), exist_ok=True)
-        with open(REGIONS_CACHE, "w") as f:
-            json.dump(regions, f)
+            data = json.loads(resp.read().decode().split("\n")[0])
+        cache = {
+            "regions": data["regions"],
+            "ports": data["groups"]["ovpnudp"][0]["ports"],
+        }
+        os.makedirs(os.path.dirname(SERVERLIST_CACHE), exist_ok=True)
+        with open(SERVERLIST_CACHE, "w") as f:
+            json.dump(cache, f)
     except OSError:
         try:
-            with open(REGIONS_CACHE) as f:
-                regions = json.load(f)
+            with open(SERVERLIST_CACHE) as f:
+                cache = json.load(f)
         except OSError:
             raise RuntimeError("region list needs internet — connect the VPN first")
-    return regions
+    return cache["regions"], cache["ports"]
 
 
 def run(*cmd, stdin=None, timeout=90):
@@ -112,13 +117,17 @@ try:
                     xbmcgui.NOTIFICATION_WARNING,
                 )
     elif choice == 1:
-        regions = fetch_regions()
+        regions, ports = fetch_serverlist()
         regions.sort(key=lambda r: r["name"])
         sel = dialog.select("PIA region", [r["name"] for r in regions])
         if sel >= 0:
             run(
                 SUDO, "-n", TEE, REMOTE_CONF,
-                stdin="remote %s 1197\n" % regions[sel]["dns"],
+                # One line per port: openvpn falls through to the next
+                # remote if a port stops answering.
+                stdin="".join(
+                    "remote %s %s\n" % (regions[sel]["dns"], p) for p in ports
+                ),
             )
             if active:
                 run(SUDO, "-n", SYSTEMCTL, "restart", UNIT)

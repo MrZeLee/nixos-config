@@ -103,10 +103,10 @@ in
   networking.firewall.allowedTCPPorts = [ 8080 ];
   networking.firewall.allowedUDPPorts = [ 9777 ];
 
-  # PIA VPN for the whole box, on from boot; the Kodi addon manages it
-  # (connect, region, kill switch, credentials via its Login option).
+  # PIA VPN for the whole box, started on demand; the Kodi addon manages
+  # it (connect, region, kill switch, credentials via its Login option).
   services.openvpn.servers.pia = {
-    autoStart = true;
+    autoStart = false;
     # Apply PIA's pushed DNS while the tunnel is up (removed on stop).
     updateResolvConf = true;
     config = ''
@@ -287,7 +287,10 @@ in
       # PIA region, rewritten by the Kodi addon; seeded once.
       "d /var/lib/pia 0755 root root -"
       "C /var/lib/pia/remote.conf 0644 root root - ${pkgs.writeText "pia-remote.conf" ''
-        remote portugal.pvt.site 1197
+        remote portugal.pvt.site 8080
+        remote portugal.pvt.site 853
+        remote portugal.pvt.site 123
+        remote portugal.pvt.site 53
       ''}"
     ];
 
