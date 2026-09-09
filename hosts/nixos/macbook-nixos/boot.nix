@@ -7,6 +7,8 @@
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
+    # efivars are read-only on Asahi; let bootctl tolerate EFI variable failures
+    loader.systemd-boot.graceful = true;
     loader.efi.canTouchEfiVariables = false;
 
     # For ` to < and ~ to > (for those with US keyboards)

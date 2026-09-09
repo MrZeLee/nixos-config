@@ -13,6 +13,7 @@
     ./boot.nix
   ];
 
+  hardware.asahi.enable = true;
   #Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
