@@ -31,6 +31,14 @@ in
   # set the user uid and install uidmap in root
   home.sessionVariables = {
     DOCKER_HOST = "unix:///run/user/1000/docker.sock";
+    OIDC_SOCK = "/run/user/1000/oidc-agent.sock";
+  };
+
+  systemd.user.services.oidc-agent = {
+    Unit.Description = "oidc-agent";
+    # --console: sem daemonizar, para o systemd seguir o processo
+    Service.ExecStart = "${pkgs.oidc-agent}/bin/oidc-agent --console --socket-path=%t/oidc-agent.sock";
+    Install.WantedBy = [ "default.target" ];
   };
 
   systemd.user.services.docker = {
