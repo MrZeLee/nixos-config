@@ -8,6 +8,7 @@
     ./editors.nix
     ./development.nix
     ./network.nix
+    ./oidc-agent.nix
     ./messaging.nix
     ./media
     ./theme.nix
