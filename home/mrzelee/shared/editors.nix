@@ -1,11 +1,15 @@
 {
   pkgs,
   lib,
+  config,
   isLinux,
   isDarwin,
   isX86_64,
   ...
 }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
   home.sessionVariables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
@@ -85,19 +89,21 @@
       yarn
 
       # VSCode
-      pkgs.vscode
+      (wrapGL vscode)
       glibc
-      postgresql
+      (postgresql.withPackages (pp: [
+        pp.pgvector
+      ]))
 
       # Document viewers
-      zathura
+      (wrapGL zathura)
     ]
     ++ lib.optionals isLinux [
       ## VimTex dependencies
       xdotool
     ]
     ++ lib.optionals (isLinux && isX86_64) [
-      typora
+      (wrapGL typora)
     ]
     ++ lib.optionals isDarwin [
     ];

@@ -1,31 +1,30 @@
 {
   pkgs,
   lib,
+  config,
   hostname,
   isLinux,
   isDarwin,
   isX86_64,
   ...
 }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
-
-  imports = [ ./ani-cli ];
-
   home.packages =
     with pkgs;
     [
       # Image
-      gimp
+      (wrapGL gimp)
 
       # Audio/Video
-      # unstable.spotify-player
-      master.spotify-player
-      mpv
+      (wrapGL mpv)
       ffmpeg_6-full
     ]
     ++ lib.optionals isLinux [
       #Image
-      swayimg
+      (wrapGL swayimg)
       #dependencies
       giflib
       libjpeg
@@ -42,20 +41,10 @@
       slurp
 
       #Audio/Video
-      pavucontrol
-
-      # File management
-      nemo-with-extensions
-      gvfs
-      udisks2
-      gphoto2
-      libmtp
-      cinnamon-desktop
-      shared-mime-info
-      xdg-utils
+      (wrapGL pavucontrol)
     ]
     ++ lib.optionals (isLinux && isX86_64) [
-      spotify
+      (wrapGL spotify)
     ]
     ++ lib.optionals isDarwin [
       spotify

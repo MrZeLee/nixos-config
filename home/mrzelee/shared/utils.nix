@@ -1,21 +1,23 @@
 {
   pkgs,
   lib,
+  config,
   isLinux,
   isDarwin,
-  isX86_64,
   ...
 }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
   home.packages =
     with pkgs;
     [
       # Security
-      keepassxc
+      (wrapGL keepassxc)
       gnupg
       pass
-      tor
-      torsocks
+      age
 
       # System
       pciutils
@@ -28,44 +30,31 @@
       teleport_17
 
       # Misc
-      qbittorrent
-      obsidian
-      # mmex
+      (wrapGL obsidian)
       ghostscript
-      pdfpc
+      (wrapGL pdfpc)
     ]
     ++ lib.optionals isLinux [
-      #Security
-      seahorse
-      monero-cli
-      monero-gui
-
       #System
       usbutils
       lshw
 
       #Misc
-      gnucash
       (ledger.override {
         # gpgmeSupport dropped in 26.05: gpgme 2.0 split out gpgmepp, and
         # ledger's find_package(Gpgmepp 1.13.1) no longer resolves.
         usePython = true;
       })
-      libreoffice
-      kdePackages.okular
+      (wrapGL libreoffice)
 
       #Media
-      #stremio
       bluetui
 
       #Network
       sshfs
 
       #Lightweight terminal
-      enlightenment.terminology
-    ]
-    ++ lib.optionals (isLinux && isX86_64) [
-      tor-browser
+      (wrapGL enlightenment.terminology)
     ]
     ++ lib.optionals isDarwin [
     ];

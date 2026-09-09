@@ -8,15 +8,6 @@ let
   wrapGL = pkg: config.lib.nixGL.wrap pkg;
 in
 {
-  # Cursor theme configuration
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  };
-
   home.packages = with pkgs; [
     # Hyprland compositor and core tools
     (wrapGL hyprland)
@@ -32,37 +23,13 @@ in
     # Hyprland plugins (note: may need version matching with hyprland)
     hyprlandPlugins.hy3 # Uncomment if you need hy3 plugin
 
-    # Status bar
-    (wrapGL waybar)
-
-    # Application launcher
-    fuzzel
-
-    # Notifications
-    mako
-    libnotify
-
-    # Audio
-    (wrapGL pavucontrol)
-
-    # Wallpaper
-    swww
-    (wrapGL waypaper)
-
     # Screenshot & screen recording
-    grim
-    slurp
     swappy
     wf-recorder
     gifski # mp4 -> high-quality gif (used by record-toggle.sh)
 
     # Clipboard
     cliphist
-    wl-clipboard
-
-    # Vim anywhere (Wayland)
-    wofi
-    wtype
 
     # File manager (used in your config)
     nautilus
@@ -154,23 +121,6 @@ in
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
-    };
-  };
-
-  gtk = {
-    gtk3 = {
-      extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-        gtk-cursor-blink = false;
-        gtk-recent-files-limit = 20;
-      };
-      bookmarks = [
-        "file://${config.home.homeDirectory}/Documents"
-        "file://${config.home.homeDirectory}/Downloads"
-        "file://${config.home.homeDirectory}/Music"
-        "file://${config.home.homeDirectory}/Pictures"
-        "file://${config.home.homeDirectory}/Videos"
-      ];
     };
   };
 

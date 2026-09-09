@@ -6,38 +6,18 @@
   ...
 }:
 {
-  imports =
-    if isLinux then
-      [
-        ./terminal
-        ./media
-        ./cli.nix
-        ./theme.nix
-        ./utils.nix
-        ./gaming.nix
-        ./editors.nix
-        ./wayland.nix
-        ./messaging.nix
-        ./development.nix
-        ./network.nix
-        ./librewolf.nix
-      ]
-    else if isDarwin then
-      [
-        ./terminal
-        ./media
-        ./cli.nix
-        ./theme.nix
-        ./utils.nix
-        ./editors.nix
-        ./messaging.nix
-        ./development.nix
-        ./aerospace.nix
-        ./network.nix
-        ./librewolf.nix
-      ]
-    else
-      [ ];
+  imports = [
+    ../shared
+    ./extra.nix
+    ./librewolf.nix
+  ]
+  ++ lib.optionals isLinux [
+    ./ani-cli
+    ./gaming.nix
+  ]
+  ++ lib.optionals isDarwin [
+    ./aerospace.nix
+  ];
 
   home = lib.mkIf isDarwin {
     activation = {

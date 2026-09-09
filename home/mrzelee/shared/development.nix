@@ -1,18 +1,18 @@
 {
   pkgs,
   lib,
-  inputs,
-  system,
+  config,
   isLinux,
   ...
 }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
   home.packages =
     with pkgs;
     [
       # AI
-      unstable.codex
-      unstable.opencode
       unstable.claude-code
 
       # Languages
@@ -76,7 +76,6 @@
       kubetail
       kustomize
       opentofu
-      postgresql
       terraform
       terragrunt
       azure-cli
@@ -91,29 +90,15 @@
       chromedriver
 
       #Databases
-      pgadmin4-desktopmode
+      (wrapGL pgadmin4-desktopmode)
       unstable.lazysql
-      # (writeShellScriptBin "harlequin" ''
-      #   # Ensure harlequin is installed with all dependencies
-      #   if ! ${uv}/bin/uv tool list 2>/dev/null | grep -q "harlequin"; then
-      #     echo "Installing harlequin with uv..." >&2
-      #     ${uv}/bin/uv tool install 'harlequin[postgres]'
-      #   fi
-      #   # Run harlequin via uv
-      #   exec ${uv}/bin/uv tool run harlequin "$@"
-      # '')
 
       #Testing
-      postman
-      age
-
-      #ios
-      usbmuxd
-      inputs.iloader.packages.${system}.default
+      (wrapGL postman)
     ]
     ++ lib.optionals isLinux [
       #Automations
-      chromium
+      (wrapGL chromium)
       parted
     ];
 }

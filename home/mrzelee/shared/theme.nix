@@ -6,6 +6,14 @@
   ...
 }:
 {
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   gtk = {
     enable = true;
 
@@ -17,12 +25,6 @@
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
-    };
-
-    cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-      size = 24;
     };
 
     font = {
@@ -65,16 +67,17 @@
     GTK_THEME = "Adwaita-dark";
   };
 
+  fonts.fontconfig.enable = true;
+
   home.packages =
     with pkgs;
     [
       nerd-fonts.hack
+      nerd-fonts.jetbrains-mono
       adwaita-icon-theme
     ]
     ++ lib.optionals isLinux [
-      catppuccin-sddm
       gnome-themes-extra
-      adwaita-icon-theme
       dejavu_fonts
     ]
     ++ lib.optionals isDarwin [ ];

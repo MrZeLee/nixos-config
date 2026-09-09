@@ -1,12 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
   home.packages = with pkgs; [
-    waybar
+    (wrapGL waybar)
     fuzzel
     mako
     libnotify
-    swaybg
-    waypaper
+    (wrapGL waypaper)
     swww
 
     # Vim anywhere (Wayland)

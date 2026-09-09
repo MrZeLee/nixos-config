@@ -1,25 +1,29 @@
 {
   pkgs,
+  config,
   isDarwin,
   isLinux,
   isX86_64,
   ...
 }:
+let
+  wrapGL = config.lib.nixGL.wrap;
+in
 {
   home.packages =
     with pkgs;
     [
-      signal-desktop
-      telegram-desktop
+      (wrapGL signal-desktop)
+      (wrapGL telegram-desktop)
     ]
     ++ lib.optionals isLinux [
-      caprine # Facebook Messenger
+      (wrapGL caprine) # Facebook Messenger
       # wasistlos # WhatsApp in browser
-      vesktop # Discord
-      teams-for-linux
+      (wrapGL vesktop) # Discord
+      (wrapGL teams-for-linux)
     ]
     ++ lib.optionals (isLinux && isX86_64) [
-      zoom-us
+      (wrapGL zoom-us)
     ]
     ++ lib.optionals isDarwin [
       teams

@@ -23,6 +23,7 @@
       moreutils
       fastfetch
       rclone
+      oidc-agent
       speedtest-cli
       stow
       tldr
