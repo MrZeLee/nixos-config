@@ -21,6 +21,11 @@ in
   home.homeDirectory = lib.mkForce "/home/jmoura";
   home.stateVersion = "24.11";
 
+  # O tema GTK é gerido pelos dotfiles; o Adwaita-dark do theme.nix partilhado
+  # só existe no perfil Nix e o /usr/bin/firefox do Pop!_OS não o encontra,
+  # ficando meio-aplicado.
+  gtk.enable = false;
+
   # Enable nixGL for OpenGL support on non-NixOS systems
   targets.genericLinux.nixGL = {
     inherit (inputs.nixgl) packages;

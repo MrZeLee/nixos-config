@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   isLinux,
   isDarwin,
@@ -15,7 +16,8 @@
   };
 
   gtk = {
-    enable = true;
+    # mkDefault: quem gere o tema GTK por fora (dotfiles) desliga isto
+    enable = lib.mkDefault true;
 
     theme = {
       name = "Adwaita-dark";
@@ -63,7 +65,7 @@
   };
 
   # Optionally, export the GTK_THEME environment variable
-  home.sessionVariables = {
+  home.sessionVariables = lib.mkIf config.gtk.enable {
     GTK_THEME = "Adwaita-dark";
   };
 
@@ -76,7 +78,7 @@
       nerd-fonts.jetbrains-mono
       adwaita-icon-theme
     ]
-    ++ lib.optionals isLinux [
+    ++ lib.optionals (isLinux && config.gtk.enable) [
       gnome-themes-extra
       dejavu_fonts
     ]
