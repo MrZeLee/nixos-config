@@ -36,7 +36,19 @@ in
       # Qt/WebEngine para o fluxo OIDC: sem nixGL falha como o oidc-prompt.
       # Arranque manual; o .desktop que o cliente escreve aponta para o binario
       # cru e nao e lido por ninguem (o Hyprland nao le ~/.config/autostart).
-      (wrapGL owncloud-client)
+      # QT_STYLE_OVERRIDE=adwaita-dark (qt.style, global) chega ao Qt Quick, que
+      # tenta importar um modulo QML "adwaita-dark" que nao existe (adwaita-qt so
+      # tem o plugin QStyle) e mata a janela principal. QT_QUICK_CONTROLS_STYLE
+      # nao o anula: so o unset resolve, e so aqui -- mexer nele globalmente
+      # rebenta o greeter do SDDM, que tambem e Qt Quick.
+      (symlinkJoin {
+        name = "owncloud-client-qml-style";
+        paths = [ (wrapGL owncloud-client) ];
+        nativeBuildInputs = [ makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/owncloud --unset QT_STYLE_OVERRIDE
+        '';
+      })
     ]
     ++ lib.optionals isLinux [
       #System
