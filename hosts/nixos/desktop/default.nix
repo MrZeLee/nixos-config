@@ -55,6 +55,15 @@ in
     };
   };
 
+  # /dev/dri/cardN segue a ordem de probe dos drivers (hoje i915 no initrd ->
+  # card0, nvidia depois -> card1). O AQ_DRM_DEVICES do Hyprland separa por ':'
+  # e os links by-path (pci-0000:01:00.0-card) têm ':' no nome, logo dá-se a
+  # cada GPU um nome estável sem ':' e desktop.conf aponta para estes.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="drm", KERNEL=="card[0-9]", DRIVERS=="nvidia", SYMLINK+="dri/card-nvidia"
+    SUBSYSTEM=="drm", KERNEL=="card[0-9]", DRIVERS=="i915",   SYMLINK+="dri/card-intel"
+  '';
+
   # Game stream host for Moonlight clients (htpc, laptop)
   services.sunshine = {
     enable = true;
@@ -66,7 +75,7 @@ in
     # just vulkan-loader, which hides the driver's libcuda.so.1; --prefix with
     # the driver path added keeps both reachable.
     package =
-      (pkgs.sunshine.override {
+      (pkgs.unstable.sunshine.override {
         cudaSupport = true;
         inherit (pkgs) cudaPackages;
       }).overrideAttrs
