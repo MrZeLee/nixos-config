@@ -40,7 +40,8 @@
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  services.xserver.videoDrivers = lib.mkForce [ ];
+  # DisplayLink: video out of the UGREEN CM558 dock (evdi + DisplayLinkManager)
+  services.xserver.videoDrivers = lib.mkForce [ "displaylink" ];
 
   # Hyprland ignores monitors hotplugged after start on Asahi (no render node on
   # the apple KMS device). Patch aquamarine to not abort the connect on that.
@@ -130,6 +131,5 @@
   environment.systemPackages = with pkgs; [
     brightnessctl
     playerctl
-    # displaylink
   ];
 }
