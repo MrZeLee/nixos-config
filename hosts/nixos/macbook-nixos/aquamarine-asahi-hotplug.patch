@@ -1,0 +1,20 @@
+Asahi: the apple KMS device (card1) has no render node, so aquamarine can never
+create its secondary renderer for it. On hotplug, SDRMConnector::connect() bails
+out on that failure before emitting the output, so a monitor plugged in after
+Hyprland starts is never shown. At startup (recheckOutputs) and on applyCommit
+the same failure is only logged, and rendering works fine without it, so do the
+same here.
+--- a/src/backend/drm/DRM.cpp
++++ b/src/backend/drm/DRM.cpp
+@@ -1686,10 +1686,8 @@
+     if (!backend->backend->ready)
+         return;
+ 
+-    if (!backend->updateSecondaryRendererState()) {
++    if (!backend->updateSecondaryRendererState())
+         backend->backend->log(AQ_LOG_ERROR, std::format("drm: Failed to update renderer state for {} on connect", szName));
+-        return;
+-    }
+ 
+     auto primaryBackend = backend->primary ? backend->primary : backend;
+     output->swapchain   = CSwapchain::create(backend->backend->primaryAllocator, primaryBackend.lock());
