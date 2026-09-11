@@ -43,16 +43,6 @@
   # DisplayLink: video out of the UGREEN CM558 dock (evdi + DisplayLinkManager)
   services.xserver.videoDrivers = lib.mkForce [ "displaylink" ];
 
-  # Hyprland ignores monitors hotplugged after start on Asahi (no render node on
-  # the apple KMS device). Patch aquamarine to not abort the connect on that.
-  nixpkgs.overlays = [
-    (final: prev: {
-      aquamarine = prev.aquamarine.overrideAttrs (old: {
-        patches = (old.patches or [ ]) ++ [ ./aquamarine-asahi-hotplug.patch ];
-      });
-    })
-  ];
-
   powerManagement.enable = lib.mkForce true;
   powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 

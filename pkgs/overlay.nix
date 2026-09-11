@@ -14,6 +14,11 @@ final: prev: {
   wl-kbptr = prev.wl-kbptr.overrideAttrs (o: {
     patches = (o.patches or [ ]) ++ [ ./wl-kbptr/vim-keys.patch ];
   });
+  # Hyprland drops monitors hotplugged on a KMS device that has no render node
+  # (Asahi's apple KMS, evdi/DisplayLink). See the patch header.
+  aquamarine = prev.aquamarine.overrideAttrs (o: {
+    patches = (o.patches or [ ]) ++ [ ./aquamarine/hotplug-no-render-node.patch ];
+  });
   # codex = prev.callPackage ./codex {};
   # gnucash = prev.callPackage ./gnucash {};
 }
