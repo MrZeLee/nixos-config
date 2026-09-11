@@ -29,5 +29,6 @@ in
     (wrapGL localsend)
     (wrapGL neo4j)
     (wrapGL drawio)
+    (wrapGL optcg-sim)
   ];
 }
