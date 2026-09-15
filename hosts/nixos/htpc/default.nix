@@ -306,6 +306,13 @@ in
     "quiet"
     "udev.log_level=3"
     "vt.global_cursor_default=0"
+    # With `quiet` fbcon defers its takeover, so nothing has done a modeset
+    # on the HDMI connector when Kodi starts. Kodi's atomic DRM init then
+    # sees encoder_id == 0, falls back to legacy DRM, and legacy leaks one
+    # fence fd per frame — ~45 s later Kodi hits the 1024-fd limit and CEC,
+    # udev and gamepads all die. Taking the console over at driver init
+    # does the modeset up front and atomic DRM works on the first try.
+    "fbcon=nodefer"
   ];
 
   networking.hostName = "htpc";
