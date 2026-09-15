@@ -21,6 +21,7 @@ in
       # Audio/Video
       (wrapGL mpv)
       ffmpeg_6-full
+      lowfi
     ]
     ++ lib.optionals isLinux [
       #Image
