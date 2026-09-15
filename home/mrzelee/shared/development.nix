@@ -14,6 +14,7 @@ in
     [
       # AI
       unstable.claude-code
+      unstable.pi-coding-agent
 
       # Languages
       go
