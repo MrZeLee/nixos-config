@@ -74,3 +74,8 @@
           { };
     };
 }
+// lib.optionalAttrs isLinux {
+  # crates.io 403s any User-Agent starting with "curl/", which is exactly what
+  # nixpkgs' fetchurl sends by default, breaking every crate download.
+  systemd.services.nix-daemon.environment.NIX_CURL_FLAGS = "--user-agent=Nixpkgs";
+}
