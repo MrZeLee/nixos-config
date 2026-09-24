@@ -44,8 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # pinned: newer revs fail to eval (missing apple-codesign cargoLock hash)
-    iloader.url = "github:nab138/iloader/f93df876226071dd27d9fa7aea20c3a6a0f566a8";
+    iloader.url = "github:nab138/iloader/8473838c75fa71ede4da44d941307577d7bc6e10";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
