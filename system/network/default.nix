@@ -25,6 +25,8 @@
     # every 20s (desktop-1, -2, ...), which tears down every published
     # service -- Moonlight then never discovers Sunshine.
     resolved.settings.Resolve.MulticastDNS = false;
+    # ...so avahi also has to answer .local for glibc/NSS now.
+    avahi.nssmdns4 = true;
   };
 
   # Don't wait for network startup
