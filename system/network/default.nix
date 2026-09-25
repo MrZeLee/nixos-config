@@ -20,6 +20,11 @@
   services = {
     # DNS resolver
     resolved.enable = true;
+    # avahi already owns mDNS here (CUPS, Sunshine). With resolved answering
+    # for <host>.local too, avahi sees its own name taken and renames itself
+    # every 20s (desktop-1, -2, ...), which tears down every published
+    # service -- Moonlight then never discovers Sunshine.
+    resolved.settings.Resolve.MulticastDNS = false;
   };
 
   # Don't wait for network startup
