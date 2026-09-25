@@ -381,6 +381,11 @@ in
     "flakes"
   ];
 
+  # This box is too slow to build its own closure: the desktop builds and
+  # pushes with `nixos-rebuild --target-host --sudo`, and that copy has to
+  # land unsigned paths.
+  nix.settings.trusted-users = [ "@wheel" ];
+
   # First install of this box; do not bump on upgrades.
   system.stateVersion = "26.05";
 }
