@@ -44,6 +44,13 @@ in
     ../../../system/services/tailscale.nix
   ];
 
+  # cluster advertises 192.168.1.0/24 -- the LAN this box sits on -- as a
+  # subnet route, and accepting it sends desktop<->htpc traffic (Sunshine,
+  # ssh, deploys) around through the tunnel instead of over the switch.
+  # Only for the boxes that live here: laptop and macbook need those routes
+  # to reach this LAN from outside.
+  services.tailscale.extraSetFlags = [ "--accept-routes=false" ];
+
   # The Kodi addon drives the tailscale CLI. Operator mode can't cover
   # login: logout wipes OperatorUser from the profile, and getting it
   # back needs root. So: sudo for exactly this one binary.
