@@ -42,6 +42,7 @@ in
       # Git tools
       gh
       gh-dash
+      forgejo-cli
       tea-dash
       git-lfs
       lazygit
