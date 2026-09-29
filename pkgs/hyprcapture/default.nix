@@ -21,6 +21,12 @@ hyprlandPlugins.mkHyprlandPlugin {
     hash = "sha256-KoPr8KykCeyCoFzg25PEMtZRIJxcpfdwk/uL//Wt6lc=";
   };
 
+  # Backport of upstream 15a831a (in releases for Hyprland 0.56+): the trust
+  # checks reject anything under the group-writable /nix/store, and the helper
+  # only looks for wl-copy/hyprctl/xdg-open in /usr/bin (without wl-copy the
+  # clipboard dies with it). Patch also searches the Nix profile bin dirs.
+  patches = [ ./trust-nix-store.patch ];
+
   nativeBuildInputs = [
     cmake
     pkg-config
