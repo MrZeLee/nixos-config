@@ -42,6 +42,7 @@ in
       # Git tools
       gh
       gh-dash
+      tea-dash
       git-lfs
       lazygit
       lazydocker

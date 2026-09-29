@@ -34,7 +34,7 @@ in
       (wrapGL obsidian)
       ghostscript
       (wrapGL pdfpc)
-      (wrapGL inputs.iloader.packages.${system}.default)
+      (wrapGL inputs.iloader.packages.${stdenv.hostPlatform.system}.default)
       # Qt/WebEngine para o fluxo OIDC: sem nixGL falha como o oidc-prompt.
       # Arranque manual; o .desktop que o cliente escreve aponta para o binario
       # cru e nao e lido por ninguem (o Hyprland nao le ~/.config/autostart).
