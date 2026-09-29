@@ -22,6 +22,7 @@ in
 
     # Hyprland plugins (note: may need version matching with hyprland)
     hyprlandPlugins.hy3 # Uncomment if you need hy3 plugin
+    hyprcapture
 
     # Screenshot & screen recording
     swappy
@@ -54,6 +55,7 @@ in
   # Set Hyprland-related environment variables
   home.sessionVariables = {
     HYPRLAND_HY3 = "${pkgs.hyprlandPlugins.hy3}";
+    HYPRLAND_HYPRCAPTURE = "${pkgs.hyprcapture}";
     # LD_LIBRARY_PATH = "$HOME/.nix-profile/lib:/usr/local/lib\${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}";
   };
 

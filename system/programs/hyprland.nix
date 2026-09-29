@@ -24,6 +24,7 @@
       hyprland
       hyprlandPlugins.hy3
       hyprlandPlugins.csgo-vulkan-fix
+      hyprcapture
       hypridle
       hyprpaper
       hyprlock
@@ -39,6 +40,7 @@
       NIXOS_OZONE_WL = "1";
       HYPRLAND_CSGO_VULKAN_FIX = "${pkgs.hyprlandPlugins.csgo-vulkan-fix}";
       HYPRLAND_HY3 = "${pkgs.hyprlandPlugins.hy3}";
+      HYPRLAND_HYPRCAPTURE = "${pkgs.hyprcapture}";
       HYPRLAND_HOST = "${config.networking.hostName}";
     };
   };

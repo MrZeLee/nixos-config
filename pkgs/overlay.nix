@@ -7,6 +7,7 @@ final: prev: {
   # koji = prev.callPackage ./koji {};
   mmex = prev.callPackage ./mmex { };
   optcg-sim = prev.callPackage ./optcg-sim { };
+  hyprcapture = prev.callPackage ./hyprcapture { };
   # mode_split hardcodes `wasd` as aliases for `hjkl` (home_row_keys can't
   # shadow them -- only the click indices short-circuit), and offers no way
   # back to the initial area short of repeated backspaces. The patch drops the
