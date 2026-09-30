@@ -31,6 +31,8 @@ in
       teleport_17
 
       # Misc
+      newsboat
+      discordo
       (wrapGL obsidian)
       ghostscript
       (wrapGL pdfpc)
