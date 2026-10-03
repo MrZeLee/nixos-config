@@ -95,28 +95,26 @@
     enable = true;
   };
 
-  # install the default config with our on-ac / on-battery settings
-  environment.etc."power-profiles-daemon/config.toml".text = lib.trim ''
-    [general]
-    # which profile to pick at boot if none is active
-    default-profile = "balanced"
-
-    # switch profiles on AC / battery insert/remove
-    on-ac      = "performance"
-    on-battery = "powersave"
-
-    # how long to wait after an AC/BAT event before switching
-    timeout = 10
-
-    # If you want to tweak the individual profiles, you can do so here:
-    #
-    #[profile.powersave]
-    #  # example: turn on schedutil governor
-    #  governor = "schedutil"
-    #
-    #[profile.performance]
-    #  governor = "performance"
+  # ppd has no on-ac/on-battery config; switch profiles from udev instead
+  services.udev.extraRules = ''
+    SUBSYSTEM=="power_supply", KERNEL=="macsmc-ac", ATTR{online}=="0", RUN+="${lib.getExe pkgs.power-profiles-daemon} set power-saver"
+    SUBSYSTEM=="power_supply", KERNEL=="macsmc-ac", ATTR{online}=="1", RUN+="${lib.getExe pkgs.power-profiles-daemon} set balanced"
   '';
+
+  # udev's boot-time event fires before ppd is up, so apply once after it starts
+  systemd.services.ppd-ac-sync = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "power-profiles-daemon.service" ];
+    requires = [ "power-profiles-daemon.service" ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      if [ "$(cat /sys/class/power_supply/macsmc-ac/online)" = 1 ]; then p=balanced; else p=power-saver; fi
+      ${lib.getExe pkgs.power-profiles-daemon} set $p
+    '';
+  };
+
+  # warp-svc keeps waking the CPU/radio; tailscale covers remote access here
+  services.cloudflare-warp.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     brightnessctl
