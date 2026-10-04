@@ -81,6 +81,7 @@ in
         "browser.preferences.defaultPerformanceSettings.enabled" = false;
         "browser.translations.automaticallyPopup" = false;
         "browser.sessionstore.restore_on_demand" = false;
+        "ui.key.menuAccessKeyFocuses" = false;
 
         # ─── Privacidade ───────────────────────────────────────────────────────
         "signon.rememberSignons" = false;
