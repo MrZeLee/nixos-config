@@ -51,7 +51,7 @@
     HandlePowerKeyLongPress = "poweroff";
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchExternalPower = "suspend-then-hibernate";
-    HandleLidSwitchDocked = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "ignore";
     HoldoffTimeoutSec = "5s";
     IdleAction = "suspend";
     IdleActionSec = "300s";
