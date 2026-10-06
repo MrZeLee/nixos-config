@@ -8,8 +8,9 @@ let
 
   # NixOS hosts decrypt with their SSH host key:
   # `cat /etc/ssh/ssh_host_ed25519_key.pub` on each, then `agenix -r`.
-  # TODO: desktop = "ssh-ed25519 ..."; laptop = "..."; macbook-nixos = "...";
-  systems = [ ];
+  # TODO: desktop = "ssh-ed25519 ..."; laptop = "...";
+  macbook-nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKrHFKOsiSq/ShpAW8VZ5AZitBGMlPSseS2c4VHHpUuQ";
+  systems = [ macbook-nixos ];
 in
 {
   "aerc-accounts.conf.age".publicKeys = systems ++ homes ++ [ user1 ];
