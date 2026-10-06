@@ -13,4 +13,5 @@ let
 in
 {
   "aerc-accounts.conf.age".publicKeys = systems ++ homes ++ [ user1 ];
+  "vdirsyncer-config.age".publicKeys = systems ++ homes ++ [ user1 ];
 }

@@ -18,12 +18,35 @@
     file = ../../secrets/aerc-accounts.conf.age;
     owner = "mrzelee";
   };
+  age.secrets.vdirsyncer-config = {
+    file = ../../secrets/vdirsyncer-config.age;
+    owner = "mrzelee";
+  };
 
   home-manager.users.mrzelee =
-    { config, osConfig, ... }:
+    {
+      config,
+      osConfig,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       programs.aerc.enable = true;
       xdg.configFile."aerc/accounts.conf".source =
         config.lib.file.mkOutOfStoreSymlink osConfig.age.secrets.aerc-accounts.path;
+
+      # Contacts: vdirsyncer <-> Stalwart CardDAV, edited with khard.
+      home.packages = [
+        pkgs.khard
+        pkgs.vdirsyncer
+      ];
+      services.vdirsyncer.enable = true;
+      xdg.configFile."vdirsyncer/config".source =
+        config.lib.file.mkOutOfStoreSymlink osConfig.age.secrets.vdirsyncer-config.path;
+      # The timer doesn't get the login PATH, and password.fetch runs `pass`.
+      systemd.user.services.vdirsyncer.Service.Environment = [
+        "PATH=${lib.makeBinPath [ pkgs.pass ]}"
+      ];
     };
 }

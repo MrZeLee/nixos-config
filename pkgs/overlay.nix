@@ -27,6 +27,17 @@ final: prev: {
       ./aquamarine/single-renderD-fallback.patch
     ];
   });
+  # carddav-query only reads a bare `FN:` line, so contacts the server returns
+  # as `FN;CHARSET=UTF-8:...` (Stalwart, any non-ASCII name) never complete.
+  # Backports upstream master's parser line; drop with > 0.21.0. It fails the
+  # build if upstream moves.
+  aerc = prev.aerc.overrideAttrs (o: {
+    postPatch = (o.postPatch or "") + ''
+      substituteInPlace contrib/carddav-query \
+        --replace-fail 'if line.startswith("FN:"):' 'if match_fn := re.match(r"^FN(?:;[^:]*)?:(.+)$", line):' \
+        --replace-fail 'name = line[len("FN:") :]' 'name = match_fn.group(1)'
+    '';
+  });
   # codex = prev.callPackage ./codex {};
   # gnucash = prev.callPackage ./gnucash {};
 }
