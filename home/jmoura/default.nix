@@ -12,6 +12,7 @@ in
   imports = [
     ../mrzelee/shared
     ./extra.nix
+    ./mail.nix
     ./wayland.nix
   ];
 
