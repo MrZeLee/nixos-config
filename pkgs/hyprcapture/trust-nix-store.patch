@@ -13,7 +13,7 @@ index 66c65a0..58bd2ec 100644
          const auto  native = current.string();
          if (stat(native.c_str(), &st) != 0 || !S_ISDIR(st.st_mode) || !isTrustedOwner(st.st_uid) || hasWritableGroupOrOther(st.st_mode))
 diff --git a/src/ui/clipboard_utils.cpp b/src/ui/clipboard_utils.cpp
-index d03e46e..2cf83b9 100644
+index d03e46e..1476c12 100644
 --- a/src/ui/clipboard_utils.cpp
 +++ b/src/ui/clipboard_utils.cpp
 @@ -48,6 +48,9 @@ bool parentChainTrusted(const QString& path) {
@@ -40,3 +40,17 @@ index d03e46e..2cf83b9 100644
          const QString trusted = trustedExecutablePath(QDir(dir).filePath(name));
          if (!trusted.isEmpty())
              return trusted;
+@@ -427,7 +435,12 @@ QString trustedSystemProgram(const QString& name) {
+ QProcessEnvironment trustedProcessEnvironment() {
+     const auto source = QProcessEnvironment::systemEnvironment();
+     QProcessEnvironment env;
+-    env.insert(QStringLiteral("PATH"), QStringLiteral("/usr/local/bin:/usr/bin:/bin"));
++    // wl-copy execs `cat` and xdg-open needs the user's apps; use the same dirs as above.
++    env.insert(QStringLiteral("PATH"), QStringList{
++        QDir::home().filePath(QStringLiteral(".nix-profile/bin")),
++        QStringLiteral("/etc/profiles/per-user/%1/bin").arg(qEnvironmentVariable("USER")),
++        QStringLiteral("/run/current-system/sw/bin"),
++        QStringLiteral("/usr/local/bin:/usr/bin:/bin")}.join(QLatin1Char(':')));
+     for (const QString& name : source.keys()) {
+         if (allowEnvironmentName(name))
+             env.insert(name, source.value(name));
