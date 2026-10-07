@@ -38,4 +38,7 @@
   systemd.user.services.vdirsyncer.Service.Environment = [
     "PATH=${lib.makeBinPath [ pkgs.pass ]}"
   ];
+  # sync refuses to run until discover has; `yes` answers its create-local-collection prompt.
+  systemd.user.services.vdirsyncer.Service.ExecStartPre =
+    "${pkgs.runtimeShell} -c '${pkgs.coreutils}/bin/yes | ${pkgs.vdirsyncer}/bin/vdirsyncer discover'";
 }
