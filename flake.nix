@@ -117,6 +117,11 @@
             inherit inputs nixpkgs agenix;
             system = "x86_64-linux";
           }).nixosConfigurations.laptop;
+        nitro =
+          (import ./hosts {
+            inherit inputs nixpkgs agenix;
+            system = "x86_64-linux";
+          }).nixosConfigurations.nitro;
         # aarch64 host
         macbook-nixos =
           (import ./hosts {

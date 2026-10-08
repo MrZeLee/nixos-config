@@ -108,7 +108,10 @@ let
 in
 {
   nixosConfigurations =
-    mkSystem "desktop" [ ] // (mkSystem "laptop" [ ]) // (mkSystem "macbook-nixos" [ ]);
+    mkSystem "desktop" [ ]
+    // (mkSystem "laptop" [ ])
+    // (mkSystem "nitro" [ ])
+    // (mkSystem "macbook-nixos" [ ]);
 
   darwinConfigurations = mkDarwinSystem "mrzelee-mbpro" [ ];
 

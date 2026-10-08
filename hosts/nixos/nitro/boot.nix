@@ -1,0 +1,45 @@
+_: {
+  boot = {
+    bootspec.enableValidation = true;
+
+    consoleLogLevel = 0;
+    initrd = {
+      verbose = false;
+      kernelModules = [ "i915" ];
+      systemd.enable = true;
+    };
+    plymouth.enable = true;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+
+    # To add the keys to the TPM2 use command: sudo systemd-cryptenroll
+    # --tpm2-device=auto /dev/...
+
+    initrd.luks.devices."luks-4514303a-9901-40e1-ae45-2ac5471153c0".device =
+      "/dev/disk/by-uuid/4514303a-9901-40e1-ae45-2ac5471153c0";
+
+    kernelParams = [
+      # General Performance Optimization
+      "intel_pstate=active" # Ensures the Intel-specific CPU frequency scaling driver is used for better performance
+      "iommu=pt" # Enables IOMMU in pass-through mode, reducing virtualization overhead and ensuring optimal PCIe device performance.
+      "usbcore.autosuspend=-1" # Disable USB autosuspend globally (fixes mouse disconnects and speeds up device recognition)
+
+      # disable the boot lines
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "i915.fastboot=1"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+    ];
+
+    # clear tmp on boot
+    tmp.cleanOnBoot = true;
+  };
+}
