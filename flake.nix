@@ -37,6 +37,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # AirDrop radio backend for the MacBook's BCM4387 (brcmfmac AWDL patches + helpers)
+    omdrop-awdl = {
+      url = "github:brentkearney/omdrop-awdl/2bd88a08fd2d539578436b6dd6a4113a3462d9ec";
+      flake = false;
+    };
+
+    # AirDrop CLI + receiver (Omarchy plugin; only bin/ and share/ are used here)
+    omdrop-plugin = {
+      url = "github:brentkearney/omdrop-plugin/cf93519c255a77b27919835ec0f2bff88ae0bb1d";
+      flake = false;
+    };
+
     agenix.url = "github:ryantm/agenix";
 
     nixgl = {

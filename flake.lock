@@ -805,6 +805,40 @@
         "type": "github"
       }
     },
+    "omdrop-awdl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791663547,
+        "narHash": "sha256-4zQLD86iIGioYyPh48P4kimLmXW9n7Caz5T9F9cEnR8=",
+        "owner": "brentkearney",
+        "repo": "omdrop-awdl",
+        "rev": "2bd88a08fd2d539578436b6dd6a4113a3462d9ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brentkearney",
+        "repo": "omdrop-awdl",
+        "rev": "2bd88a08fd2d539578436b6dd6a4113a3462d9ec",
+        "type": "github"
+      }
+    },
+    "omdrop-plugin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791663760,
+        "narHash": "sha256-PSlEecBZf860vSjdqXDydDrHkNMgF7Exxrm+RYQeM7c=",
+        "owner": "brentkearney",
+        "repo": "omdrop-plugin",
+        "rev": "cf93519c255a77b27919835ec0f2bff88ae0bb1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brentkearney",
+        "repo": "omdrop-plugin",
+        "rev": "cf93519c255a77b27919835ec0f2bff88ae0bb1d",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -843,7 +877,9 @@
         "nixpkgs": "nixpkgs_8",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nur": "nur"
+        "nur": "nur",
+        "omdrop-awdl": "omdrop-awdl",
+        "omdrop-plugin": "omdrop-plugin"
       }
     },
     "rust-overlay": {
