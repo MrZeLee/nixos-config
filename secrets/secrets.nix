@@ -11,9 +11,11 @@ let
   # TODO: laptop = "...";
   desktop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWXSQOr1X+aIsGO8MRxiv2hbJ2m1WsBSvPdRmwJUTzM";
   macbook-nixos = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKrHFKOsiSq/ShpAW8VZ5AZitBGMlPSseS2c4VHHpUuQ";
+  nitro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAPGSpTw+qskfpu8zpoFlyo7UxlOd/9xzTB3+v9ZBpCX";
   systems = [
     desktop
     macbook-nixos
+    nitro
   ];
 in
 {
