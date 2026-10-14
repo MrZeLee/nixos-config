@@ -23,11 +23,16 @@
   # Plasma for gloria; mrzelee keeps Hyprland (pick it once in SDDM).
   services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = lib.mkForce "plasma";
+  # hyprlock enables hypridle for every graphical session; it crashes under KWin.
+  systemd.user.services.hypridle.unitConfig.ConditionEnvironment = "HYPRLAND_INSTANCE_SIGNATURE";
   # plasma6 and system/services/sddm.nix both set the same kdePackages.sddm
   services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
   # Shared qt.nix exports qt5ct/adwaita-dark globally, which breaks Plasma;
   # hyprland.conf already sets QT_QPA_PLATFORMTHEME for the Hyprland session.
-  qt.enable = lib.mkForce false;
+  # Keep qt.enable: it provides QML2_IMPORT_PATH/QT_PLUGIN_PATH, without which
+  # plasmashell can't load the desktop/panel and the session stays black.
+  qt.platformTheme = lib.mkForce null;
+  qt.style = lib.mkForce null;
   programs.firefox.enable = true;
 
   users.users.gloria = {
