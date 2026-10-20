@@ -23,6 +23,7 @@ in
     # Hyprland plugins (note: may need version matching with hyprland)
     hyprlandPlugins.hy3 # Uncomment if you need hy3 plugin
     hyprcapture
+    (wrapGL ksnip)
 
     # Screenshot & screen recording
     swappy
