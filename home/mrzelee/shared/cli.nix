@@ -10,7 +10,13 @@
       abook
       bat
       brotab
-      cacert
+      # same eMudhra distrust as hosts/nixos/default.nix; drop with it
+      (cacert.override {
+        blacklist = [
+          "Comodo AAA Services root"
+          "emSign ECC Root CA - G3"
+        ];
+      })
       cht-sh
       croc
       ddgr
