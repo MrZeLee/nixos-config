@@ -11,6 +11,13 @@
     inputs.agenix.packages."${system}".default
   ];
 
+  # eMudhra intermediate CA key compromise (Oct 2026): distrust the roots that
+  # signed the leaked intermediates. Drop once nixpkgs' cacert removes them.
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+  ];
+
   # aerc against Stalwart; accounts.conf is an agenix secret so the mail
   # domain stays out of this public repo. Decrypted with the host key and
   # linked into ~ by home-manager (a home-owned dir, unlike agenix's mkdir).
