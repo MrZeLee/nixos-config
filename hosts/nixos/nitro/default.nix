@@ -47,6 +47,7 @@
     ];
     packages = [
       pkgs.kdePackages.kate
+      pkgs.kdePackages.krfb
       pkgs.keepassxc
       pkgs.owncloud-client
       pkgs.trayscale
