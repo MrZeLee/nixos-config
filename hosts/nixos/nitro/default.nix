@@ -28,6 +28,14 @@
     enable = true;
     user = "gloria";
   };
+  # krfb ships no autostart entry; OnlyShowIn keeps it out of mrzelee's Hyprland.
+  environment.etc."xdg/autostart/krfb.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=krfb
+    Exec=${pkgs.kdePackages.krfb}/bin/krfb --nodialog
+    OnlyShowIn=KDE;
+  '';
   # hyprlock enables hypridle for every graphical session; it crashes under KWin.
   systemd.user.services.hypridle.unitConfig.ConditionEnvironment = "HYPRLAND_INSTANCE_SIGNATURE";
   # plasma6 and system/services/sddm.nix both set the same kdePackages.sddm
