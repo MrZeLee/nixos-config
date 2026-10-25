@@ -23,6 +23,11 @@
   # Plasma for gloria; mrzelee keeps Hyprland (pick it once in SDDM).
   services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = lib.mkForce "plasma";
+  # so krfb is reachable over tailscale after a reboot without someone at the keyboard
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "gloria";
+  };
   # hyprlock enables hypridle for every graphical session; it crashes under KWin.
   systemd.user.services.hypridle.unitConfig.ConditionEnvironment = "HYPRLAND_INSTANCE_SIGNATURE";
   # plasma6 and system/services/sddm.nix both set the same kdePackages.sddm
