@@ -34,6 +34,9 @@
   qt.platformTheme = lib.mkForce null;
   qt.style = lib.mkForce null;
   programs.firefox.enable = true;
+  programs.gnupg.agent.enable = true;
+  # lets gloria toggle tailscale (and trayscale) without sudo
+  services.tailscale.extraSetFlags = [ "--operator=gloria" ];
 
   users.users.gloria = {
     isNormalUser = true;
@@ -42,6 +45,11 @@
       "networkmanager"
       "wheel"
     ];
-    packages = [ pkgs.kdePackages.kate ];
+    packages = [
+      pkgs.kdePackages.kate
+      pkgs.keepassxc
+      pkgs.owncloud-client
+      pkgs.trayscale
+    ];
   };
 }
