@@ -36,6 +36,14 @@
     Exec=${pkgs.kdePackages.krfb}/bin/krfb --nodialog
     OnlyShowIn=KDE;
   '';
+  # Portuguese for gloria: only startplasma reads plasma-localerc, so Hyprland stays en_US.
+  environment.etc."xdg/plasma-localerc".text = ''
+    [Formats]
+    LANG=pt_PT.UTF-8
+
+    [Translations]
+    LANGUAGE=pt_PT:pt
+  '';
   # hyprlock enables hypridle for every graphical session; it crashes under KWin.
   systemd.user.services.hypridle.unitConfig.ConditionEnvironment = "HYPRLAND_INSTANCE_SIGNATURE";
   # plasma6 and system/services/sddm.nix both set the same kdePackages.sddm
@@ -47,6 +55,8 @@
   qt.platformTheme = lib.mkForce null;
   qt.style = lib.mkForce null;
   programs.firefox.enable = true;
+  # Firefox follows LANG, so this only kicks in for the Plasma session
+  programs.firefox.languagePacks = [ "pt-PT" ];
   programs.gnupg.agent.enable = true;
   # lets gloria toggle tailscale (and trayscale) without sudo
   services.tailscale.extraSetFlags = [ "--operator=gloria" ];
