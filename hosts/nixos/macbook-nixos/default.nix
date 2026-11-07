@@ -11,7 +11,6 @@
     inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     ../../../system
     ./boot.nix
-    ./omdrop.nix
   ];
 
   hardware.asahi.enable = true;
