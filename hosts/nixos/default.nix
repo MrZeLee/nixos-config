@@ -15,7 +15,6 @@
   # signed the leaked intermediates. Drop once nixpkgs' cacert removes them.
   security.pki.caCertificateBlacklist = [
     "Comodo AAA Services root"
-    "emSign ECC Root CA - G3"
   ];
 
   # aerc against Stalwart; accounts.conf is an agenix secret so the mail
