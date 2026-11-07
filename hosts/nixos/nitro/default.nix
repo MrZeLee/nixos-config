@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
+    ./facer.nix
     ../../../system
   ];
 
