@@ -1,3 +1,50 @@
+diff --git a/src/plugin/recording.cpp b/src/plugin/recording.cpp
+index 6371e74..50a06e1 100644
+--- a/src/plugin/recording.cpp
++++ b/src/plugin/recording.cpp
+@@ -106,6 +106,9 @@ bool hasWritableGroupOrOther(mode_t mode) {
+ 
+ bool parentChainTrusted(const std::filesystem::path& path) {
+     for (auto current = path.parent_path(); !current.empty(); current = current.parent_path()) {
++        // /nix/store is group-writable (nixbld) but its children are immutable.
++        if (current == "/nix/store")
++            return true;
+         struct stat st {};
+         const auto  native = current.string();
+         if (stat(native.c_str(), &st) != 0 || !S_ISDIR(st.st_mode) || !isTrustedOwner(st.st_uid) || hasWritableGroupOrOther(st.st_mode))
+@@ -134,20 +137,24 @@ std::optional<std::string> trustedExecutablePath(const std::string& candidate) {
+     return native;
+ }
+ 
+-std::optional<std::string> trustedFfmpegPath() {
+-    for (const auto& candidate : {"/usr/local/bin/ffmpeg", "/usr/bin/ffmpeg", "/bin/ffmpeg"}) {
+-        if (const auto trusted = trustedExecutablePath(candidate))
++std::optional<std::string> trustedSystemProgram(const std::string& name) {
++    const auto env = [](const char* key) { const char* value = std::getenv(key); return std::string(value ? value : ""); };
++    for (const auto& dir : {
++             // Nix profiles: standalone home-manager, NixOS per-user, NixOS system.
++             env("HOME") + "/.nix-profile/bin", "/etc/profiles/per-user/" + env("USER") + "/bin", std::string("/run/current-system/sw/bin"),
++             std::string("/usr/local/bin"), std::string("/usr/bin"), std::string("/bin")}) {
++        if (const auto trusted = trustedExecutablePath(dir + "/" + name))
+             return trusted;
+     }
+     return std::nullopt;
+ }
+ 
++std::optional<std::string> trustedFfmpegPath() {
++    return trustedSystemProgram("ffmpeg");
++}
++
+ std::optional<std::string> trustedGpuScreenRecorderPath() {
+-    for (const auto& candidate : {"/usr/local/bin/gpu-screen-recorder", "/usr/bin/gpu-screen-recorder", "/bin/gpu-screen-recorder"}) {
+-        if (const auto trusted = trustedExecutablePath(candidate))
+-            return trusted;
+-    }
+-    return std::nullopt;
++    return trustedSystemProgram("gpu-screen-recorder");
+ }
+ 
+ std::optional<std::string> findVaapiRenderDevice() {
 diff --git a/src/plugin/session_launcher.cpp b/src/plugin/session_launcher.cpp
 index 66c65a0..58bd2ec 100644
 --- a/src/plugin/session_launcher.cpp

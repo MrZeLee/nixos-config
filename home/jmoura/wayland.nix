@@ -28,6 +28,7 @@ in
     # Screenshot & screen recording
     swappy
     wf-recorder
+    (wrapGL gpu-screen-recorder) # hyprcapture records fullscreen/region video with it
     gifski # mp4 -> high-quality gif (used by record-toggle.sh)
 
     # Clipboard
@@ -57,6 +58,8 @@ in
   home.sessionVariables = {
     HYPRLAND_HY3 = "${pkgs.hyprlandPlugins.hy3}";
     HYPRLAND_HYPRCAPTURE = "${pkgs.hyprcapture}";
+    # Recording result/transcode popups ignore plugin:hyprcapture:helper; they only see this.
+    HYPRCAPTURE_HELPER = "${pkgs.hyprcapture}/bin/hyprcapture-ui";
     # LD_LIBRARY_PATH = "$HOME/.nix-profile/lib:/usr/local/lib\${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}";
   };
 

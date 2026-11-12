@@ -24,7 +24,8 @@ hyprlandPlugins.mkHyprlandPlugin {
   # Backport of upstream 15a831a (in releases for Hyprland 0.56+): the trust
   # checks reject anything under the group-writable /nix/store, and the helper
   # only looks for wl-copy/hyprctl/xdg-open in /usr/bin (without wl-copy the
-  # clipboard dies with it). Patch also searches the Nix profile bin dirs.
+  # clipboard dies with it). Patch also searches the Nix profile bin dirs, in
+  # the plugin's recorder lookup too (ffmpeg / gpu-screen-recorder).
   patches = [ ./trust-nix-store.patch ];
 
   nativeBuildInputs = [

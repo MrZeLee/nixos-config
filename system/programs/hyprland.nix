@@ -41,6 +41,8 @@
       HYPRLAND_CSGO_VULKAN_FIX = "${pkgs.hyprlandPlugins.csgo-vulkan-fix}";
       HYPRLAND_HY3 = "${pkgs.hyprlandPlugins.hy3}";
       HYPRLAND_HYPRCAPTURE = "${pkgs.hyprcapture}";
+      # Recording result/transcode popups ignore plugin:hyprcapture:helper; they only see this.
+      HYPRCAPTURE_HELPER = "${pkgs.hyprcapture}/bin/hyprcapture-ui";
       HYPRLAND_HOST = "${config.networking.hostName}";
     };
   };
