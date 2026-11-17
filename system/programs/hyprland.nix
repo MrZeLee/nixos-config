@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   ...
@@ -16,6 +17,9 @@
   programs.hyprlock = {
     enable = true;
   };
+  # hyprlock turns on the hypridle user service, but hyprland.conf already
+  # exec-once's hypridle; the service's PATH lacks bash so its scripts fail.
+  services.hypridle.enable = lib.mkForce false;
 
   programs.ydotool.enable = true;
 

@@ -44,7 +44,6 @@
   services.xserver.videoDrivers = lib.mkForce [ "displaylink" ];
 
   powerManagement.enable = lib.mkForce true;
-  powerManagement.resumeCommands = "sudo ${pkgs.kmod}/bin/rmmod atkbd; sudo ${pkgs.kmod}/bin/modprobe atkbd reset=1";
 
   services.logind.settings.Login = {
     HandlePowerKey = "suspend-then-hibernate";

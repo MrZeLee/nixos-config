@@ -45,8 +45,6 @@
     [Translations]
     LANGUAGE=pt_PT:pt
   '';
-  # hyprlock enables hypridle for every graphical session; it crashes under KWin.
-  systemd.user.services.hypridle.unitConfig.ConditionEnvironment = "HYPRLAND_INSTANCE_SIGNATURE";
   # plasma6 and system/services/sddm.nix both set the same kdePackages.sddm
   services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
   # Shared qt.nix exports qt5ct/adwaita-dark globally, which breaks Plasma;
