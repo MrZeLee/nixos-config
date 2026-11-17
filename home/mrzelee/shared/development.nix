@@ -14,6 +14,7 @@ in
     [
       # AI
       unstable.claude-code
+      unstable.antigravity-cli
       unstable.pi-coding-agent
 
       # Languages
