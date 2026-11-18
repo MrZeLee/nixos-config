@@ -82,7 +82,7 @@ in
     # just vulkan-loader, which hides the driver's libcuda.so.1; --prefix with
     # the driver path added keeps both reachable.
     package =
-      (pkgs.unstable.sunshine.override {
+      (pkgs.sunshine.override {
         cudaSupport = true;
         inherit (pkgs) cudaPackages;
       }).overrideAttrs
