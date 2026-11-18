@@ -8,6 +8,18 @@ let
   wrapGL = pkg: config.lib.nixGL.wrap pkg;
 in
 {
+  # single-renderD-fallback: upstream f44fecf (in 0.12.0), see the patch
+  # header. Drop with aquamarine >= 0.12.
+  nixpkgs.overlays = [
+    (final: prev: {
+      aquamarine = prev.aquamarine.overrideAttrs (o: {
+        patches = (o.patches or [ ]) ++ [
+          ../../pkgs/aquamarine/single-renderD-fallback.patch
+        ];
+      });
+    })
+  ];
+
   home.packages = with pkgs; [
     # Hyprland compositor and core tools
     (wrapGL hyprland)

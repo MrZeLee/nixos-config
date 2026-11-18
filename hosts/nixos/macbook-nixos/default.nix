@@ -13,6 +13,22 @@
     ./boot.nix
   ];
 
+  # Hyprland drops monitors hotplugged on a KMS device that has no render node
+  # (Asahi's apple KMS, evdi/DisplayLink). See the patch header.
+  # single-renderD-fallback: upstream f44fecf (in 0.12.0). On Asahi the KMS
+  # card and renderD128 have different parents, so no render node is found
+  # and every Wayland GL client falls back to llvmpipe. Drop with >= 0.12.
+  nixpkgs.overlays = [
+    (final: prev: {
+      aquamarine = prev.aquamarine.overrideAttrs (o: {
+        patches = (o.patches or [ ]) ++ [
+          ../../../pkgs/aquamarine/hotplug-no-render-node.patch
+          ../../../pkgs/aquamarine/single-renderD-fallback.patch
+        ];
+      });
+    })
+  ];
+
   hardware.asahi.enable = true;
   #Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
